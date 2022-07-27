@@ -104,3 +104,15 @@ export function markEditorError(line, col, line2, col2) {
 export function markEditorWarning(line, col, line2, col2) {
     markEditor({ line: line, ch: col }, { line: line2, ch: col2 + 1 }, "editor-warning-mark")
 }
+
+/**
+ * Mark the text in the editor with a hint
+ *
+ * @param {Number} line the line of the first character to mark
+ * @param {Number} col the collumn of the first character to mark
+ * @param {Number} line2 the line of the last character to mark
+ * @param {Number} col2 the collumn of the last character to mark
+ */
+export function markEditorHint(line, col, line2, col2) {
+    markEditor({ line: line, ch: col }, { line: line2, ch: col2 + 1 }, "editor-hint-mark")
+}

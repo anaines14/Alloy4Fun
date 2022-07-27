@@ -9,6 +9,7 @@ import { cmdChanged, isUnsatInstance, prevState, nextState,
     lastState, currentState, setCurrentState, storeInstances, 
     getCurrentState, getCurrentTrace } from '../../lib/editor/state'
 import { staticProjection, savePositions, applyPositions } from '../../lib/visualizer/projection'
+import { hintModel } from '../../lib/editor/hintModel'
 
 Template.alloyEditor.helpers({
     /**
@@ -221,6 +222,7 @@ Template.alloyEditor.events({
         textEditor.doc.getAllMarks().forEach(marker => marker.clear())
     },
     'click #exec > button': executeModel,
+    'click #hint > button': hintModel,
     'change .command-selection > select'() {
         cmdChanged()
     },

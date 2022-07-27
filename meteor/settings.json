@@ -1,7 +1,8 @@
 {
     "env": {
         "API_URL": "http://localhost:8080",
-        "MAX_INSTANCES": 10
+        "MAX_INSTANCES": 10,
+        "NODE_TLS_REJECT_UNAUTHORIZED": "0"
     },
     "public": {
 

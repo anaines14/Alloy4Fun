@@ -6,11 +6,15 @@
 export { containsValidSecret,
     getCommandsFromCode,
     secretTag,
+    repairTag,
     paragraphKeywords,
-    extractSecrets }
+    extractSecrets,
+    extractRepairTargets }
 
 /** The secret tag used in Alloy code. */
 secretTag = '//SECRET'
+/** The tag used to specify predicates to repair  */
+repairTag = '//REPAIR'
 /** The keywords that identify paragraphs. */
 paragraphKeywords = 'sig|fact|assert|check|fun|pred|run'
 
@@ -53,6 +57,23 @@ function extractSecrets(code) {
         public: public_code,
         secret
     }
+}
+
+function extractRepairTargets(code) {
+    let ret = {}
+    const tag = new RegExp(`${repairTag}.*`, 'mg')
+
+    let match
+    while ((match = tag.exec(code)) != null) {
+        let repairTargets = match[0].slice(repairTag.length).split(/\s+/).filter(x => x !== "")
+        let check = code.slice(match.index + match[0].length).match(/check\s+[a-z][a-zA-Z0-9_]*\s{/)
+        if (check !== null) {
+            let checkName = check[0].slice("check".length, check[0].length - 1).trim()
+            ret[checkName] = repairTargets
+        }
+    }
+
+    return ret
 }
 
 /**

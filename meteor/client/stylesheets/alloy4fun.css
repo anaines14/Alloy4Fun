@@ -248,6 +248,10 @@ body {
     background-color: #fa04;
 }
 
+.editor-hint-mark {
+    background-color: #4af8;
+}
+
 .margin-top10px {
     margin-top: 10px;
 }
@@ -297,6 +301,16 @@ body {
 
 .log-warning {
     background-color: #fdcf55;
+    font-weight: 700;
+    color: #333333;
+    width: auto;
+    padding: 5px;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.log-hint {
+    background-color: #0af;
     font-weight: 700;
     color: #333333;
     width: auto;

@@ -6,7 +6,7 @@
  */
 import CodeMirror from 'codemirror'
 import * as simpleMode from 'codemirror/addon/mode/simple' // do not remove despite unused warning
-import { paragraphKeywords, secretTag } from '../../lib/editor/text'
+import { paragraphKeywords, secretTag, repairTag } from '../../lib/editor/text'
 
 export { defineAlloyMode }
 
@@ -23,6 +23,10 @@ function defineAlloyMode() {
             sol: true
         }, {
             regex: new RegExp(`\s*${tag}.*`, 'mg'),
+            token: 'secret',
+            sol: false
+        }, {
+            regex: new RegExp(`\s*${repairTag}.*`, 'mg'),
             token: 'secret',
             sol: false
         }, {
