@@ -24,6 +24,15 @@ Template.alloyEditor.helpers({
     },
 
     /**
+     * Whether the show hint command button is enabled, if the model has not
+     * ran previously or hint has already been used for the current model.
+     */
+    hintEnabled() {
+        const enab = Session.get('model-executed') && !Session.get('hint-generated')
+        return enab ? '' : 'disabled'
+    },
+
+    /**
      * Whether the next instance button should be enabled, if the current
      * instance is not the last and the model has not been updated.
      */

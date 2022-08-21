@@ -89,6 +89,7 @@ export function prevInstance() {
  */
 function handleExecuteModel(err, result) {
     Session.set('is_running',false)
+    Session.set('model-executed', true)
     if (err) {
         maxInstanceNumber = -1
         return displayError(err)

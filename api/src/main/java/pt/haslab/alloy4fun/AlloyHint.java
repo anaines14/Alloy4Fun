@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.haslab.mutation.mutator.Mutator;
+import pt.haslab.util.ExprToString;
 import pt.haslab.util.Repairer;
 
 import javax.json.Json;
@@ -33,29 +34,22 @@ import java.util.List;
 public class AlloyHint {
 
     public static final int HINT_TIMEOUT = 1500;
+    public static final int MAX_DEPTH = 1;
     private static final Logger LOGGER = LoggerFactory.getLogger(AlloyGetInstances.class);
 
     @POST
     @Produces("text/json")
     public Response doGet(String body) throws Err {
+        // Extract needed variables
         JSONObject jo = new JSONObject(body);
         String model = jo.getString("model");
         int commandIndex = jo.getInt("commandIndex");
         JSONObject allRepairTargets = jo.getJSONObject("repairTargets");
 
-        List<ErrorWarning> warnings = new ArrayList<ErrorWarning>();
-
-        A4Reporter rep = new A4Reporter() {
-            public void warning (ErrorWarning msg) {
-                warnings.add(msg);
-            }
-        };
-
         LOGGER.info("Request for hint");
 
-
+        // Parse the given model
         CompModule world;
-
         try {
             File tmpAls = File.createTempFile("alloy_heredoc", ".als");
             tmpAls.deleteOnExit();
@@ -63,7 +57,7 @@ public class AlloyHint {
             bos.write(model.getBytes());
             bos.flush();
             bos.close();
-            world = CompUtil.parseEverything_fromFile(rep, null, tmpAls.getAbsolutePath());
+            world = CompUtil.parseEverything_fromFile(A4Reporter.NOP, null, tmpAls.getAbsolutePath());
             tmpAls.deleteOnExit();
         } catch (Err e) {
             LOGGER.info("Alloy errored during model parsing: "+e.getMessage());
@@ -85,6 +79,7 @@ public class AlloyHint {
             return Response.ok(instanceJSON.build().toString()).build();
         }
 
+        // Find the command to run and the suspissious functions
         Command command = world.getAllCommands().get(commandIndex);
         List<Func> repairTargets = new ArrayList<>();
         for (Object o : allRepairTargets.getJSONArray(command.label.replace("this/", ""))) {
@@ -95,7 +90,8 @@ public class AlloyHint {
             }
         }
 
-        Repairer repairer = Repairer.make(world, command, repairTargets, 2);
+        // Attempt the repair
+        Repairer repairer = Repairer.make(world, command, repairTargets, MAX_DEPTH);
         repairer.repair(HINT_TIMEOUT);
 
         JsonObjectBuilder res = Json.createObjectBuilder();
@@ -112,14 +108,15 @@ public class AlloyHint {
                 mut.add("line2", pos.y2);
                 mut.add("column2", pos.x2);
                 mut.add("name", mutator.name);
-                //mut.add("class", mutator.getClass().getSimpleName());
-                //mut.add("classor", mutator.original.expr.getClass().getName());
                 mutator.hint().ifPresent(hint -> {
                     mut.add("hint", hint);
                 });
                 mutators.add(mut);
             }
             res.add("mutators", mutators);
+            if (repairTargets.size() == 1) {
+                res.add("repair", ExprToString.exprToString(repairTargets.get(0).getBody()));
+            }
         });
 
         return Response.ok(res.build().toString()).build();

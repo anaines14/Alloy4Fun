@@ -13,6 +13,8 @@ let instances = []
 export function modelChanged() {
     Session.set('model-updated', true)
     Session.set('model-shared', false)
+    Session.set('model-executed', false)
+    Session.set('hint-generated', false)
     Session.set('log-message', '')
     Session.set('log-class', '')
     Session.set('currentInstance', 0)

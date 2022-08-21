@@ -2,8 +2,12 @@ import { displayError, markEditorHint } from "./feedback"
 import { getCommandIndex, modelExecuted } from "./state"
 
 
+/**
+ * As for hint to the model through the selected command. Will call the Alloy API.
+ */
 export function hintModel() {
     Session.set('is_running', true)
+    Session.set('hint-generated', true)
     const commandIndex = getCommandIndex()
 
     // no command to run
@@ -17,23 +21,30 @@ export function hintModel() {
     }
 }
 
+/**
+ * Handles the response of the Alloy API for the request of an hint, showing the
+ * hints or messages returned.
+ *
+ * @param {Error} err the possible meteor error
+ * @param {Object} result the result to the getHint request
+ */
 function handleHintModel(err, result) {
-    console.debug(result)
     Session.set('is_running', false)
     if (err) {
         maxInstanceNumber = -1
         return displayError(err)
     }
 
-    if (result.repaired) {
+    if (result.error) {
+        Session.set('log-message',result.error)
+        Session.set('log-class', 'log-error')
+    } else if (result.repaired) {
         let log = ""
         result.mutators.forEach(mutator => {
             markEditorHint(mutator.line - 1, mutator.column - 1, mutator.line2 - 1, mutator.column2 - 1)
-            console.debug(mutator.line - 1, mutator.column - 1, mutator.line2 - 1, mutator.column2 - 1)
             log += "(" + mutator.line + ":" + mutator.column + ") - " + (mutator.hint ?? "No hint available.")
             log += "\n"
         });
-            console.debug(log)
         Session.set('log-message', log)
         Session.set('log-class', 'log-hint')
     } else {
