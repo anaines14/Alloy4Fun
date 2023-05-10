@@ -15,4 +15,5 @@ RUN mvn clean install
 
 EXPOSE 8080
 # preferIPv4Stack is needed to keep wildfly-swarm happy
-ENTRYPOINT ["java", "-Djava.net.preferIPv4Stack=true", "-jar", "/home/target/alloy4fun-api-swarm.jar"]
+ENTRYPOINT [ "java", "-Djava.net.preferIPv4Stack=true", "-jar", "/home/target/alloy4fun-api-thorntail.jar" ]
+#ENTRYPOINT ["java", "-Djava.net.preferIPv4Stack=true", "-jar", "/home/target/alloy4fun-api-swarm.jar"]
