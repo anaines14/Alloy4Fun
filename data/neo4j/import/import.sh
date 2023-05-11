@@ -5,7 +5,5 @@ for challenge in datasets/*/; do
         challenge=$(basename "$challenge")
         predicate=$(basename "${predicate%.csv}")
         java -cp higena-1.0.0.jar org.higena.graph.Graph $challenge $predicate
-        break
     done
-    break
 done 
