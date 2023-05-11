@@ -1,8 +1,9 @@
-FROM openjdk:jdk-alpine
+FROM ibmjava:11-jdk
+
 
 # OPTION 1 - mvn clean install (has to download everything, everytime)
 # RUN apk update && apk upgrade && apk add --no-cache maven # use this if it makes sense to update
-RUN apk add --no-cache maven
+RUN apt-get update && apt-get install -y maven
 COPY ./lib/ /home/lib/
 COPY ./src/ /home/src/
 COPY pom.xml /home/

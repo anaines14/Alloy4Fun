@@ -41,7 +41,7 @@ public class AlloyHiGenA {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
 
-    return Response.ok(response).build();
+    return Response.ok(response.toString()).build();
   }
 }
 
