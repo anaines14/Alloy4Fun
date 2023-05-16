@@ -10,13 +10,13 @@ services:
 #      - api
 #    env_file:
 #      - .env
-#  mongo:
-#    image: mongo:latest
-#    command: mongod --storageEngine=wiredTiger
-#    volumes:
-#      - ./data/db:/data/db
-#    ports:
-#      - "27017:27017"
+  mongo:
+    image: mongo:latest
+    command: mongod --storageEngine=wiredTiger
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"
   api:
     build:
       context: ./api/
@@ -26,8 +26,8 @@ services:
       - URI_NEO4J=${URI_NEO4J_DOCKER}
       - USERNAME_NEO4J=${USERNAME_NEO4J}
       - PASSWORD_NEO4J=${PASSWORD_NEO4J}
-    networks:
-      - higenaNetwork
+    links:
+      - neo4j
   neo4j:
     image: neo4j:5.7-enterprise
     ports:
@@ -47,8 +47,3 @@ services:
       - NEO4J_server_directories_import=import # import folder
     env_file:
       - .env
-    networks:
-      - higenaNetwork
-networks:
-  higenaNetwork:
-    driver: bridge
