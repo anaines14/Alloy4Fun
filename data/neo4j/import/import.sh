@@ -1,9 +1,9 @@
 #!/bin/sh
 
-for challenge in datasets/*/; do
+for challenge in prepared_data/*/; do
     for predicate in "$challenge"/*; do
         challenge=$(basename "$challenge")
         predicate=$(basename "${predicate%.csv}")
-        java -cp higena-1.0.0.jar org.higena.graph.Graph $challenge $predicate
+        java -jar higena-1.0.0.jar $challenge $predicate
     done
 done 
