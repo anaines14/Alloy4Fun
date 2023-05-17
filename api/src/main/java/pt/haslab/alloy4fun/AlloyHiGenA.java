@@ -5,7 +5,7 @@ import org.higena.graph.hint.HintGenType;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.higena.graph.Graph;
-import org.parser.A4FExprParser;
+import org.higena.parser.ExprExtractor;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,8 +26,8 @@ public class AlloyHiGenA {
     }
 
     // Get expression from model
-    A4FExprParser parser = new A4FExprParser(request.model);
-    String expression = parser.parse(request.predicate);
+    ExprExtractor extractor = new ExprExtractor(request.model);
+    String expression = extractor.parse(request.predicate);
 
     // Generate hint
     Graph graph = new Graph(request.challenge, request.predicate);
