@@ -10,6 +10,7 @@ import { cmdChanged, isUnsatInstance, prevState, nextState,
     getCurrentState, getCurrentTrace } from '../../lib/editor/state'
 import { staticProjection, savePositions, applyPositions } from '../../lib/visualizer/projection'
 import { hintModel } from '../../lib/editor/hintModel'
+import { getHiGenAHint } from '../../lib/editor/higenaHint'
 
 Template.alloyEditor.helpers({
     /**
@@ -232,6 +233,7 @@ Template.alloyEditor.events({
     },
     'click #exec > button': executeModel,
     'click #hint > button': hintModel,
+    'click #higena_hint > button': getHiGenAHint,
     'change .command-selection > select'() {
         cmdChanged()
     },

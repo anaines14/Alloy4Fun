@@ -11,6 +11,7 @@ import './methods/shareInstance'
 import './methods/getModel'
 import './methods/downloadTree'
 import './methods/navInstance'
+import './methods/genHiGenAHint'
 
 import './publications/modelFromLink'
 
