@@ -4,10 +4,6 @@ Meteor.methods({
     genHiGenAHint(code, predicate, currentModelId) {
         const originalId = Model.findOne(currentModelId).original
 
-        console.log("CODE: ", code)
-        console.log("PREDICATE: ", predicate)
-        console.log("ORIGINAL ID: ", originalId)
-
         return new Promise((resolve, reject) => {
             HTTP.call('POST', `${Meteor.settings.env.API_URL}/higena`, {
                 data: {
@@ -20,7 +16,23 @@ Meteor.methods({
                 const content = JSON.parse(result.content)
 
                 const new_hint = {
-                    message: content.hint,
+                    expression: content.expression,
+                    code: content.code,
+                    mapping: content.mapping,
+                    type: content.type,
+                    isNewNode: content.isNewNode,
+                    createdShorterPath: content.createdShorterPath,
+                    sourceExpr: content.sourceExpr,
+                    sourceAST: content.sourceAST,
+                    targetExpr: content.targetExpr,
+                    targetAST: content.targetAST,
+                    nextExpr: content.nextExpr,
+                    nextAST: content.nextAST,
+                    totalTED: content.totalTED,
+                    srcDstTED: content.srcDstTED,
+                    operations: JSON.parse(content.operations.replace(/\\/g, "")),
+                    hint: content.hint,
+                    time: content.time,
                     model_id: currentModelId
                 }
                 HiGenAHint.insert(new_hint) 

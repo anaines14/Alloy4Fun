@@ -1,6 +1,6 @@
 package pt.haslab.alloy4fun;
 
-import org.higena.graph.hint.Hint;
+import org.higena.graph.hint.HintGenerator;
 import org.higena.graph.hint.HintGenType;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,16 +31,10 @@ public class AlloyHiGenA {
 
     // Generate hint
     Graph graph = new Graph(request.challenge, request.predicate);
-    Hint hint = graph.getHint(expression, request.model, HintGenType.TED);
+    HintGenerator hintGen = graph.generateHint(expression, request.model, HintGenType.TED);
 
     // Build response
-    JSONObject response = new JSONObject();
-    try {
-      response.put("hint", hint.toString());
-    } catch (JSONException e) {
-      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-    }
-
+    JSONObject response = hintGen.getJSON();
     return Response.ok(response.toString()).build();
   }
 }
