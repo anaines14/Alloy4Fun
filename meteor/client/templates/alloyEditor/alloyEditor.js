@@ -30,6 +30,12 @@ Template.alloyEditor.helpers({
      */
     hintEnabled() {
         const enab = Session.get('model-executed') && !Session.get('hint-generated')
+        classes = Session.get('log-class')
+        for (let i = 0; i < classes.length; i++) {
+            if (classes[i] == 'log-complete') {
+                return 'disabled'
+            }
+        }
         return enab ? '' : 'disabled'
     },
 

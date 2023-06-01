@@ -41,7 +41,7 @@ services:
       - ./data/neo4j/conf/:/var/lib/neo4j/conf/ # where the config file is stored
     environment:
       - NEO4J_AUTH=${USERNAME_NEO4J}/${PASSWORD_NEO4J} # sets username and password for neo4j for the first time the container is created
-      - NEO4J_dbms._max__databases=150 # for using multiple databases. increase if needed
+      - NEO4J_dbms_max__databases=150 # for using multiple databases. increase if needed
       - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes # for using enterprise edition
       - NEO4J_dbms_security_procedures_unrestricted=jwt.security.*,apoc.*,gds.* # used by higena for graph algorithms
       - NEO4J_server_directories_import=import # import folder
