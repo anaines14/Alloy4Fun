@@ -11,8 +11,8 @@ if not jpype.isJVMStarted():
 # Import the Java classes
 CompUtil = jpype.JClass('edu.mit.csail.sdg.parser.CompUtil')
 Reporter = jpype.JClass('edu.mit.csail.sdg.alloy4.A4Reporter')
-ExprParser = jpype.JClass('org.parser.A4FExprParser')
-ASTParser = jpype.JClass('org.parser.A4FParser')
+ExprParser = jpype.JClass('org.higena.parser.ExprExtractor')
+ASTParser = jpype.JClass('org.higena.parser.A4FParser')
 SyntaxError = jpype.JClass('edu.mit.csail.sdg.alloy4.ErrorSyntax')
 TypeError = jpype.JClass('edu.mit.csail.sdg.alloy4.ErrorType')
 
