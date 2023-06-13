@@ -427,11 +427,11 @@ def parseExpr(id, expr, fullCode, challenge, parsedChallenge):
 
     parsed = None
     try:
-        parsed = str(ASTParser.parse(expr, parsedChallenge))
+        parsed = str(ASTParser.parse(expr, parsedChallenge).toTreeString())
     except Exception as e:
         # Try to parse the full code
         try:
-            parsed = str(ASTParser.parse(expr, fullCode))
+            parsed = str(ASTParser.parse(expr, parsedChallenge).toTreeString())
         except Exception as e:
             logError(id, challenge, e, expr)
 

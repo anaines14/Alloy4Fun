@@ -28,8 +28,6 @@ public class AlloyHiGenA {
     // Get expression from model
     ExprExtractor extractor = new ExprExtractor(request.model);
     String expression = extractor.parse(request.predicate);
-    System.err.println(expression);
-    System.err.println(request.model);
 
     // Generate hint
     Graph graph = new Graph(request.challenge, request.predicate);
