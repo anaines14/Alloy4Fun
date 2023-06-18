@@ -1,7 +1,7 @@
 package pt.haslab.alloy4fun;
 
-import org.higena.graph.hint.HintGenerator;
-import org.higena.graph.hint.HintGenType;
+import org.higena.hint.HintGenerator;
+import org.higena.hint.HintGenType;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.higena.graph.Graph;
