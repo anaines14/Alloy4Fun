@@ -16,7 +16,8 @@ Meteor.methods({
                 const content = JSON.parse(result.content)
 
                 const new_hint = {
-                    expression: content.expression,
+                    challenge: originalId,
+                    predicate: predicate,
                     code: content.code,
                     mapping: content.mapping,
                     type: content.type,

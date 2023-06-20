@@ -4,10 +4,14 @@ HiGenAHint.attachSchema(new SimpleSchema({
     _id: {
         type: String
     },
-    /** expression that the student is currently working on. */
-    expression: {
+    /** challenge id */
+    challenge: {
         type: String
     },
+    /** predicate name */
+    predicate: {
+        type: String
+    },    
     /** the student's full code. */
     code: {
         type: String

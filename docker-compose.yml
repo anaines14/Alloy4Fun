@@ -23,9 +23,12 @@ services:
     ports:
       - "8081:8080" # if access id needed from the outside (otherwise no need)
     environment:
-      - URI_NEO4J=${URI_NEO4J_DOCKER}
+#      - URI_NEO4J=${URI_NEO4J_HOST} # for accessing neo4j running on the host
+      - URI_NEO4J=${URI_NEO4J_DOCKER} # for accessing neo4j running in a docker container
       - USERNAME_NEO4J=${USERNAME_NEO4J}
       - PASSWORD_NEO4J=${PASSWORD_NEO4J}
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway" # for accessing the host from within the container
     links:
       - neo4j
   neo4j:
