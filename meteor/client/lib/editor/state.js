@@ -34,6 +34,7 @@ export function modelExecuted() {
     Session.set('model-updated', false)
     instChanged()
     Session.set('from-instance', false)
+    Session.set('hint-enabled', true)
 }
 
 /**
@@ -113,7 +114,7 @@ export function getNextInstance() {
         return undefined
     else if (instances[instanceIndex + 1].unsat)
         return instances[instanceIndex + 1]
-    else 
+    else
         return instances[instanceIndex + 1].instance[stateIndex]
 }
 
@@ -148,7 +149,7 @@ export function currentState() {
 }
 
 export function setCurrentState(st) {
-    Session.set('currentState',st) 
+    Session.set('currentState',st)
 }
 
 export function lastState() {

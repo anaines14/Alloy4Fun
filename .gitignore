@@ -34,6 +34,10 @@ api/\.project
 api/\.settings/
 api/bin/
 
+
+#Private Data
+db-population/
+
 # others
 alloy-examples
 Alloy4FunMeteor/\.meteor/

@@ -131,34 +131,16 @@ Template.rightClickMenu.events({
     },
     'click .hideAtom'() {
         const elem = event.target.getAttribute("elm")
-        if (Session.get('rightClickSig')) {
+        if (Session.get('rightClickSig') || !elem.includes("<:")) {
             const val = sigSettings.getInheritedAtomVisibility(elem)
             sigSettings.updateAtomVisibility(elem, !val)
-        } else if (Session.get('rightClickRel')) {
+        } else if (Session.get('rightClickRel') || elem.includes("<:")) {
             const val = relationSettings.isShowAsArcsOn(elem)
             relationSettings.updateShowAsArcs(elem, !val)            
-        } else { // how to distinguish? comes from right-click on background
-            const val = sigSettings.getInheritedAtomVisibility(elem)
-            sigSettings.updateAtomVisibility(elem, !val)
         }
         Session.set('theme-changed', !Session.get('theme-changed'))
         updateGraph(getCurrentState(),false)
-    },
-    'click .hideRel'() {
-        const elem = event.target.getAttribute("elm")
-        if (Session.get('rightClickSig')) {
-            const val = sigSettings.getInheritedAtomVisibility(elem)
-            sigSettings.updateAtomVisibility(elem, !val)
-        } else if (Session.get('rightClickRel')) {
-            const val = relationSettings.isShowAsArcsOn(elem)
-            relationSettings.updateShowAsArcs(elem, !val)            
-        } else {
-            const val = relationSettings.isShowAsArcsOn(elem)
-            relationSettings.updateShowAsArcs(elem, !val)            
-        }
-        Session.set('theme-changed', !Session.get('theme-changed'))
-        refreshGraph()
-        applyCurrentLayout()
+        newInstanceSetup()
     },
     'click .showAsAttribute'() {
         const elem = event.target.getAttribute("elm")

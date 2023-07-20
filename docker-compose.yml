@@ -10,6 +10,10 @@ services:
       - api
     env_file:
       - .env
+    depends_on:
+      mongo:
+        condition: service_healthy
+
   mongo:
     image: mongo:latest
     command: mongod --storageEngine=wiredTiger
@@ -17,8 +21,13 @@ services:
       - ./data/db:/data/db
     ports:
       - "27017:27017"
+    
   api:
     build:
       context: ./api/
+      dockerfile: src/main/docker/Dockerfile.native
     ports:
-      - "8081:8080" # if access id needed from the outside (otherwise no need)
+      - "8080:8080" # if access id needed from the outside (otherwise no need)
+    depends_on:
+      mongo:
+        condition: service_healthy

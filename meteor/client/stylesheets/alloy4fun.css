@@ -2,7 +2,7 @@ html {
     position: relative;
     min-height: 100%;
 }
-  
+
 .empty-instance {
     color: black;
     text-align: center;
@@ -41,7 +41,7 @@ div.instanceViewer {
     padding: 5px;
 }
 
-.urlinfo>p {
+.urlinfo > p {
     margin-top: 10px;
 }
 
@@ -55,7 +55,7 @@ div.instanceViewer {
 body {
     font-family: monospace !important;
     background-color: ghostwhite;
-    margin-bottom:60px;
+    margin-bottom: 60px;
 }
 
 .copyrights {
@@ -96,7 +96,7 @@ body {
     margin-top: 10px;
     bottom: 0;
     left: 0;
-    right: 0;    
+    right: 0;
 }
 
 #instanceViewer {
@@ -165,7 +165,7 @@ body {
     margin-top: 30px;
 }
 
-.command-selection>select {
+.command-selection > select {
     text-align: center;
     background: rgba(142, 140, 140, 0.88);
     border-color: transparent;
@@ -186,11 +186,9 @@ body {
     background: url('/images/loading.gif') no-repeat center center;
 }
 
-#log{
-    margin-top:50px;
+#log {
+    margin-top: 10px;
 }
-
-
 
 .shapePickerTarget.settings {
     background: white !important;
@@ -200,9 +198,9 @@ body {
 }
 
 .shapePickerTarget,
-.shapePickerTarget>option,
+.shapePickerTarget > option,
 .shapePickerType,
-.shapePickerType>option {
+.shapePickerType > option {
     width: 100%;
     color: #333;
     text-align: center;
@@ -227,7 +225,7 @@ body {
 
 .CodeMirror {
     height: 55vh !important;
-    min-height:500px;
+    min-height: 500px;
 }
 
 .cm-secret {
@@ -238,6 +236,18 @@ body {
 .secret {
     color: #bab8b5;
     background-color: rgba(113, 29, 30, 0.76);
+}
+
+.editor-error-mark {
+    background-color: #811;
+}
+
+.editor-warning-mark {
+    background-color: #fa04;
+}
+
+.editor-info-mark {
+    background-color: #246ab7;
 }
 
 .margin-top10px {
@@ -287,8 +297,36 @@ body {
     padding: 5px;
 }
 
+.log-warning {
+    background-color: #fdcf55;
+    font-weight: 700;
+    color: #333333;
+    width: auto;
+    padding: 5px;
+    white-space: pre-line;
+    text-align: center;
+}
+
+.log-error {
+    background-color: #990033;
+    font-weight: 700;
+    color: white;
+    width: auto;
+    padding: 5px;
+    white-space: pre-line;
+    text-align: center;
+}
+
 .log-info {
-    background-color: #009933;
+    background-color: #93ccea;
+    font-weight: 700;
+    color: white;
+    width: auto;
+    padding: 5px;
+}
+
+.log-unavailable {
+    background-color: #aaaaaa;
     font-weight: 700;
     color: white;
     width: auto;
@@ -386,7 +424,7 @@ input[type=checkbox] {
 
 }
 
-.selectize-input>input {
+.selectize-input > input {
     display: none !important;
 }
 
@@ -401,7 +439,7 @@ input[type=checkbox] {
     color: white;
 }
 
-.selectize-control.multi .selectize-input>div {
+.selectize-control.multi .selectize-input > div {
     background: lightslategrey;
     color: #303030;
     border: 0 solid #cacaca;
@@ -411,7 +449,7 @@ input[type=checkbox] {
     border-radius: 4px;
 }
 
-.selectize-control.multi .selectize-input>div:hover {
+.selectize-control.multi .selectize-input > div:hover {
     background-color: #98A9BA;
 }
 
@@ -441,9 +479,9 @@ input[disabled] {
 }
 
 .framePickerTarget,
-.framePickerTarget>option,
+.framePickerTarget > option,
 .framePickerType,
-.framePickerType>option {
+.framePickerType > option {
     width: 100%;
     color: #333;
     text-align: center;
@@ -502,7 +540,7 @@ input[disabled] {
 }
 
 .current-frame {
-    margin-top : 4px;
+    margin-top: 4px;
     padding: 10px;
 }
 
@@ -530,7 +568,8 @@ input[disabled] {
     padding-left: 16px;
 }
 
-.cm-keyword-secret {}
+.cm-keyword-secret {
+}
 
 #headTitle {
     text-align: center;
