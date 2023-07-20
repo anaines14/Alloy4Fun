@@ -91,7 +91,7 @@ def parse_args() -> Namespace:
                                      + ' If a directory is specified, all JSON files in the directory and its subdirectories will be inserted into MongoDB.'
                                      + ' If no arguments are specified, the current directory will be searched for JSON files and the data will be inserted into MongoDB.'
                                      + ' Each JSON file should contain one Alloy4Fun model per line.')
-    parser.add_argument('path', nargs='?', default='.', help='path to JSON file(s) or directory to search for JSON files (default: current directory)')
+    parser.add_argument('path', nargs='?', default='dataset', help='path to JSON file(s) or directory to search for JSON files (default: dataset/)')
     parser.add_argument('collection_name', nargs='?', default='meteor', help='name of MongoDB collection to insert JSON objects into (default: "meteor")')
     parser.add_argument('-r', '--recursive', action='store_true', help='recursively search for JSON files in subdirectories')
     return parser.parse_args()
