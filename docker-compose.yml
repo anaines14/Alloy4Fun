@@ -1,18 +1,18 @@
 version: '3'
 services:
-  meteor:
-    build:
-      context: ./meteor/
-    ports:
-      - "3010:3000"
-    links:
-      - mongo
-      - api
-    env_file:
-      - .env
-    depends_on:
-      mongo:
-        condition: service_healthy
+#  meteor:
+#    build:
+#      context: ./meteor/
+#    ports:
+#      - "3010:3000"
+#    links:
+#      - mongo
+#      - api
+#    env_file:
+#      - .env
+#    depends_on:
+#      mongo:
+#        condition: service_healthy
 
   mongo:
     image: mongo:latest
@@ -25,9 +25,6 @@ services:
   api:
     build:
       context: ./api/
-      dockerfile: src/main/docker/Dockerfile.native
+      dockerfile: src/main/docker/Dockerfile.jvm
     ports:
       - "8080:8080" # if access id needed from the outside (otherwise no need)
-    depends_on:
-      mongo:
-        condition: service_healthy
