@@ -34,7 +34,7 @@ public interface Util {
 
     static CompModule parseModel(String model, A4Reporter rep) throws UncheckedIOException, Err {
         try {
-            String prefix_name = "thr-%s.alloy_heredoc".formatted(Thread.currentThread().threadId());
+            String prefix_name = "thr-%d.alloy_heredoc".formatted(Thread.currentThread().getId());
             File file = File.createTempFile(prefix_name, ".als");
             file.deleteOnExit();
 
@@ -54,7 +54,7 @@ public interface Util {
 
     static AlloyInstance parseInstance(A4Solution solution, Integer state) throws UncheckedIOException, Err {
         try {
-            String prefix_name = "thr-%s.a4f".formatted(Thread.currentThread().threadId());
+            String prefix_name = "thr-%d.a4f".formatted(Thread.currentThread().getId());
             File file = File.createTempFile(prefix_name, ".als");
             file.deleteOnExit();
             solution.writeXML(file.getAbsolutePath());
@@ -71,7 +71,7 @@ public interface Util {
 
     static List<AlloyInstance> parseInstances(A4Solution solution, Integer from, Integer to) throws UncheckedIOException, Err {
         try {
-            String prefix_name = "thr-%s.a4f".formatted(Thread.currentThread().threadId());
+            String prefix_name = "thr-%d.a4f".formatted(Thread.currentThread().getId());
             File file = File.createTempFile(prefix_name, ".als");
             file.deleteOnExit();
             solution.writeXML(file.getAbsolutePath());

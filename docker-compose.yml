@@ -21,10 +21,9 @@ services:
       - ./data/db:/data/db
     ports:
       - "27017:27017"
-    
   api:
-    build:
-      context: ./api/
-      dockerfile: src/main/docker/Dockerfile.jvm
+    image: quarkus/alloy4fun-api-jvm
     ports:
       - "8080:8080" # if access id needed from the outside (otherwise no need)
+    links:
+      - mongo
