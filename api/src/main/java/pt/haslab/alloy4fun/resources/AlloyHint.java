@@ -156,6 +156,30 @@ public class AlloyHint {
         return Response.ok("Test started").build();
     }
 
+    /**
+     * This method is used to setup the graphs for the first time.
+     * It will generate the graphs from the exercises for the given models. 
+     * It will also compute the policies for the graphs and debloat them.
+     */
+    @GET
+    @Path("/setup-graphs")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response genGraphs(List<String> model_ids, @DefaultValue("Unkown") @QueryParam("prefix") String prefix) {
+        LOG.info("Starting setup for model ids " + model_ids);
+        // Create graph
+        makeGraphAndExercisesFromCommands(model_ids, prefix).close();
+        // Fill graph
+        model_ids.forEach(id -> graphInjestor.parseModelTree(id, null));
+        // Compute policy
+        graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
+                policyManager.computePolicyForGraph(id);
+                graphManager.debloatGraph(id);
+        });
+        return Response.ok("Setup completed.").build();
+    }
+
+   
+
     @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
