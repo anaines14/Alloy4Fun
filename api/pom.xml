@@ -65,6 +65,11 @@
             <artifactId>TAR</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>pt.haslab</groupId>
+            <artifactId>HiGenA</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
