@@ -129,7 +129,11 @@ public class AlloyHint {
             graphManager.deleteExerciseByModelIDs(model_ids, true);
             makeGraphAndExercisesFromCommands(model_ids, prefix).close();
             LOG.debug("Scanning models");
-            scanModels(model_ids, new YearRange(yearLower, yearMiddle)).close();
+            try {
+                CompletableFuture.allOf(model_ids.stream().map(id -> graphInjestor.parseModelTree(id, new YearRange(yearLower, yearMiddle)::testDate)).toArray(CompletableFuture[]::new)).get();
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
             LOG.debug("Computing policies");
             graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
                 policyManager.computePolicyForGraph(id);
