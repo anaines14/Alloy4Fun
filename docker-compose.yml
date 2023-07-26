@@ -28,4 +28,4 @@ services:
     links:
       - mongo
     environment:
-      - QUARKUS_MONGODB_CONNECTION_STRING="mongodb://mongo:27017"
+      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017
