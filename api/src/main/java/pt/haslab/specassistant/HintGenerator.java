@@ -75,11 +75,6 @@ public class HintGenerator {
         return modelRepo.findById(model_id).original;
     }
 
-    public Optional<HintMsg> getHint(String challengeId, String command_label, String modelId) {
-        CompModule world = Model.getWorld(modelId);
-        return this.getHint(challengeId, command_label, modelId);
-    }
-
 
     public Optional<HintMsg> getHint(String originId, String command_label, CompModule world) {
         String original_id = getOriginalId(originId);

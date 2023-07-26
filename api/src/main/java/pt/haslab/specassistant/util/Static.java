@@ -1,6 +1,10 @@
 package pt.haslab.specassistant.util;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -42,6 +46,32 @@ public interface Static {
             }
             result.add(current);
         }
+        return result;
+    }
+
+    static <R> void mergeFutures(Collection<CompletableFuture<R>> futures, Consumer<R> process) {
+        for (CompletableFuture<R> future : futures) {
+            try {
+                process.accept(future.get());
+            } catch (ExecutionException e) {
+                try {
+                    throw new RuntimeException(e.getCause());
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    static <K, V> Map<K, V> mergeFutureEntries(Collection<CompletableFuture<Map.Entry<K, V>>> futures) {
+        return mergeFutureEntries(futures, (a, b) -> b);
+    }
+
+    static <K, V> Map<K, V> mergeFutureEntries(Collection<CompletableFuture<Map.Entry<K, V>>> futures, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+        Map<K, V> result = new HashMap<>();
+        mergeFutures(futures, entry -> result.merge(entry.getKey(), entry.getValue(), remappingFunction));
         return result;
     }
 }

@@ -12,11 +12,12 @@ import org.jboss.logging.Logger;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
 import pt.haslab.specassistant.data.models.*;
-import pt.haslab.specassistant.treeedit.ASTEditDiff;
 import pt.haslab.specassistant.repositories.HintEdgeRepository;
 import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.repositories.ModelRepository;
+import pt.haslab.specassistant.treeedit.ASTEditDiff;
+import pt.haslab.specassistant.util.Static;
 import pt.haslab.specassistant.util.Text;
 
 import java.time.LocalDateTime;
@@ -156,34 +157,37 @@ public class GraphInjestor {
         return context;
     }
 
-    public void parseModelTree(String model_id, Predicate<LocalDateTime> year_tester) {
+    public CompletableFuture<Void> parseModelTree(String model_id) {
+        return parseModelTree(model_id, null);
+    }
+
+
+    public CompletableFuture<Void> parseModelTree(String model_id, Predicate<LocalDateTime> year_tester) {
         Model model = modelRepo.findById(model_id);
         CompModule base_world = Util.parseModel(model.code);
+        long common;
         try {
-            long commonT = System.nanoTime();
+            long start = System.nanoTime();
             if (year_tester == null)
                 walkModelTree(model).get();
             else {
                 walkModelTree(model, year_tester).get();
             }
-            commonT = System.nanoTime() - commonT;
-
-            List<CompletableFuture<Map.Entry<ObjectId, Long>>> classifications = exerciseRepo.streamByModelId(model.id).map(ex -> {
-                long v = System.nanoTime();
-                return classifyAllEdges(base_world, ex.graph_id).thenApply(nil -> Map.entry(ex.graph_id, System.nanoTime() - v));
-            }).toList();
-
-            CompletableFuture.allOf(classifications.toArray(CompletableFuture[]::new)).get();
-
-            Map<ObjectId, Long> classificationTimes = new HashMap<>();
-            for (CompletableFuture<Map.Entry<ObjectId, Long>> cl : classifications) {
-                Map.Entry<ObjectId, Long> et = cl.get();
-                classificationTimes.put(et.getKey(), et.getValue() + classificationTimes.getOrDefault(et.getKey(), commonT));
-            }
-            classificationTimes.forEach(HintGraph::registerParsingTime);
-
+            common = System.nanoTime() - start;
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+
+        List<CompletableFuture<Map.Entry<ObjectId, Long>>> classifications = exerciseRepo.streamByModelId(model.id).map(ex -> {
+            long v = System.nanoTime();
+            return classifyAllEdges(base_world, ex.graph_id).thenApply(nil -> Map.entry(ex.graph_id, System.nanoTime() - v));
+        }).toList();
+
+        return CompletableFuture.allOf(classifications.toArray(CompletableFuture[]::new))
+                .whenCompleteAsync((nil, error) -> {
+                    if (error != null)
+                        LOG.error(error);
+                    Static.mergeFutureEntries(classifications).forEach((id, time) -> HintGraph.registerParsingTime(id, time + common));
+                });
     }
 }
