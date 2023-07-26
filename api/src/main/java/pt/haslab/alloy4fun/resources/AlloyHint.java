@@ -1,8 +1,6 @@
 package pt.haslab.alloy4fun.resources;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import edu.mit.csail.sdg.parser.CompModule;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -11,11 +9,10 @@ import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.transfer.ExerciseForm;
+import pt.haslab.alloy4fun.data.transfer.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
-import pt.haslab.alloy4fun.data.transfer.InstancesRequest;
 import pt.haslab.alloy4fun.data.transfer.YearRange;
 import pt.haslab.alloy4fun.services.SessionService;
-import pt.haslab.alloyaddons.Util;
 import pt.haslab.specassistant.GraphInjestor;
 import pt.haslab.specassistant.GraphManager;
 import pt.haslab.specassistant.HintGenerator;
@@ -84,14 +81,6 @@ public class AlloyHint {
         return Response.ok().build();
     }
 
-    @POST
-    @Path("/check")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response checkHint(InstancesRequest request) {
-        CompModule world = Util.parseModel(request.model);
-        return Response.ok(hintGenerator.getHint(request.parentId, world.getAllCommands().get(request.commandIndex).label, world).isPresent()).build();
-    }
-
     @GET
     @Path("/scan-model")
     @Produces(MediaType.APPLICATION_JSON)
@@ -158,7 +147,7 @@ public class AlloyHint {
 
     /**
      * This method is used to setup the graphs for the first time.
-     * It will generate the graphs from the exercises for the given models. 
+     * It will generate the graphs from the exercises for the given models.
      * It will also compute the policies for the graphs and debloat them.
      */
     @GET
@@ -172,21 +161,20 @@ public class AlloyHint {
         model_ids.forEach(id -> graphInjestor.parseModelTree(id, null));
         // Compute policy
         graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
-                policyManager.computePolicyForGraph(id);
-                graphManager.debloatGraph(id);
+            policyManager.computePolicyForGraph(id);
+            graphManager.debloatGraph(id);
         });
         return Response.ok("Setup completed.").build();
     }
 
-   
 
     @GET
-    @Path("/get")
+    @Path("/check")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHint(HintRequest request) {
-        LOG.info("Hint requested for session " + request.sessionId);
+    public Response checkHint(HintRequest request) {
+        LOG.info("Hint requested for session " + request.model);
 
-        Session session = sessionManager.findById(request.sessionId);
+        Session session = sessionManager.findById(request.model);
 
         if (session == null)
             return Response.ok(InstanceMsg.error("Invalid Session")).build();
@@ -195,7 +183,7 @@ public class AlloyHint {
             Optional<HintMsg> response = session.hintRequest.get();
 
             if (response.isEmpty())
-                LOG.debug("NO HINT AVAILABLE FOR " + request.sessionId);
+                LOG.debug("NO HINT AVAILABLE FOR " + request.model);
 
             return Response.ok(response.map(InstanceMsg::from).orElseGet(() -> InstanceMsg.error("Unable to generate hint"))).build();
         } catch (CancellationException | InterruptedException e) {
@@ -205,6 +193,14 @@ public class AlloyHint {
             LOG.error(e);
             return Response.ok(InstanceMsg.error("Error when generating hint")).build();
         }
+    }
+
+    @POST
+    @Path("/get")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHint(HintRequest request) {
+        Optional<HintMsg> result = hintGenerator.getHint(request.challenge, request.predicate, request.model);
+        return (result.isPresent() ? Response.ok(InstanceMsg.from(result.orElseThrow())) : Response.status(Response.Status.NO_CONTENT)).build();
     }
 
     @GET
@@ -221,10 +217,5 @@ public class AlloyHint {
     public Response debug1() {
         HintGraph.removeAllHintStats();
         return Response.ok().build();
-    }
-
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class HintRequest {
-        public String sessionId;
     }
 }
