@@ -23,7 +23,6 @@ import pt.haslab.specassistant.util.Text;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -165,29 +164,26 @@ public class GraphInjestor {
     public CompletableFuture<Void> parseModelTree(String model_id, Predicate<LocalDateTime> year_tester) {
         Model model = modelRepo.findById(model_id);
         CompModule base_world = Util.parseModel(model.code);
-        long common;
-        try {
-            long start = System.nanoTime();
-            if (year_tester == null)
-                walkModelTree(model).get();
-            else {
-                walkModelTree(model, year_tester).get();
-            }
-            common = System.nanoTime() - start;
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
 
-        List<CompletableFuture<Map.Entry<ObjectId, Long>>> classifications = exerciseRepo.streamByModelId(model.id).map(ex -> {
-            long v = System.nanoTime();
-            return classifyAllEdges(base_world, ex.graph_id).thenApply(nil -> Map.entry(ex.graph_id, System.nanoTime() - v));
-        }).toList();
+        CompletableFuture<Long> job;
 
-        return CompletableFuture.allOf(classifications.toArray(CompletableFuture[]::new))
-                .whenCompleteAsync((nil, error) -> {
-                    if (error != null)
-                        LOG.error(error);
-                    Static.mergeFutureEntries(classifications).forEach((id, time) -> HintGraph.registerParsingTime(id, time + common));
-                });
+        long start = System.nanoTime();
+
+        if (year_tester == null) job = walkModelTree(model).thenApplyAsync(nil -> System.nanoTime() - start);
+        else job = walkModelTree(model, year_tester).thenApplyAsync(nil -> System.nanoTime() - start);
+
+        return job.thenComposeAsync(commonTime -> {
+            List<CompletableFuture<Map.Entry<ObjectId, Long>>> classifications = exerciseRepo.streamByModelId(model.id).map(ex -> {
+                long v = System.nanoTime();
+                return classifyAllEdges(base_world, ex.graph_id).thenApply(nil -> Map.entry(ex.graph_id, System.nanoTime() - v));
+            }).toList();
+
+            return CompletableFuture.allOf(classifications.toArray(CompletableFuture[]::new))
+                    .whenCompleteAsync((nil, error) -> {
+                        if (error != null)
+                            LOG.error(error);
+                        Static.mergeFutureEntries(classifications).forEach((id, time) -> HintGraph.registerParsingTime(id, time + commonTime));
+                    });
+        });
     }
 }
