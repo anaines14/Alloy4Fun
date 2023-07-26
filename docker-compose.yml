@@ -27,3 +27,5 @@ services:
       - "8080:8080" # if access id needed from the outside (otherwise no need)
     links:
       - mongo
+    environment:
+      - QUARKUS_MONGODB_CONNECTION_STRING="mongodb://mongo:27017"

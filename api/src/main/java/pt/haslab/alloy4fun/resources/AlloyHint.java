@@ -13,6 +13,7 @@ import pt.haslab.alloy4fun.data.transfer.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.data.transfer.YearRange;
 import pt.haslab.alloy4fun.services.SessionService;
+import pt.haslab.alloyaddons.Util;
 import pt.haslab.specassistant.GraphInjestor;
 import pt.haslab.specassistant.GraphManager;
 import pt.haslab.specassistant.HintGenerator;
@@ -158,13 +159,17 @@ public class AlloyHint {
         // Create graph
         makeGraphAndExercisesFromCommands(model_ids, prefix).close();
         // Fill graph
-        model_ids.forEach(id -> graphInjestor.parseModelTree(id, null));
-        // Compute policy
-        graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
-            policyManager.computePolicyForGraph(id);
-            graphManager.debloatGraph(id);
-        });
-        return Response.ok("Setup completed.").build();
+        CompletableFuture.allOf(model_ids.stream().map(id -> graphInjestor.parseModelTree(id)).toArray(CompletableFuture[]::new))
+                // Then Compute policy
+                .thenAcceptAsync(nil -> graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
+                    policyManager.computePolicyForGraph(id);
+                    graphManager.debloatGraph(id);
+                })).whenCompleteAsync((nil, error) -> {
+                    if (error != null)
+                        LOG.error(error);
+                    LOG.info("Setup Completed");
+                });
+        return Response.ok("Setup in progress.").build();
     }
 
 
@@ -172,9 +177,9 @@ public class AlloyHint {
     @Path("/check")
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkHint(HintRequest request) {
-        LOG.info("Hint requested for session " + request.model);
+        LOG.info("Hint requested for session " + request.challenge);
 
-        Session session = sessionManager.findById(request.model);
+        Session session = sessionManager.findById(request.challenge);
 
         if (session == null)
             return Response.ok(InstanceMsg.error("Invalid Session")).build();
@@ -183,7 +188,7 @@ public class AlloyHint {
             Optional<HintMsg> response = session.hintRequest.get();
 
             if (response.isEmpty())
-                LOG.debug("NO HINT AVAILABLE FOR " + request.model);
+                LOG.debug("NO HINT AVAILABLE FOR " + request.challenge);
 
             return Response.ok(response.map(InstanceMsg::from).orElseGet(() -> InstanceMsg.error("Unable to generate hint"))).build();
         } catch (CancellationException | InterruptedException e) {
@@ -195,12 +200,12 @@ public class AlloyHint {
         }
     }
 
-    @POST
+    @GET
     @Path("/get")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHint(HintRequest request) {
-        Optional<HintMsg> result = hintGenerator.getHint(request.challenge, request.predicate, request.model);
-        return (result.isPresent() ? Response.ok(InstanceMsg.from(result.orElseThrow())) : Response.status(Response.Status.NO_CONTENT)).build();
+        Optional<HintMsg> result = hintGenerator.getHint(request.challenge, request.predicate, Util.parseModel(request.model));
+        return result.map(r -> Response.ok(InstanceMsg.from(r))).orElseGet(() -> Response.status(Response.Status.NO_CONTENT)).build();
     }
 
     @GET
