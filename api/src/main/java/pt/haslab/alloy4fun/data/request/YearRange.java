@@ -1,4 +1,4 @@
-package pt.haslab.alloy4fun.data.transfer;
+package pt.haslab.alloy4fun.data.request;
 
 import org.jboss.resteasy.reactive.RestQuery;
 

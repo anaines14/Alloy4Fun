@@ -20,7 +20,7 @@ import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.data.transfer.InstanceResponse;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
-import pt.haslab.alloy4fun.data.transfer.InstancesRequest;
+import pt.haslab.alloy4fun.data.request.InstancesRequest;
 import pt.haslab.alloy4fun.services.SessionService;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
