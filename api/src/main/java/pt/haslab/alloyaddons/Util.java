@@ -5,6 +5,7 @@ import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4.Pos;
 import edu.mit.csail.sdg.alloy4viz.AlloyInstance;
 import edu.mit.csail.sdg.alloy4viz.StaticInstanceReader;
+import edu.mit.csail.sdg.ast.Command;
 import edu.mit.csail.sdg.ast.Expr;
 import edu.mit.csail.sdg.ast.Func;
 import edu.mit.csail.sdg.parser.CompModule;
@@ -103,6 +104,18 @@ public interface Util {
         return allFunctions.stream().filter(x -> targetNames.contains(x.label.replace("this/", "")));
     }
 
+    static Stream<String> streamFuncsNamesWithNames(Collection<Func> allFunctions, Set<String> targetNames) {
+        return allFunctions.stream().filter(x -> targetNames.contains(x.label.replace("this/", ""))).map(x -> x.label.replace("this/", ""));
+    }
+
+    static boolean containsFuncs(Collection<Func> allFunctions, Set<String> targetNames) {
+        return allFunctions.stream().map(x -> x.label.replace("this/", "")).collect(Collectors.toSet()).containsAll(targetNames);
+    }
+
+    static boolean containsCommand(Collection<Command> allFunctions, String targetName) {
+        return allFunctions.stream().map(x -> x.label.replace("this/", "")).collect(Collectors.toSet()).contains(targetName);
+    }
+
     static String stripThisFromLabel(String str) {
         if (str != null)
             str = str.replace("this/", "");
@@ -160,7 +173,7 @@ public interface Util {
 
 
     static String posAsStringTuple(Pos p) {
-        return "(" + p.x + "," + p.y + (p.x2 != p.x || p.y2 != p.y ? "," + p.x2 + "," + p.y2: "") + ")";
+        return "(" + p.x + "," + p.y + (p.x2 != p.x || p.y2 != p.y ? "," + p.x2 + "," + p.y2 : "") + ")";
     }
 
     static String lineCSV(String sep, List<String> strings) {

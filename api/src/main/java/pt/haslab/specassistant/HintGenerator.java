@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 import pt.haslab.Repairer;
 import pt.haslab.alloyaddons.ExprNormalizer;
 import pt.haslab.alloyaddons.ExprStringify;
@@ -38,6 +39,7 @@ import static pt.haslab.specassistant.util.Static.getCombinations;
 @ApplicationScoped
 public class HintGenerator {
 
+    private static final Logger LOG = Logger.getLogger(HintGenerator.class);
 
     @ConfigProperty(name = "hint.mutations", defaultValue = "true")
     boolean mutationsEnabled;
@@ -79,8 +81,15 @@ public class HintGenerator {
     public Optional<HintMsg> getHint(String originId, String command_label, CompModule world) {
         String original_id = getOriginalId(originId);
         HintExercise exercise = exerciseRepo.findByModelIdAndCmdN(original_id, command_label).orElse(null);
-        if (exercise == null)
+        if (exercise == null) {
+            LOG.debug("No exercise found for original=" + original_id + " && command_label=" + command_label);
             return Optional.empty();
+        }
+        Set<String> availableFuncs = Util.streamFuncsNamesWithNames(world.getAllFunc().makeConstList(), exercise.targetFunctions).collect(Collectors.toSet());
+        if (!availableFuncs.containsAll(exercise.targetFunctions)) {
+            LOG.debug("Some of the targeted functions are not contained within provided world, missing " + new HashSet<>(exercise.targetFunctions).removeAll(availableFuncs));
+            return Optional.empty();
+        }
 
         ObjectId graph_id = exercise.graph_id;
 
