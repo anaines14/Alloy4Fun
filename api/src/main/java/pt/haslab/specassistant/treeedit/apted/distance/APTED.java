@@ -21,11 +21,11 @@
  * SOFTWARE.
  */
 
-package at.unisalzburg.dbresearch.apted.distance;
+package pt.haslab.specassistant.treeedit.apted.distance;
 
-import at.unisalzburg.dbresearch.apted.costmodel.CostModel;
-import at.unisalzburg.dbresearch.apted.node.Node;
-import at.unisalzburg.dbresearch.apted.node.NodeIndexer;
+import pt.haslab.specassistant.treeedit.apted.costmodel.CostModel;
+import pt.haslab.specassistant.treeedit.apted.node.Node;
+import pt.haslab.specassistant.treeedit.apted.node.NodeIndexer;
 
 import java.util.Arrays;
 import java.util.LinkedList;

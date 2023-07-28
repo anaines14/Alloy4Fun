@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-package at.unisalzburg.dbresearch.apted.costmodel;
+package pt.haslab.specassistant.treeedit.apted.costmodel;
 
-import at.unisalzburg.dbresearch.apted.node.Node;
+import pt.haslab.specassistant.treeedit.apted.node.Node;
 
 /**
  * This interface specifies the methods to implement for a custom cost model.

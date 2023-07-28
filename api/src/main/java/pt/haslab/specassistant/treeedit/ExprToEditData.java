@@ -1,6 +1,6 @@
 package pt.haslab.specassistant.treeedit;
 
-import at.unisalzburg.dbresearch.apted.node.Node;
+import pt.haslab.specassistant.treeedit.apted.node.Node;
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4.Pos;
 import edu.mit.csail.sdg.ast.*;
