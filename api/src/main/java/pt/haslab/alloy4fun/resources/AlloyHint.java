@@ -6,6 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.bson.types.ObjectId;
+import org.higena.parser.ExprExtractor;
 import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.request.ExerciseForm;
@@ -227,6 +228,15 @@ public class AlloyHint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response debug1() {
         HintGraph.removeAllHintStats();
+        return Response.ok().build();
+    }
+
+    @POST 
+    @Path("/higena")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHiGenAHint(){
+        ExprExtractor extractor = new ExprExtractor("var sig File { var link : lone File } var sig Trash in File {} var sig Protected in File {}");
+        String expression = extractor.parse("no Trash");
         return Response.ok().build();
     }
 }
