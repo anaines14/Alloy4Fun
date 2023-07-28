@@ -160,6 +160,8 @@ public class AlloyHint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response genGraphs(List<String> model_ids, @DefaultValue("Unkown") @QueryParam("prefix") String prefix) {
         LOG.info("Starting setup for model ids " + model_ids);
+        // Clean
+        graphManager.deleteExerciseByModelIDs(model_ids, true);
         // Create graph
         makeGraphAndExercisesFromCommands(model_ids, prefix).close();
         // Fill graph
