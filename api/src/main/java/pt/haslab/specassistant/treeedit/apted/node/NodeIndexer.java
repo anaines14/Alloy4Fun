@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-package at.unisalzburg.dbresearch.apted.node;
+package pt.haslab.specassistant.treeedit.apted.node;
 
-import at.unisalzburg.dbresearch.apted.costmodel.CostModel;
+import pt.haslab.specassistant.treeedit.apted.costmodel.CostModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;

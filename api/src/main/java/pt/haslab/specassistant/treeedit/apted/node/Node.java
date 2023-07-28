@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package at.unisalzburg.dbresearch.apted.node;
+package pt.haslab.specassistant.treeedit.apted.node;
 
 import java.util.ArrayList;
 import java.util.List;
