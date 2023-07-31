@@ -38,6 +38,13 @@ api/bin/
 #Private Data
 db-population/
 
+# Neo4j
+data/neo4j/data/
+data/neo4j/import/*
+data/neo4j/logs/
+data/neo4j/conf/
+
+
 # others
 alloy-examples
 Alloy4FunMeteor/\.meteor/
