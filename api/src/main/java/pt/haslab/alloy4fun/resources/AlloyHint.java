@@ -14,8 +14,8 @@ import org.json.JSONObject;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.request.ExerciseForm;
 import pt.haslab.alloy4fun.data.request.HintRequest;
-import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.data.request.YearRange;
+import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.services.SessionService;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.specassistant.GraphInjestor;
@@ -235,15 +235,13 @@ public class AlloyHint {
     }
 
     @POST 
-    @Path("/higena")
+    @Path("/higena-hint")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHiGenAHint(HintRequest request) {
         LOG.info("HiGenA Hint requested");
         // Get expression from model
         ExprExtractor extractor = new ExprExtractor(request.model);
         String expression = extractor.parse(request.predicate);
-        LOG.debug("Expression: " + expression);
-        LOG.debug("Model: " + request.model);
 
          // Generate hint
         Graph graph = new Graph(request.challenge, request.predicate);
@@ -253,4 +251,21 @@ public class AlloyHint {
         JSONObject response = hintGen.getJSON();
         return Response.ok(response.toString()).build();
     }
+
+    @POST
+    @Path("/higena-setup")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getHiGenAHint(List<String> model_ids) {
+        LOG.info("HiGenA Setup requested");
+        CompletableFuture.runAsync(() -> {
+            for (String model_id : model_ids) {
+                graphManager.getSecretsForModel(model_id).forEach(secret -> {
+                    new Graph(model_id, secret).setup();
+                    LOG.info("HiGenA setup finished for " + model_id + " " + secret);
+                });
+            }
+        });
+        return Response.ok("Setup in progress").build();
+    }
+
 }

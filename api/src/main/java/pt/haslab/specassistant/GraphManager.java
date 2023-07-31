@@ -15,6 +15,7 @@ import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.repositories.ModelRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -64,6 +65,14 @@ public class GraphManager {
             return true;
         }
         return false;
+    }
+
+    public List<String> getSecretsForModel(String model_id) {
+        Model m = modelRepo.findByIdOptional(model_id).orElseThrow();
+        CompModule world = Util.parseModel(m.code);
+        List<Pos> secretPositions = secretPos(world.path, m.code);
+        Map<String, Set<String>> targets = Util.getFunctionWithPositions(world, secretPositions);
+        return new ArrayList<>(targets.keySet());
     }
 
     public void generateExercisesWithGraphIdFromSecrets(Function<String, ObjectId> commandToGraphId, String model_id) {
