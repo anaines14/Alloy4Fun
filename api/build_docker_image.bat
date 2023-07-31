@@ -2,6 +2,7 @@
 
 REM Step 1: Build the application using Maven
 echo Building the application using Maven...
+call .\mvnw clean install -U 
 call .\mvnw package
 
 REM Step 2: Build the Docker image

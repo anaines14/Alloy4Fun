@@ -6,8 +6,11 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.bson.types.ObjectId;
+import org.higena.graph.Graph;
+import org.higena.hint.HintGenType;
 import org.higena.parser.ExprExtractor;
 import org.jboss.logging.Logger;
+import org.json.JSONObject;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.request.ExerciseForm;
 import pt.haslab.alloy4fun.data.request.HintRequest;
@@ -234,9 +237,20 @@ public class AlloyHint {
     @POST 
     @Path("/higena")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHiGenAHint(){
-        ExprExtractor extractor = new ExprExtractor("var sig File { var link : lone File } var sig Trash in File {} var sig Protected in File {}");
-        String expression = extractor.parse("no Trash");
-        return Response.ok().build();
+    public Response getHiGenAHint(HintRequest request) {
+        LOG.info("HiGenA Hint requested");
+        // Get expression from model
+        ExprExtractor extractor = new ExprExtractor(request.model);
+        String expression = extractor.parse(request.predicate);
+        LOG.debug("Expression: " + expression);
+        LOG.debug("Model: " + request.model);
+
+         // Generate hint
+        Graph graph = new Graph(request.challenge, request.predicate);
+        org.higena.hint.HintGenerator hintGen = graph.generateHint(expression, request.model, HintGenType.TED);
+
+        // Build response
+        JSONObject response = hintGen.getJSON();
+        return Response.ok(response.toString()).build();
     }
 }

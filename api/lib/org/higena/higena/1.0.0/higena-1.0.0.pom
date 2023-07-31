@@ -6,4 +6,48 @@
   <artifactId>higena</artifactId>
   <version>1.0.0</version>
   <description>POM was created from install:install-file</description>
+
+  <dependencies>
+      <dependency>
+          <groupId>org.alloytools</groupId>
+          <artifactId>Alloy</artifactId>
+          <version>6.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>Apted</groupId>
+          <artifactId>apted</artifactId>
+          <version>0.1.1</version>
+      </dependency>
+      <dependency>
+          <groupId>org.neo4j.driver</groupId>
+          <artifactId>neo4j-java-driver</artifactId>
+          <version>4.3.6</version>
+      </dependency>
+      <dependency>
+          <groupId>io.github.cdimascio</groupId>
+          <artifactId>dotenv-java</artifactId>
+          <version>2.3.2</version>
+      </dependency>
+      <dependency>
+          <groupId>com.github.gumtreediff</groupId>
+          <artifactId>core</artifactId>
+          <version>3.0.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>1.7.25</version>
+      </dependency>
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-simple</artifactId>
+          <version>1.7.25</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20230227</version>
+      </dependency>
+  </dependencies>
 </project>
