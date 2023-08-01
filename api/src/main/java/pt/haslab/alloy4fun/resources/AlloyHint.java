@@ -16,6 +16,7 @@ import pt.haslab.alloy4fun.data.request.ExerciseForm;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.request.YearRange;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
+import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.alloy4fun.services.SessionService;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.specassistant.GraphInjestor;
@@ -50,6 +51,9 @@ public class AlloyHint {
 
     @Inject
     SessionService sessionManager;
+
+    @Inject
+    HintMerge hintMerge;
 
     private static ObjectId getAGraphID(Map<String, ObjectId> graphspace, String prefix, String label) {
         if (!graphspace.containsKey(label))
@@ -266,6 +270,17 @@ public class AlloyHint {
             }
         });
         return Response.ok("Setup in progress").build();
+    }
+
+    @POST
+    @Path("/spec-hint")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getSpecHint(HintRequest request) {
+        LOG.info("Spec Hint requested");
+        String hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
+        if (hint == null)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.ok(hint).build();
     }
 
 }
