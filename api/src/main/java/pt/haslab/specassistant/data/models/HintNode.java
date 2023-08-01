@@ -74,6 +74,11 @@ public class HintNode extends PanacheMongoEntity {
                 .collect(toUnmodifiableMap(x -> x.label, x -> ExprStringify.stringify(ExprNormalizer.normalize(x))));
     }
 
+    public static Map<String, String> getFormulaFrom(Collection<Func> funcs, Set<String> targetNames) {
+        return Util.streamFuncsWithNames(funcs, targetNames)
+                .collect(toUnmodifiableMap(x -> x.label, x -> ExprStringify.stringify(x.getBody())));
+    }
+
     public Map<String, Expr> getParsedFormula(CompModule world) throws RuntimeException {
         CompModule target_world = Optional.ofNullable(this.witness).map(Model::getWorld).orElse(world);
         return formula.entrySet().stream().collect(toMap(Map.Entry::getKey, x -> Util.parseOneExprFromString(target_world, x.getValue())));
