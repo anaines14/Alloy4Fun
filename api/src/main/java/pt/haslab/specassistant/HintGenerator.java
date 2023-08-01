@@ -16,14 +16,16 @@ import pt.haslab.alloyaddons.ExprStringify;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.mutation.Candidate;
 import pt.haslab.mutation.mutator.Mutator;
-import pt.haslab.specassistant.data.models.*;
+import pt.haslab.specassistant.data.models.HintEdge;
+import pt.haslab.specassistant.data.models.HintExercise;
+import pt.haslab.specassistant.data.models.HintGraph;
+import pt.haslab.specassistant.data.models.HintNode;
 import pt.haslab.specassistant.data.transfer.HintMsg;
 import pt.haslab.specassistant.repositories.HintEdgeRepository;
 import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.repositories.ModelRepository;
 import pt.haslab.specassistant.treeedit.ASTEditDiff;
-import pt.haslab.specassistant.treeedit.EditOperation;
 import pt.haslab.specassistant.util.Static;
 import pt.haslab.specassistant.util.Text;
 
@@ -34,6 +36,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static pt.haslab.specassistant.data.models.HintNode.formulaExprToString;
 import static pt.haslab.specassistant.util.Static.getCombinations;
 
 @ApplicationScoped
@@ -103,11 +106,16 @@ public class HintGenerator {
         return hintWithGraph(world, exercise, graph_id);
     }
 
+
     private Optional<HintMsg> hintWithGraph(CompModule world, HintExercise exercise, ObjectId graph_id) {
-        Map<String, Expr> formulaExpr = HintNode.getNormalizedFormulaExprFrom(world.getAllFunc().makeConstList(), exercise.targetFunctions);
+        Map<String, Expr> formulaExpr = HintNode.getNormalizedFormulaExprFrom(world, exercise.targetFunctions);
+        Map<String, String> formula = formulaExprToString(formulaExpr);
 
-        Map<String, String> formula = formulaExpr.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, x -> ExprStringify.stringify(x.getValue())));
+        return nextState(graph_id, formula).map(x -> firstHint(formulaExpr, x.getParsedFormula(world)));
+    }
 
+
+    public Optional<HintNode> nextState(ObjectId graph_id, Map<String, String> formula) {
         Optional<HintNode> node_opt = nodeRepo.findByGraphIdAndFormula(graph_id, formula);
 
         if (node_opt.isPresent()) {
@@ -115,20 +123,19 @@ public class HintGenerator {
             Optional<HintEdge> edge_opt = edgeRepo.findBestScoredByOriginNode(origin_node.id);
             if (edge_opt.isPresent()) {
                 HintEdge edge = edge_opt.orElseThrow();
-                node_opt = nodeRepo.findByIdOptional(edge.destination);
-                if (node_opt.isPresent()) {
-                    HintNode dest_node = node_opt.orElseThrow();
-
-                    Map<String, Expr> otherFormulaExpr = dest_node.getParsedFormula(Optional.ofNullable(dest_node.witness).map(Model::getWorld).orElse(world));
-                    for (String s : formula.keySet()) {
-                        ASTEditDiff diff = new ASTEditDiff().initFrom(formulaExpr.get(s), otherFormulaExpr.get(s));
-                        diff.computeEditDistance();
-                        return operationToMsg(diff.getFirstEditOperation());
-                    }
-                }
+                return nodeRepo.findByIdOptional(edge.destination);
             }
         }
         return Optional.empty();
+    }
+
+    public static HintMsg firstHint(Map<String, Expr> formulaExpr, Map<String, Expr> otherFormulaExpr) {
+        for (String s : formulaExpr.keySet()) {
+            ASTEditDiff diff = new ASTEditDiff().initFrom(formulaExpr.get(s), otherFormulaExpr.get(s));
+            diff.computeEditDistance();
+            return diff.getFirstEditOperation().getHintMessage();
+        }
+        return null;
     }
 
     public Optional<HintMsg> hintWithMutation(ObjectId graph_id, Collection<Func> skolem, ConstList<Sig> sigs, HintExercise exercise) {
@@ -153,16 +160,6 @@ public class HintGenerator {
         }
 
         return Optional.empty();
-    }
-
-    public Optional<HintMsg> operationToMsg(EditOperation operation) {
-        if (operation == null)
-            return Optional.empty();
-        return switch (operation.type) {
-            case "rename", "delete" -> Optional.of(HintMsg.from(operation.target().position(), "Try to change this declaration"));
-            case "insert" -> Optional.of(HintMsg.from(operation.target().position(), "Try adding something to this declaration"));
-            default -> Optional.empty();
-        };
     }
 
 

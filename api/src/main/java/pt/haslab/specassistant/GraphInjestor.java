@@ -71,8 +71,8 @@ public class GraphInjestor {
         try {
             HintNode originN = nodeGetter.apply(edge.origin);
             HintNode originD = nodeGetter.apply(edge.destination);
-            Map<String, Expr> originParsed = originN.getParsedFormula(Optional.ofNullable(originN.witness).map(Model::getWorld).orElse(world));
-            Map<String, Expr> peerParsed = originD.getParsedFormula(Optional.ofNullable(originD.witness).map(Model::getWorld).orElse(world));
+            Map<String, Expr> originParsed = originN.getParsedFormula(world);
+            Map<String, Expr> peerParsed = originD.getParsedFormula(world);
 
             edge.editDistance = getFormulaMapDiff(originParsed, peerParsed).values().stream().map(ASTEditDiff::computeEditDistance).reduce(0.0f, Float::sum);
         } catch (ErrorSyntax e) {

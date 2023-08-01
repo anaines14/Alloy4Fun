@@ -1,5 +1,7 @@
 package pt.haslab.specassistant.treeedit;
 
+import pt.haslab.specassistant.data.transfer.HintMsg;
+
 public class EditOperation {
 
     public String type;
@@ -32,5 +34,13 @@ public class EditOperation {
     @Override
     public String toString() {
         return "{\"type\"=\"" + type + (value != null ? ("\",\"value\"=\"" + value) : "") + "\",\"target\"=\"" + target + "\"}";
+    }
+
+    public HintMsg getHintMessage() {
+        return switch (this.type) {
+            case "rename", "delete" -> HintMsg.from(target.position(), "Try to change this declaration");
+            case "insert" -> HintMsg.from(target.position(), "Try adding something to this declaration");
+            default -> null;
+        };
     }
 }

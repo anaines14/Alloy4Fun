@@ -13,7 +13,9 @@ import pt.haslab.alloyaddons.Util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toUnmodifiableMap;
@@ -50,9 +52,17 @@ public class HintNode extends PanacheMongoEntity {
         return result;
     }
 
+    public static Map<String, Expr> getNormalizedFormulaExprFrom(CompModule world, Set<String> functions) {
+        return getNormalizedFormulaExprFrom(world.getAllFunc().makeConstList(), functions);
+    }
+
     public static Map<String, Expr> getNormalizedFormulaExprFrom(Collection<Func> skolem, Set<String> functions) {
         return Util.streamFuncsWithNames(skolem, functions)
                 .collect(toUnmodifiableMap(x -> x.label, ExprNormalizer::normalize));
+    }
+
+    public static Map<String, String> formulaExprToString(Map<String, Expr> formulaExpr) {
+        return formulaExpr.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, x -> ExprStringify.stringify(x.getValue())));
     }
 
     public static Map<String, Expr> getFormulaExprFrom(Collection<Func> skolem, Set<String> functions) {
@@ -65,7 +75,8 @@ public class HintNode extends PanacheMongoEntity {
     }
 
     public Map<String, Expr> getParsedFormula(CompModule world) throws RuntimeException {
-        return formula.entrySet().stream().collect(toMap(Map.Entry::getKey, x -> Util.parseOneExprFromString(world, x.getValue())));
+        CompModule target_world = Optional.ofNullable(this.witness).map(Model::getWorld).orElse(world);
+        return formula.entrySet().stream().collect(toMap(Map.Entry::getKey, x -> Util.parseOneExprFromString(target_world, x.getValue())));
     }
 
     public HintNode visit() {
