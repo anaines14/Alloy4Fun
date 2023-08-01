@@ -1,6 +1,7 @@
 package pt.haslab.alloy4fun.services;
 
 import edu.mit.csail.sdg.parser.CompModule;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.specassistant.HintGenerator;
@@ -12,6 +13,7 @@ import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import java.util.Map;
 import java.util.Optional;
 
+@ApplicationScoped
 public class HintMerges {
 
     @Inject
