@@ -1,11 +1,12 @@
 package pt.haslab.alloy4fun.services;
 
-import com.github.gumtreediff.tree.Tree;
 import edu.mit.csail.sdg.ast.Expr;
 import edu.mit.csail.sdg.parser.CompModule;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.higena.graph.Graph;
+import org.higena.hint.Hint;
+import org.higena.hint.HintGenType;
 import org.higena.parser.A4FParser;
 import org.higena.parser.ExprExtractor;
 import pt.haslab.alloyaddons.Util;
@@ -27,7 +28,7 @@ public class HintMerge {
     @Inject
     HintExerciseRepository hintExerciseRepo;
 
-    public HintGenerator specAssistantGraphToHigena(String originId, String command_label, String model) {
+    public String specAssistantGraphToHigena(String originId, String command_label, String model) {
         CompModule world = Util.parseModel(model);
         HintExercise exercise = hintExerciseRepo.findByModelIdAndCmdN(originId, command_label).orElseThrow();
         Map<String, String> formula = HintNode.getNormalizedFormulaFrom(world.getAllFunc().makeConstList(), exercise.targetFunctions);
@@ -38,17 +39,16 @@ public class HintMerge {
         String old_expr = formula.values().stream().findFirst().orElseThrow();
         String new_expr = target.orElseThrow().formula.values().stream().findFirst().orElseThrow();
 
-        Tree old = A4FParser.parse(old_expr, world);
+        // Generate hint message
+        String oldAST = A4FParser.parse(old_expr, model).toTreeString(),
+                newAST = A4FParser.parse(new_expr, model).toTreeString();
 
-        //...
-
-        return null;
+        return new Hint(oldAST, newAST).toString();
     }
 
     public HintMsg higenaGraphToSpecAssistant(String challenge, String predicate, String model) {
         CompModule world = Util.parseModel(model);
 
-        // Preciso das ASTs do no atual e do proximo no para passar a isto, posso dar parse das formulas ou das asts diretamente
         // Get expression from model
         ExprExtractor extractor = new ExprExtractor(model);
         String old_expr = extractor.parse(predicate);
@@ -56,9 +56,8 @@ public class HintMerge {
         // Generate hint
         Graph graph = new Graph(challenge, predicate);
         org.higena.hint.HintGenerator.cantCreatePath = true;
-
-
-        String new_expr = "";
+        org.higena.hint.HintGenerator generator = graph.getHintPath(old_expr, model, HintGenType.TED);
+        String new_expr = generator.getNextExpr();
 
         try {
             Map<String, Expr> oldFormulaExpr = Map.of(predicate, world.parseOneExpressionFromString(old_expr));
