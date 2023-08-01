@@ -19,6 +19,7 @@ import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @ApplicationScoped
 public class HintMerge {
@@ -60,7 +61,7 @@ public class HintMerge {
         String new_expr = generator.getNextExpr();
 
         try {
-            Map<String, Expr> oldFormulaExpr = Map.of(predicate, world.parseOneExpressionFromString(old_expr));
+            Map<String, Expr> oldFormulaExpr = HintNode.getFormulaExprFrom(world.getAllFunc().makeConstList(), Set.of(predicate));
             Map<String, Expr> newFormulaExpr = Map.of(predicate, world.parseOneExpressionFromString(new_expr));
 
             return HintGenerator.firstHint(oldFormulaExpr, newFormulaExpr);
