@@ -11,4 +11,5 @@ public class HintRequest {
     @JsonAlias({"predicate", "command_label"})
     public String predicate;
     public String model;
+    public String hintGenType = "TED";
 }

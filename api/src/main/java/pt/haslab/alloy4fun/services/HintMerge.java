@@ -29,7 +29,7 @@ public class HintMerge {
     @Inject
     HintExerciseRepository hintExerciseRepo;
 
-    public String specAssistantGraphToHigena(String originId, String command_label, String model) {
+    public Map<String,String> specAssistantGraphToHigena(String originId, String command_label, String model) {
         CompModule world = Util.parseModel(model);
         HintExercise exercise = hintExerciseRepo.findByModelIdAndCmdN(originId, command_label).orElseThrow();
         Map<String, String> formula = HintNode.getNormalizedFormulaFrom(world.getAllFunc().makeConstList(), exercise.targetFunctions);
@@ -44,7 +44,7 @@ public class HintMerge {
         String oldAST = A4FParser.parse(old_expr, model).toTreeString(),
                 newAST = A4FParser.parse(new_expr, model).toTreeString();
 
-        return new Hint(oldAST, newAST).toString();
+        return Map.of("hint", new Hint(oldAST, newAST).toString(), "nextExpr", new_expr, "targetExpr", "");
     }
 
     public HintMsg higenaGraphToSpecAssistant(String challenge, String predicate, String model) {

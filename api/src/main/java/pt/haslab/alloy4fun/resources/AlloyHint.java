@@ -241,12 +241,12 @@ public class AlloyHint {
     @POST 
     @Path("/higena-hint")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHiGenAHint(HintRequest request, @DefaultValue("TED") @QueryParam("hintGenType") HintGenType hintGenType) {
+    public Response getHiGenAHint(HintRequest request) {
         LOG.info("HiGenA Hint requested");
         // Get expression from model
         ExprExtractor extractor = new ExprExtractor(request.model);
         String expression = extractor.parse(request.predicate);
-        System.out.println(hintGenType);
+        HintGenType hintGenType = HintGenType.valueOf(request.hintGenType.toUpperCase());
 
          // Generate hint
         Graph graph = new Graph(request.challenge, request.predicate);
@@ -278,12 +278,11 @@ public class AlloyHint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSpecHint(HintRequest request) {
         LOG.info("Spec Hint requested");
-        String hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
+        Map<String,String> hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
         if (hint == null)
             return Response.status(Response.Status.NO_CONTENT).build();
-        JSONObject response = new JSONObject();
-        response.put("hint", hint);
-        return Response.ok(response.toString()).build();
+
+        return Response.ok(hint).build();
     }
 
 }
