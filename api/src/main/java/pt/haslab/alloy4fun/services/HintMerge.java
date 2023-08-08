@@ -56,7 +56,7 @@ public class HintMerge {
 
         // Generate hint
         Graph graph = new Graph(challenge, predicate);
-        org.higena.hint.HintGenerator.cantCreatePath = true;
+        org.higena.hint.HintGenerator.turnOffPathCreation();
         org.higena.hint.HintGenerator generator = graph.getHintPath(old_expr, model, HintGenType.TED);
         String new_expr = generator.getNextExpr();
 
