@@ -76,10 +76,18 @@ public class HintGenerator {
         return getCombinations(unchanged, changed);
     }
 
+    public static HintMsg firstHint(Map<String, Expr> formulaExpr, Map<String, Expr> otherFormulaExpr) {
+        for (String s : formulaExpr.keySet()) {
+            ASTEditDiff diff = new ASTEditDiff().initFrom(formulaExpr.get(s), otherFormulaExpr.get(s));
+            diff.computeEditDistance();
+            return diff.getFirstEditOperation().getHintMessage();
+        }
+        return null;
+    }
+
     private String getOriginalId(String model_id) {
         return modelRepo.findById(model_id).original;
     }
-
 
     public Optional<HintMsg> getHint(String originId, String command_label, CompModule world) {
         String original_id = getOriginalId(originId);
@@ -106,14 +114,12 @@ public class HintGenerator {
         return hintWithGraph(world, exercise, graph_id);
     }
 
-
     private Optional<HintMsg> hintWithGraph(CompModule world, HintExercise exercise, ObjectId graph_id) {
         Map<String, Expr> formulaExpr = HintNode.getNormalizedFormulaExprFrom(world, exercise.targetFunctions);
         Map<String, String> formula = formulaExprToString(formulaExpr);
 
         return nextState(graph_id, formula).map(x -> firstHint(formulaExpr, x.getParsedFormula(world)));
     }
-
 
     public Optional<HintNode> nextState(ObjectId graph_id, Map<String, String> formula) {
         Optional<HintNode> node_opt = nodeRepo.findByGraphIdAndFormula(graph_id, formula);
@@ -127,15 +133,6 @@ public class HintGenerator {
             }
         }
         return Optional.empty();
-    }
-
-    public static HintMsg firstHint(Map<String, Expr> formulaExpr, Map<String, Expr> otherFormulaExpr) {
-        for (String s : formulaExpr.keySet()) {
-            ASTEditDiff diff = new ASTEditDiff().initFrom(formulaExpr.get(s), otherFormulaExpr.get(s));
-            diff.computeEditDistance();
-            return diff.getFirstEditOperation().getHintMessage();
-        }
-        return null;
     }
 
     public Optional<HintMsg> hintWithMutation(ObjectId graph_id, Collection<Func> skolem, ConstList<Sig> sigs, HintExercise exercise) {

@@ -135,7 +135,7 @@ public class GraphInjestor {
 
                 // If the command index is above or equal to the first "secret" index
                 // (meteor currently places secrets as the last defined predicates)
-                if (current.cmd_i >= world.getAllCommands().size() - exercise.secret_cmd_count) {
+                if (current.cmd_i >= world.getAllCommands().size() - exercise.end_offset) {
                     boolean valid = current.sat == 0;
 
                     Map<String, String> formula = HintNode.getNormalizedFormulaFrom(world.getAllFunc().makeConstList(), exercise.targetFunctions);

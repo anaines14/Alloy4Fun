@@ -1,9 +1,9 @@
 package pt.haslab.specassistant.treeedit;
 
-import pt.haslab.specassistant.treeedit.apted.node.Node;
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4.Pos;
 import edu.mit.csail.sdg.ast.*;
+import pt.haslab.specassistant.treeedit.apted.node.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;
