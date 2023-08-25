@@ -28,7 +28,7 @@ public class PolicyManager {
     HintEdgeRepository edgeRepo;
 
     @ConfigProperty(name = "policy.discount", defaultValue = "0.99")
-    Double mutationsEnabled;
+    Double policyDiscount;
 
     @ConfigProperty(name = "policy.reward", defaultValue = "HOPSnTED")
     RewardEvaluation rewardEvaluation;
@@ -40,7 +40,7 @@ public class PolicyManager {
     public void computePolicyForGraph(ObjectId graph_id) {
         HintGraph.removeAllPolicyStats(graph_id);
         long t = System.nanoTime();
-        Collection<PolicyContext> batch = nodeRepo.streamByGraphIdAndValidTrue(graph_id).map(PolicyContext::init).toList();
+        Collection<PolicyContext> batch = nodeRepo.streamByGraphIdAndValidTrue(graph_id).map(n -> PolicyContext.init(n, policyDiscount, rewardEvaluation, probabilityEvaluation)).toList();
 
         while (!batch.isEmpty()) {
             PolicyContext targetScore = Collections.min(batch);
