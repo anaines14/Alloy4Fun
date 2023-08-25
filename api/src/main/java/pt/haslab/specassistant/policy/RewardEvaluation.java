@@ -7,6 +7,7 @@ import java.util.function.BiFunction;
 
 public enum RewardEvaluation implements BiFunction<HintNode, HintEdge, Double> {
     NONE,
+    ONE,
     TED,
     HOPS,
     VISITS,
@@ -16,6 +17,7 @@ public enum RewardEvaluation implements BiFunction<HintNode, HintEdge, Double> {
     public Double apply(HintNode state, HintEdge action) {
         return (double) switch (this) {
             case NONE -> 0.0;
+            case ONE -> 1.0;
             case TED -> action.editDistance;
             case HOPS -> state.hopDistance;
             case VISITS -> state.visits;
