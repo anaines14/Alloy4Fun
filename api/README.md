@@ -1,59 +1,45 @@
 # alloy4fun-api
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## How to run
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+### Prerequisites
+- Docker
+- Npm 18
+- Node
+- Meteor
 
-## Running the application in dev mode
+### Setup
+- Create `.env` file in the root directory of the project based on `.env.example` file.
+- Download the datasets using the `downloadData.py` script in the `data/import` directory.
+- Download the ".als" files for each challenge using the Alloy4Fun website.
+- Run the `dataPreparation.py` script in the `data/import` directory to prepare the datasets for import.
+- Build the API docker image by running the `build_docker_image.bat` script. 
+- Start the docker containers using `docker-compose up` in the root directory of the project. This will start the API, the MongoDB database and the Neo4j database.
+- Run `npm install` in the `meteor` directory.
+- Run `meteor --settings settings.json` in the `meteor` directory or `npm run start`. This will start the Meteor frontend.
+- Now, we must import the prepared data into the MongoDB and Neo4j databases. To do this, run the `importDataMongo.py` and `importDataNeo4j.py` scripts in the `data/import` directory. You can also use the API to import the data by sending requests.
+- Create the graphs for SpecAssistant by sending a GET request to 
+`localhost:8080/hint/setup-graphs` with an array of challenge IDs as the body.
 
-You can run your application in dev mode that enables live coding using:
+### Usage
 
-```shell script
-./mvnw compile quarkus:dev
+Example of a hint generation request for HiGenA:
+```
+POST localhost:8080/hint/higena-hint
+body:
+    {
+	"challenge": "dkZH6HJNQNLLDX6Aj",
+	"predicate": "inv5",
+	"model": "sig User {follows : set User,sees : set Photo,posts : set Photo,suggested : set User} sig Influencer extends User {} sig Photo {date : one Day} sig Ad extends Photo {} sig Day {} pred inv5 {all inf : Influencer | all u: User | inf in u.follows}"
+    }
 ```
 
-> **_NOTE:_**  Quarkus ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
-
-## Packaging and running the application
-
-The application can be packaged using:
-
-```shell script
-./mvnw package
+Example of a hint generation request for SpecAssistant (same body as HiGenA):
+```
+GET localhost:8080/hint/get
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+Example of a hint generation request for SpecAssistant using HiGenA message generate (same body as HiGenA):
 ```
-
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Pnative
+POST localhost:8080/hint/spec-hint
 ```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/alloy4fun-api-1.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
-
-## Related Guides
-
-- MongoDB client ([guide](https://quarkus.io/guides/mongodb)): Connect to MongoDB in either imperative or reactive style
-
