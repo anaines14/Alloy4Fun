@@ -31,10 +31,6 @@ public class PolicyContext implements Ordered<PolicyContext> {
         return result;
     }
 
-    public static PolicyContext init(HintNode n) {
-        return init(n, 0.99, RewardEvaluation.HOPSnTED, ProbabilityEvaluation.EDGE);
-    }
-
     public ObjectId nodeId() {
         return node.id;
     }

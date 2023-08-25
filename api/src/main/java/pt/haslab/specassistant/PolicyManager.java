@@ -30,7 +30,7 @@ public class PolicyManager {
     @ConfigProperty(name = "policy.discount", defaultValue = "0.99")
     Double policyDiscount;
 
-    @ConfigProperty(name = "policy.reward", defaultValue = "HOPSnTED")
+    @ConfigProperty(name = "policy.reward", defaultValue = "TED")
     RewardEvaluation rewardEvaluation;
 
     @ConfigProperty(name = "policy.probability", defaultValue = "EDGE")
