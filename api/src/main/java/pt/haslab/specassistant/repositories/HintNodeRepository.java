@@ -51,4 +51,7 @@ public class HintNodeRepository implements PanacheMongoRepository<HintNode> {
         return find(new Document("graph_id", graph_id)).stream().map(x -> x.visits).map(Integer::longValue).reduce(0L, Long::sum);
     }
 
+    public void unsetAllScoresFrom(ObjectId graph_id) {
+        update(new Document("$unset", new Document("score",""))).where("graph_id", graph_id);
+    }
 }

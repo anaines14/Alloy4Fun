@@ -22,6 +22,9 @@ public class HintExercise extends PanacheMongoEntity {
     public Set<String> targetFunctions;
 
 
+    public HintExercise(){
+    }
+
     public HintExercise(String model_id, ObjectId graph_id, Integer end_offset, String cmd_n, Set<String> targetFunctions) {
         this.model_id = model_id;
         this.graph_id = graph_id;
