@@ -247,12 +247,17 @@ public class AlloyHint {
         ExprExtractor extractor = new ExprExtractor(request.model);
         String expression = extractor.parse(request.predicate);
         HintGenType hintGenType = HintGenType.valueOf(request.hintGenType.toUpperCase());
+        // Turn off create new paths
+        org.higena.hint.HintGenerator.turnOffPathCreation();
 
          // Generate hint
         Graph graph = new Graph(request.challenge, request.predicate);
         org.higena.hint.HintGenerator hintGen = graph.generateHint(expression, request.model, hintGenType);
 
         // Build response
+        if (hintGen.getHint() == null) // Failed
+            return Response.ok(InstanceMsg.error("No hint available")).build();
+        // Success
         JSONObject response = hintGen.getJSON();
         return Response.ok(response.toString()).build();
     }
