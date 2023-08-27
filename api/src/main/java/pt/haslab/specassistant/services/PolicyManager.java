@@ -30,6 +30,8 @@ public class PolicyManager {
     }
     public void computePolicyForGraph(ObjectId graph_id, Double policyDiscount,RewardEvaluation rewardEvaluation,ProbabilityEvaluation probabilityEvaluation) {
         HintGraph.removeAllPolicyStats(graph_id);
+        nodeRepo.unsetAllScoresFrom(graph_id);
+        edgeRepo.unsetAllScoresFrom(graph_id);
         long t = System.nanoTime();
         Collection<PolicyContext> batch = nodeRepo.streamByGraphIdAndValidTrue(graph_id).map(n -> PolicyContext.init(n, policyDiscount, rewardEvaluation, probabilityEvaluation)).toList();
 

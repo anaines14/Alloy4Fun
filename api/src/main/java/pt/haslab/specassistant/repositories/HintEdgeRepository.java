@@ -36,4 +36,8 @@ public class HintEdgeRepository implements PanacheMongoRepository<HintEdge> {
     public void deleteByScoreNull(ObjectId graph_id) {
         delete(new Document("score", null).append("graph_id", graph_id));
     }
+
+    public void unsetAllScoresFrom(ObjectId graph_id) {
+        update(new Document("$unset", new Document("score",""))).where("graph_id", graph_id);
+    }
 }
