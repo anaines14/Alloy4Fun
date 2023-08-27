@@ -1,14 +1,13 @@
-package pt.haslab.specassistant;
+package pt.haslab.specassistant.services;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.bson.types.ObjectId;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import pt.haslab.specassistant.data.models.HintGraph;
-import pt.haslab.specassistant.policy.PolicyContext;
-import pt.haslab.specassistant.policy.ProbabilityEvaluation;
-import pt.haslab.specassistant.policy.RewardEvaluation;
+import pt.haslab.specassistant.services.policy.PolicyContext;
+import pt.haslab.specassistant.services.policy.ProbabilityEvaluation;
+import pt.haslab.specassistant.services.policy.RewardEvaluation;
 import pt.haslab.specassistant.repositories.HintEdgeRepository;
 import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.util.Ordered;
@@ -26,18 +25,10 @@ public class PolicyManager {
     HintNodeRepository nodeRepo;
     @Inject
     HintEdgeRepository edgeRepo;
-
-    @ConfigProperty(name = "policy.discount", defaultValue = "0.99")
-    Double policyDiscount;
-
-    @ConfigProperty(name = "policy.reward", defaultValue = "TED")
-    RewardEvaluation rewardEvaluation;
-
-    @ConfigProperty(name = "policy.probability", defaultValue = "EDGE")
-    ProbabilityEvaluation probabilityEvaluation;
-
-
-    public void computePolicyForGraph(ObjectId graph_id) {
+    public void computePolicyForGraph(ObjectId graph_id){
+        computePolicyForGraph(graph_id,0.99,RewardEvaluation.TED,ProbabilityEvaluation.EDGE);
+    }
+    public void computePolicyForGraph(ObjectId graph_id, Double policyDiscount,RewardEvaluation rewardEvaluation,ProbabilityEvaluation probabilityEvaluation) {
         HintGraph.removeAllPolicyStats(graph_id);
         long t = System.nanoTime();
         Collection<PolicyContext> batch = nodeRepo.streamByGraphIdAndValidTrue(graph_id).map(n -> PolicyContext.init(n, policyDiscount, rewardEvaluation, probabilityEvaluation)).toList();

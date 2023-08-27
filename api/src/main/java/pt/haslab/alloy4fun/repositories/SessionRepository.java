@@ -1,4 +1,4 @@
-package pt.haslab.alloy4fun.services;
+package pt.haslab.alloy4fun.repositories;
 
 import io.quarkus.scheduler.Scheduled;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class SessionService {
+public class SessionRepository {
 
     private final Map<String, Session> localSessions = new HashMap<>();
 

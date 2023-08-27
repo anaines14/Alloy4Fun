@@ -13,7 +13,6 @@ public class YearRange {
 
     LocalDateTime minDate, maxDate;
 
-
     public YearRange() {
     }
 

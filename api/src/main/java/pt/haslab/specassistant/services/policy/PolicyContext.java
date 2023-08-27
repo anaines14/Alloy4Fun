@@ -1,4 +1,4 @@
-package pt.haslab.specassistant.policy;
+package pt.haslab.specassistant.services.policy;
 
 import org.bson.types.ObjectId;
 import pt.haslab.specassistant.data.models.HintEdge;

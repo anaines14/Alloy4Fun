@@ -17,12 +17,12 @@ import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.request.YearRange;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.services.HintMerge;
-import pt.haslab.alloy4fun.services.SessionService;
+import pt.haslab.alloy4fun.repositories.SessionRepository;
 import pt.haslab.alloyaddons.Util;
-import pt.haslab.specassistant.GraphInjestor;
-import pt.haslab.specassistant.GraphManager;
-import pt.haslab.specassistant.HintGenerator;
-import pt.haslab.specassistant.PolicyManager;
+import pt.haslab.specassistant.services.GraphInjestor;
+import pt.haslab.specassistant.services.GraphManager;
+import pt.haslab.specassistant.services.HintGenerator;
+import pt.haslab.specassistant.services.PolicyManager;
 import pt.haslab.specassistant.data.models.HintGraph;
 import pt.haslab.specassistant.data.transfer.HintMsg;
 
@@ -50,7 +50,7 @@ public class AlloyHint {
     PolicyManager policyManager;
 
     @Inject
-    SessionService sessionManager;
+    SessionRepository sessionManager;
 
     @Inject
     HintMerge hintMerge;
@@ -176,7 +176,7 @@ public class AlloyHint {
         CompletableFuture.allOf(model_ids.stream().map(id -> graphInjestor.parseModelTree(id)).toArray(CompletableFuture[]::new))
                 // Then Compute policy
                 .thenAcceptAsync(nil -> graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
-                    policyManager.computePolicyForGraph(id);
+                    policyManager.computePolicyForGraph(id); //TODO
                     graphManager.debloatGraph(id);
                 })).whenCompleteAsync((nil, error) -> {
                     if (error != null)

@@ -1,4 +1,4 @@
-package pt.haslab.specassistant.treeedit;
+package pt.haslab.specassistant.services.treeedit;
 
 import edu.mit.csail.sdg.alloy4.Pos;
 import edu.mit.csail.sdg.ast.Expr;

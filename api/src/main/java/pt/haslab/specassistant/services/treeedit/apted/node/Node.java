@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package pt.haslab.specassistant.treeedit.apted.node;
+package pt.haslab.specassistant.services.treeedit.apted.node;
 
 import java.util.ArrayList;
 import java.util.List;

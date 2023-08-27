@@ -1,8 +1,8 @@
-package pt.haslab.specassistant.treeedit;
+package pt.haslab.specassistant.services.treeedit;
 
 import edu.mit.csail.sdg.ast.Expr;
-import pt.haslab.specassistant.treeedit.apted.distance.APTED;
-import pt.haslab.specassistant.treeedit.apted.node.NodeIndexer;
+import pt.haslab.specassistant.services.treeedit.apted.distance.APTED;
+import pt.haslab.specassistant.services.treeedit.apted.node.NodeIndexer;
 
 import java.util.ArrayList;
 import java.util.Collections;

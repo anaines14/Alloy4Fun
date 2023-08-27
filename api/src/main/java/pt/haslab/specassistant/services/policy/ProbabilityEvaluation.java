@@ -1,4 +1,4 @@
-package pt.haslab.specassistant.policy;
+package pt.haslab.specassistant.services.policy;
 
 import pt.haslab.specassistant.data.models.HintEdge;
 import pt.haslab.specassistant.data.models.HintNode;

@@ -21,11 +21,11 @@
  * SOFTWARE.
  */
 
-package pt.haslab.specassistant.treeedit.apted.distance;
+package pt.haslab.specassistant.services.treeedit.apted.distance;
 
-import pt.haslab.specassistant.treeedit.apted.costmodel.CostModel;
-import pt.haslab.specassistant.treeedit.apted.node.Node;
-import pt.haslab.specassistant.treeedit.apted.node.NodeIndexer;
+import pt.haslab.specassistant.services.treeedit.apted.costmodel.CostModel;
+import pt.haslab.specassistant.services.treeedit.apted.node.Node;
+import pt.haslab.specassistant.services.treeedit.apted.node.NodeIndexer;
 
 import java.util.Arrays;
 import java.util.LinkedList;

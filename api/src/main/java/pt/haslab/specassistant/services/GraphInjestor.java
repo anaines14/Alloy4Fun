@@ -1,4 +1,4 @@
-package pt.haslab.specassistant;
+package pt.haslab.specassistant.services;
 
 import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.alloy4.ErrorSyntax;
@@ -16,7 +16,7 @@ import pt.haslab.specassistant.repositories.HintEdgeRepository;
 import pt.haslab.specassistant.repositories.HintExerciseRepository;
 import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.repositories.ModelRepository;
-import pt.haslab.specassistant.treeedit.ASTEditDiff;
+import pt.haslab.specassistant.services.treeedit.ASTEditDiff;
 import pt.haslab.specassistant.util.Static;
 import pt.haslab.specassistant.util.Text;
 
