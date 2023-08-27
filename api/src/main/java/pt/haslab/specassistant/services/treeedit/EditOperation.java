@@ -1,4 +1,4 @@
-package pt.haslab.specassistant.treeedit;
+package pt.haslab.specassistant.services.treeedit;
 
 import pt.haslab.specassistant.data.transfer.HintMsg;
 

@@ -21,10 +21,10 @@ import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.data.transfer.InstanceResponse;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.data.request.InstancesRequest;
-import pt.haslab.alloy4fun.services.SessionService;
+import pt.haslab.alloy4fun.repositories.SessionRepository;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
-import pt.haslab.specassistant.HintGenerator;
+import pt.haslab.specassistant.services.HintGenerator;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class AlloyGetInstances {
     private static final Logger LOGGER = Logger.getLogger(AlloyGetInstances.class);
 
     @Inject
-    SessionService sessionManager;
+    SessionRepository sessionManager;
 
     @Inject
     HintGenerator hintGenerator;

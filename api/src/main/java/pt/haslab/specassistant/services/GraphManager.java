@@ -1,4 +1,4 @@
-package pt.haslab.specassistant;
+package pt.haslab.specassistant.services;
 
 
 import edu.mit.csail.sdg.alloy4.Pos;
@@ -59,12 +59,10 @@ public class GraphManager {
         HintGraph.setPolicySubmissionCount(graph_id, nodeRepo.getTotalVisitsFromGraph(graph_id));
     }
 
-    public boolean generateExercise(ObjectId graph_id, String model_id, Integer secretCommandCount, String cmd_n, Set<String> targetFunctions) {
+    public void generateExercise(ObjectId graph_id, String model_id, Integer secretCommandCount, String cmd_n, Set<String> targetFunctions) {
         if (exerciseRepo.notExistsModelIdAndCmdN(model_id, cmd_n)) {
             exerciseRepo.persistOrUpdate(new HintExercise(model_id, graph_id, secretCommandCount, cmd_n, targetFunctions));
-            return true;
         }
-        return false;
     }
 
     public List<String> getSecretsForModel(String model_id) {

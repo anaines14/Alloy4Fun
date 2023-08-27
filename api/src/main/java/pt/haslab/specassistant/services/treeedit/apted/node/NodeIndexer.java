@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-package pt.haslab.specassistant.treeedit.apted.node;
+package pt.haslab.specassistant.services.treeedit.apted.node;
 
-import pt.haslab.specassistant.treeedit.apted.costmodel.CostModel;
+import pt.haslab.specassistant.services.treeedit.apted.costmodel.CostModel;
 
 import java.util.ArrayList;
 import java.util.Iterator;

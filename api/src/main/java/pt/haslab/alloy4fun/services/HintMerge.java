@@ -10,7 +10,7 @@ import org.higena.hint.HintGenType;
 import org.higena.parser.A4FParser;
 import org.higena.parser.ExprExtractor;
 import pt.haslab.alloyaddons.Util;
-import pt.haslab.specassistant.HintGenerator;
+import pt.haslab.specassistant.services.HintGenerator;
 import pt.haslab.specassistant.data.models.HintExercise;
 import pt.haslab.specassistant.data.models.HintNode;
 import pt.haslab.specassistant.data.transfer.HintMsg;
@@ -56,7 +56,7 @@ public class HintMerge {
 
         // Generate hint
         Graph graph = new Graph(challenge, predicate);
-        org.higena.hint.HintGenerator.cantCreatePath = true;
+        org.higena.hint.HintGenerator.turnOffPathCreation();
         org.higena.hint.HintGenerator generator = graph.getHintPath(old_expr, model, HintGenType.TED);
         String new_expr = generator.getNextExpr();
 

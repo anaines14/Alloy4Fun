@@ -9,8 +9,6 @@ import org.bson.types.ObjectId;
 public class HintEdge extends PanacheMongoEntity {
     public ObjectId graph_id, origin, destination;
 
-    public Integer hopDistance;
-
     public Float editDistance;
 
     public Integer count;

@@ -34,6 +34,8 @@ public class HintNode extends PanacheMongoEntity {
 
     public Integer leaves;
 
+    public Integer hopDistance;
+
     public Double score;
 
 
