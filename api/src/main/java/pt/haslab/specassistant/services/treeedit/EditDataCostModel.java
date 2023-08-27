@@ -1,8 +1,8 @@
-package pt.haslab.specassistant.treeedit;
+package pt.haslab.specassistant.services.treeedit;
 
-import pt.haslab.specassistant.treeedit.apted.costmodel.CostModel;
-import pt.haslab.specassistant.treeedit.apted.node.Node;
 import pt.haslab.alloyaddons.ExprNodeEquals;
+import pt.haslab.specassistant.services.treeedit.apted.costmodel.CostModel;
+import pt.haslab.specassistant.services.treeedit.apted.node.Node;
 
 public class EditDataCostModel implements CostModel<EditData> {
 

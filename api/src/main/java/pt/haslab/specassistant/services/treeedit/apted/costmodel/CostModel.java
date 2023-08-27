@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-package pt.haslab.specassistant.treeedit.apted.costmodel;
+package pt.haslab.specassistant.services.treeedit.apted.costmodel;
 
-import pt.haslab.specassistant.treeedit.apted.node.Node;
+import pt.haslab.specassistant.services.treeedit.apted.node.Node;
 
 /**
  * This interface specifies the methods to implement for a custom cost model.

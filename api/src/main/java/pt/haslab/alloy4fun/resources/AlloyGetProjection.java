@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
-import pt.haslab.alloy4fun.services.SessionService;
+import pt.haslab.alloy4fun.repositories.SessionRepository;
 import pt.haslab.alloyaddons.Util;
 import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
 
@@ -27,7 +27,7 @@ public class AlloyGetProjection {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AlloyGetProjection.class);
     @Inject
-    SessionService sessionManager;
+    SessionRepository sessionManager;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)

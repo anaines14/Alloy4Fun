@@ -13,36 +13,7 @@ public class ExerciseForm {
 
     public Set<String> targetFunctions;
 
-    public String getModelId() {
-        return modelId;
-    }
-
-    public void setModelId(String modelId) {
-        this.modelId = modelId;
-    }
-
-    public Integer getSecretCommandCount() {
-        return secretCommandCount;
-    }
-
-    public void setSecretCommandCount(Integer secretCommandCount) {
-        this.secretCommandCount = secretCommandCount;
-    }
-
-    public String getCmd_n() {
-        return cmd_n;
-    }
-
-    public void setCmd_n(String cmd_n) {
-        this.cmd_n = cmd_n;
-    }
-
-    public Set<String> getTargetFunctions() {
-        return targetFunctions;
-    }
-
-    public void setTargetFunctions(Set<String> targetFunctions) {
-        this.targetFunctions = targetFunctions;
+    public ExerciseForm() {
     }
 
     @Override
