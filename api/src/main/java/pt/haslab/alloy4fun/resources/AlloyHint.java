@@ -126,7 +126,7 @@ public class AlloyHint {
             policyManager.computePolicyForGraph(id);
             graphManager.debloatGraph(id);
         });
-        return Response.ok().build();
+        return Response.ok("Policy computed").build();
     }
 
     @POST
