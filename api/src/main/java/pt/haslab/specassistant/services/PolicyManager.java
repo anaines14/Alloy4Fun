@@ -52,6 +52,7 @@ public class PolicyManager {
             try {
                 CompletableFuture.allOf(actionPool.toArray(CompletableFuture[]::new)).get();
             } catch (InterruptedException | ExecutionException e) {
+                LOG.warn("Failed to process batch, skipping " + targetIds.size() + " endpoints");
             }
 
             List<List<PolicyContext>> result = new ArrayList<>();
@@ -60,7 +61,7 @@ public class PolicyManager {
                 try {
                     result.add(l.get());
                 } catch (InterruptedException | ExecutionException e) {
-                    LOG.error("Failed to process action",e);
+                    LOG.warn("Failed to process edges a node, skipping...");
                 }
             }
             batch = List.copyOf(result.stream().flatMap(Collection::stream).collect(Collectors.toMap(PolicyContext::nodeId, x -> x, Ordered::min)).values());

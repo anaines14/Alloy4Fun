@@ -41,11 +41,15 @@ public class PolicyContext implements Ordered<PolicyContext> {
     }
 
     public PolicyContext nextContext(HintEdge action, HintNode previousState) {
-        PolicyContext next = new PolicyContext(previousState, this.discount, this.R, this.P);
-        previousState.hopDistance = next.distance = distance + 1;
-        action.score = next.applyValueFunction(action, this.score);
-        action.update();
-        return next;
+        try {
+            PolicyContext next = new PolicyContext(previousState, this.discount, this.R, this.P);
+            previousState.hopDistance = next.distance = distance + 1;
+            action.score = next.applyValueFunction(action, this.score);
+            action.update();
+            return next;
+        } catch (NullPointerException e) {
+            return null;
+        }
     }
 
     public Double applyValueFunction(HintEdge action, Double followUpScore) {
