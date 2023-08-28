@@ -127,6 +127,26 @@ public class AlloyHint {
         return Response.ok().build();
     }
 
+    @POST 
+    @Path("/compute-ted-policy")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response computeTEDPolicy(@QueryParam("model_id") String modelid) {
+        graphManager.getModelGraphs(modelid).forEach(id -> {
+            policyManager.computePolicyForGraph(id, 1.0, RewardEvaluation.TED, ProbabilityEvaluation.NONE);
+        });
+        return Response.ok("TED policy computed.").build();
+    }
+
+    @POST
+    @Path("/compute-popular-policy")    
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response computeTEDPolicy(@QueryParam("model_id") String modelid) {
+        graphManager.getModelGraphs(modelid).forEach(id -> {
+            policyManager.computePolicyForGraph(id, 1.0, RewardEvaluation.VISITS, ProbabilityEvaluation.NONE);
+        });
+        return Response.ok("Popular policy computed.").build();
+    }
+
     @GET
     @Path("/full-test")
     @Produces(MediaType.APPLICATION_JSON)
@@ -177,7 +197,7 @@ public class AlloyHint {
                 // Then Compute policy
                 .thenAcceptAsync(nil -> graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
                     policyManager.computePolicyForGraph(id); //TODO
-                    graphManager.debloatGraph(id);
+                    // graphManager.debloatGraph(id);
                 })).whenCompleteAsync((nil, error) -> {
                     if (error != null)
                         LOG.error(error);
