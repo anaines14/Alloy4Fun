@@ -16,15 +16,15 @@ import pt.haslab.alloy4fun.data.request.ExerciseForm;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.request.YearRange;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
-import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
+import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.alloyaddons.Util;
+import pt.haslab.specassistant.data.models.HintGraph;
+import pt.haslab.specassistant.data.transfer.HintMsg;
 import pt.haslab.specassistant.services.GraphInjestor;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.HintGenerator;
 import pt.haslab.specassistant.services.PolicyManager;
-import pt.haslab.specassistant.data.models.HintGraph;
-import pt.haslab.specassistant.data.transfer.HintMsg;
 import pt.haslab.specassistant.services.policy.ProbabilityEvaluation;
 import pt.haslab.specassistant.services.policy.RewardEvaluation;
 
@@ -129,7 +129,7 @@ public class AlloyHint {
         return Response.ok().build();
     }
 
-    @POST 
+    @POST
     @Path("/compute-ted-policy")
     @Produces(MediaType.APPLICATION_JSON)
     public Response computeTEDPolicy(@QueryParam("model_id") String modelid) {
@@ -140,7 +140,7 @@ public class AlloyHint {
     }
 
     @POST
-    @Path("/compute-popular-node-policy")    
+    @Path("/compute-popular-node-policy")
     @Produces(MediaType.APPLICATION_JSON)
     public Response computePopularNodePolicy(@QueryParam("model_id") String modelid) {
         graphManager.getModelGraphs(modelid).forEach(id -> {
@@ -149,13 +149,23 @@ public class AlloyHint {
         return Response.ok("Popular policy computed.").build();
     }
 
-    
+
     @POST
-    @Path("/compute-popular-edge-policy")    
+    @Path("/compute-popular-edge-policy")
     @Produces(MediaType.APPLICATION_JSON)
     public Response computePopularEdgePolicy(@QueryParam("model_id") String modelid) {
         graphManager.getModelGraphs(modelid).forEach(id -> {
             policyManager.computePolicyForGraph(id, 1.0, RewardEvaluation.NONE, ProbabilityEvaluation.EDGE);
+        });
+        return Response.ok("Popular policy computed.").build();
+    }
+
+    @POST
+    @Path("/compute-ted-edge-policy")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response computeTedEdge(@QueryParam("model_id") String modelid) {
+        graphManager.getModelGraphs(modelid).forEach(id -> {
+            policyManager.computePolicyForGraph(id, 0.99, RewardEvaluation.TED, ProbabilityEvaluation.EDGE);
         });
         return Response.ok("Popular policy computed.").build();
     }
@@ -207,15 +217,11 @@ public class AlloyHint {
         makeGraphAndExercisesFromCommands(model_ids, prefix).close();
         // Fill graph
         CompletableFuture.allOf(model_ids.stream().map(id -> graphInjestor.parseModelTree(id)).toArray(CompletableFuture[]::new))
-                // Then Compute policy
-                .thenAcceptAsync(nil -> graphManager.getModelGraphs(model_ids.get(0)).forEach(id -> {
-                    policyManager.computePolicyForGraph(id); //TODO
-                    // graphManager.debloatGraph(id);
-                })).whenCompleteAsync((nil, error) -> {
-                    if (error != null)
-                        LOG.error(error);
-                    LOG.info("Setup Completed");
-                });
+                .whenCompleteAsync((nil, error) -> {
+            if (error != null)
+                LOG.error(error);
+            LOG.info("Setup Completed");
+        });
         return Response.ok("Setup in progress.").build();
     }
 
@@ -271,7 +277,7 @@ public class AlloyHint {
         return Response.ok().build();
     }
 
-    @POST 
+    @POST
     @Path("/higena-hint")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHiGenAHint(HintRequest request) {
@@ -283,7 +289,7 @@ public class AlloyHint {
         // Turn off create new paths
         org.higena.hint.HintGenerator.turnOffPathCreation();
 
-         // Generate hint
+        // Generate hint
         Graph graph = new Graph(request.challenge, request.predicate);
         org.higena.hint.HintGenerator hintGen = graph.generateHint(expression, request.model, hintGenType);
 
@@ -316,7 +322,7 @@ public class AlloyHint {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSpecHint(HintRequest request) {
         LOG.info("Spec Hint requested");
-        Map<String,String> hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
+        Map<String, String> hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
         if (hint == null)
             return Response.status(Response.Status.NO_CONTENT).build();
 

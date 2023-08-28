@@ -5,11 +5,11 @@ import jakarta.inject.Inject;
 import org.bson.types.ObjectId;
 import org.jboss.logging.Logger;
 import pt.haslab.specassistant.data.models.HintGraph;
+import pt.haslab.specassistant.repositories.HintEdgeRepository;
+import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.services.policy.PolicyContext;
 import pt.haslab.specassistant.services.policy.ProbabilityEvaluation;
 import pt.haslab.specassistant.services.policy.RewardEvaluation;
-import pt.haslab.specassistant.repositories.HintEdgeRepository;
-import pt.haslab.specassistant.repositories.HintNodeRepository;
 import pt.haslab.specassistant.util.Ordered;
 
 import java.util.*;
@@ -25,10 +25,12 @@ public class PolicyManager {
     HintNodeRepository nodeRepo;
     @Inject
     HintEdgeRepository edgeRepo;
-    public void computePolicyForGraph(ObjectId graph_id){
-        computePolicyForGraph(graph_id,0.99,RewardEvaluation.TED,ProbabilityEvaluation.EDGE);
+
+    public void computePolicyForGraph(ObjectId graph_id) {
+        computePolicyForGraph(graph_id, 0.99, RewardEvaluation.TED, ProbabilityEvaluation.EDGE);
     }
-    public void computePolicyForGraph(ObjectId graph_id, Double policyDiscount,RewardEvaluation rewardEvaluation,ProbabilityEvaluation probabilityEvaluation) {
+
+    public void computePolicyForGraph(ObjectId graph_id, Double policyDiscount, RewardEvaluation rewardEvaluation, ProbabilityEvaluation probabilityEvaluation) {
         HintGraph.removeAllPolicyStats(graph_id);
         nodeRepo.unsetAllScoresFrom(graph_id);
         edgeRepo.unsetAllScoresFrom(graph_id);
@@ -40,30 +42,29 @@ public class PolicyManager {
 
             Map<Boolean, List<PolicyContext>> targetIds = batch.stream().collect(Collectors.partitioningBy(targetScore::isGreaterOrEqualTo));
 
+
+            List<CompletableFuture<List<PolicyContext>>> actionPool = targetIds.get(true)
+                    .stream()
+                    .peek(PolicyContext::save)
+                    .map(x -> CompletableFuture.supplyAsync(() ->
+                            edgeRepo.streamByDestinationNodeIdAndAllScoreGT(x.nodeId(), x.score)
+                                    .map(y -> x.nextContext(y, nodeRepo.findById(y.origin))).filter(Objects::nonNull).toList())).toList();
             try {
-                List<CompletableFuture<List<PolicyContext>>> actionPool = targetIds.get(true)
-                        .stream()
-                        .peek(PolicyContext::save)
-                        .map(x -> CompletableFuture.supplyAsync(() ->
-                                edgeRepo.streamByDestinationNodeIdAndAllScoreGT(x.nodeId(), x.score)
-                                        .map(y -> x.nextContext(y, nodeRepo.findById(y.origin))).filter(Objects::nonNull).toList())).toList();
-
                 CompletableFuture.allOf(actionPool.toArray(CompletableFuture[]::new)).get();
-
-                List<List<PolicyContext>> result = new ArrayList<>();
-                result.add(targetIds.get(false));
-                for (CompletableFuture<List<PolicyContext>> l : actionPool) {
-                    result.add(l.get());
-                }
-
-                batch = List.copyOf(result.stream().flatMap(Collection::stream).collect(Collectors.toMap(PolicyContext::nodeId, x -> x, Ordered::min)).values());
-
             } catch (InterruptedException | ExecutionException e) {
-                LOG.error(e);
             }
+
+            List<List<PolicyContext>> result = new ArrayList<>();
+            result.add(targetIds.get(false));
+            for (CompletableFuture<List<PolicyContext>> l : actionPool) {
+                try {
+                    result.add(l.get());
+                } catch (InterruptedException | ExecutionException e) {
+                    LOG.error("Failed to process action",e);
+                }
+            }
+            batch = List.copyOf(result.stream().flatMap(Collection::stream).collect(Collectors.toMap(PolicyContext::nodeId, x -> x, Ordered::min)).values());
         }
         HintGraph.registerPolicyCalculationTime(graph_id, System.nanoTime() - t);
     }
-
-
 }
