@@ -25,6 +25,8 @@ import pt.haslab.specassistant.services.HintGenerator;
 import pt.haslab.specassistant.services.PolicyManager;
 import pt.haslab.specassistant.data.models.HintGraph;
 import pt.haslab.specassistant.data.transfer.HintMsg;
+import pt.haslab.specassistant.services.policy.ProbabilityEvaluation;
+import pt.haslab.specassistant.services.policy.RewardEvaluation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -138,11 +140,22 @@ public class AlloyHint {
     }
 
     @POST
-    @Path("/compute-popular-policy")    
+    @Path("/compute-popular-node-policy")    
     @Produces(MediaType.APPLICATION_JSON)
-    public Response computeTEDPolicy(@QueryParam("model_id") String modelid) {
+    public Response computePopularNodePolicy(@QueryParam("model_id") String modelid) {
         graphManager.getModelGraphs(modelid).forEach(id -> {
             policyManager.computePolicyForGraph(id, 1.0, RewardEvaluation.VISITS, ProbabilityEvaluation.NONE);
+        });
+        return Response.ok("Popular policy computed.").build();
+    }
+
+    
+    @POST
+    @Path("/compute-popular-edge-policy")    
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response computePopularEdgePolicy(@QueryParam("model_id") String modelid) {
+        graphManager.getModelGraphs(modelid).forEach(id -> {
+            policyManager.computePolicyForGraph(id, 1.0, RewardEvaluation.NONE, ProbabilityEvaluation.EDGE);
         });
         return Response.ok("Popular policy computed.").build();
     }
