@@ -20,8 +20,8 @@ public enum RewardEvaluation implements BiFunction<HintNode, HintEdge, Double> {
             case ONE -> 1.0;
             case TED -> action.editDistance;
             case HOPS -> state.hopDistance;
-            case VISITS -> state.visits;
-            case LEAVES -> state.leaves;
+            case VISITS -> -state.visits;
+            case LEAVES -> -state.leaves;
             default -> state.hopDistance * action.editDistance;
         };
     }
