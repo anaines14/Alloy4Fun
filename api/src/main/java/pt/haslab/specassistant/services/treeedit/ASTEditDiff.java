@@ -5,16 +5,28 @@ import pt.haslab.specassistant.services.treeedit.apted.distance.APTED;
 import pt.haslab.specassistant.services.treeedit.apted.node.NodeIndexer;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ASTEditDiff extends APTED<EditData, EditDataCostModel> {
     public ASTEditDiff() {
         super(new EditDataCostModel());
     }
 
+    public static Map<String, ASTEditDiff> getFormulaMapDiff(Map<String, Expr> origin, Map<String, Expr> peer) {
+        return Stream.of(origin.keySet(), peer.keySet())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet())
+                .stream()
+                .collect(Collectors.toMap(key -> key, key -> new ASTEditDiff().initFrom(origin.get(key), peer.get(key))));
+    }
+
+    public static Float getFormulaDistanceDiff(Map<String, Expr> originParsed, Map<String, Expr> peerParsed) {
+        return getFormulaMapDiff(originParsed, peerParsed).values().stream().map(ASTEditDiff::computeEditDistance).reduce(0.0f, Float::sum);
+    }
 
     public ASTEditDiff initFrom(Expr from, Expr to) {
         this.init(ExprToEditData.parseOrDefault(from), ExprToEditData.parseOrDefault(to));
@@ -23,7 +35,7 @@ public class ASTEditDiff extends APTED<EditData, EditDataCostModel> {
 
     public List<EditOperation> getEditOperations() {
         List<EditOperation> result = new ArrayList<>();
-        List<int[]> mapping = new ArrayList<>(this.computeEditMapping());
+        List<int[]> mapping = this.computeEditMapping();
 
         Map<Integer, Integer> renameIndexes = mapping.stream()
                 .filter(x -> x[0] != 0 && x[1] != 0)
@@ -32,12 +44,6 @@ public class ASTEditDiff extends APTED<EditData, EditDataCostModel> {
         NodeIndexer<EditData, EditDataCostModel> it1 = this.getIndexer1();
         NodeIndexer<EditData, EditDataCostModel> it2 = this.getIndexer2();
 
-        mapping.sort((a, b) -> {
-            if (a[0] == 0 || b[0] == 0) return a[1] - b[1];
-            if (a[1] == 0 || b[1] == 0) return a[0] - b[0];
-            return a[0] == b[0] ? a[1] - b[1] : a[0] - b[0];
-        });
-        Collections.reverse(mapping);
         mapping.forEach(e -> {
             if (e[0] != 0) {
                 if (e[1] == 0) {

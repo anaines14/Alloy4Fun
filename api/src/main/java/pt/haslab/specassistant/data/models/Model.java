@@ -4,25 +4,33 @@ package pt.haslab.specassistant.data.models;
 import edu.mit.csail.sdg.parser.CompModule;
 import io.quarkus.mongodb.panache.PanacheMongoEntityBase;
 import io.quarkus.mongodb.panache.common.MongoEntity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonIgnore;
-import pt.haslab.alloyaddons.Util;
+import pt.haslab.alloyaddons.ParseUtil;
 
 @MongoEntity(collection = "Model")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class Model extends PanacheMongoEntityBase {
 
     @BsonId
-    public String id;
+    private String id;
 
     /**
      * the complete code of the model.
      */
-    public String code;
+    private String code;
 
     /**
      * which model does it derive from (null if original).
      */
-    public String derivationOf;
+    private String derivationOf;
 
     /**
      * The root of the derivation tree. Different from derivation, as this is
@@ -31,51 +39,43 @@ public class Model extends PanacheMongoEntityBase {
      * shared (i.e., sharing public versions of a model with secrets should
      * not break the derivation).
      */
-    public String original;
+    private String original;
 
     /**
      * optional field for the index of the executed command, if created by
      * execution.
      */
-    public Integer cmd_i;
+    private Integer cmd_i;
 
     /**
      * optional field for the name of the executed command, if created by
      * execution.
      */
-    public String cmd_n;
+    private String cmd_n;
 
     /**
      * optional field, whether the command was a check (1) or a run (0), if
      * created by execution.
      */
-    public Boolean cmd_c;
+    private Boolean cmd_c;
 
     /**
      * optional field, whether the command was satisfiable (1) or unsatisfiable
      * (0), if created by execution. if execution fails, then -1.
      */
-    public Integer sat;
+    private Integer sat;
 
     /**
      * the timestamp.
      */
-    public String time;
-
-    public Model() {
-    }
+    private String time;
 
     public static CompModule getWorld(String model_id) {
-        return Util.parseModel(((Model) findById(model_id)).code);
+        return ParseUtil.parseModel(((Model) findById(model_id)).code);
     }
 
     @BsonIgnore
-    public boolean isOriginal_() {
-        return id.equals(original);
-    }
-
-    @BsonIgnore
-    public boolean isRoot() {
-        return derivationOf == null;
+    public boolean isValidExecution() {
+        return sat != null && sat >= 0;
     }
 }

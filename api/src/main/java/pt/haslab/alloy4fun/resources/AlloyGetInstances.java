@@ -22,15 +22,12 @@ import pt.haslab.alloy4fun.data.transfer.InstanceResponse;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.data.request.InstancesRequest;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
-import pt.haslab.alloyaddons.Util;
-import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
-import pt.haslab.specassistant.services.HintGenerator;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Path("/getInstances")
 @RequestScoped
@@ -40,9 +37,6 @@ public class AlloyGetInstances {
 
     @Inject
     SessionRepository sessionManager;
-
-    @Inject
-    HintGenerator hintGenerator;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,17 +72,17 @@ public class AlloyGetInstances {
         Session result = sessionManager.findById(request.sessionId);
 
         if (result == null) {
-            CompModule world = Util.parseModel(request.model, rep);
+            CompModule world = ParseUtil.parseModel(request.model, rep);
             Command command = world.getAllCommands().get(request.commandIndex);
 
-            A4Options options = Util.defaultOptions(world);
+            A4Options options = new A4Options();
+            options.originalFilename = java.nio.file.Path.of(world.path()).getFileName().toString();
+            options.solver = A4Options.SatSolver.SAT4J;
+
             A4Solution ans = TranslateAlloyToKodkod.execute_command(rep, world.getAllReachableSigs(), command, options);
 
             result = Session.create(request.sessionId, ans, command, world.getAllFunc().makeConstList());
 
-            if (request.parentId != null && command.check && ans.satisfiable())
-                result.hintRequest = CompletableFuture.supplyAsync(() -> hintGenerator.getHint(request.parentId, command.label, world));
-            else result.hintRequest = CompletableFuture.completedFuture(Optional.empty());
             sessionManager.update(result);
         }
 
@@ -129,7 +123,7 @@ public class AlloyGetInstances {
         if (answer.satisfiable()) {
             result.loop = answer.getLoopState();
             try {
-                result.instance = Util.parseInstances(answer, answer.getTraceLength())
+                result.instance = ParseUtil.parseInstances(answer, answer.getTraceLength())
                         .stream()
                         .map(InstanceTrace::from)
                         .toList();

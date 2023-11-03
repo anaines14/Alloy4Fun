@@ -138,6 +138,6 @@ public class ExprNodeEquals extends VisitReturn<Boolean> {
             return false;
         Sig.Field other = (Sig.Field) this.other;
 
-        return other.label.equals(field.label);
+        return other.label.equals(field.label) && other.sig.label.equals(field.sig.label);
     }
 }

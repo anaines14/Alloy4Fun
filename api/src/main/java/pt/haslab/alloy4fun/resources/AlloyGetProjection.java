@@ -14,8 +14,8 @@ import org.slf4j.LoggerFactory;
 import pt.haslab.alloy4fun.data.models.Session;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
-import pt.haslab.alloyaddons.Util;
-import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,7 +38,7 @@ public class AlloyGetProjection {
             return Response.status(Response.Status.BAD_REQUEST).build();
 
         try {
-            AlloyInstance instance = Util.parseInstance(session.answers.get(request.index));
+            AlloyInstance instance = ParseUtil.parseInstance(session.answers.get(request.index));
 
             VizState myState = new VizState(instance);
             VizState theme = new VizState(myState);

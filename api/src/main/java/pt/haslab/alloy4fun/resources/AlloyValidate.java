@@ -7,8 +7,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import pt.haslab.alloyaddons.Util;
-import pt.haslab.alloyaddons.exceptions.UncheckedIOException;
+import pt.haslab.alloy4fun.util.ParseUtil;
+import pt.haslab.alloy4fun.util.UncheckedIOException;
 
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public class AlloyValidate {
     @Produces(MediaType.APPLICATION_JSON)
     public Response doPost(Request request) {
         try {
-            Util.parseModel(request.model);
+            ParseUtil.parseModel(request.model);
 
             return Response.ok(Map.of("success", true)).build();
         } catch (Err e) {

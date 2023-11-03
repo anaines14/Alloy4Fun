@@ -5,7 +5,7 @@ import edu.mit.csail.sdg.ast.*;
 
 import java.util.List;
 
-import static pt.haslab.alloyaddons.Util.lineCSV;
+import static pt.haslab.alloyaddons.ParseUtil.lineCSV;
 
 
 public class ExprNodeStringify extends VisitReturn<String> {
@@ -52,9 +52,9 @@ public class ExprNodeStringify extends VisitReturn<String> {
 
     @Override
     public String visit(ExprQt exprQt) throws Err {
-        String decString = Util.lineCSV(",",
+        String decString = ParseUtil.lineCSV(",",
                 exprQt.decls.stream()
-                        .map(e -> Util.lineCSV(",", e.names.stream()
+                        .map(e -> ParseUtil.lineCSV(",", e.names.stream()
                                 .map(x -> x.label).toList()) + ":" + ExprStringify.rawStringify(e.expr))
                         .toList()
         );

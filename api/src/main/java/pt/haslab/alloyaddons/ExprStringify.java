@@ -4,6 +4,7 @@ import edu.mit.csail.sdg.alloy4.Err;
 import edu.mit.csail.sdg.ast.*;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ExprStringify {
     public static String rawStringify(Expr e) {
@@ -29,17 +30,21 @@ public class ExprStringify {
             List<String> list = exprList.args.stream().map(this::visitThis).toList();
 
             return switch (exprList.op) {
-                case AND -> '(' + Util.lineCSV(" && ", list) + ')';
-                case OR -> '(' + Util.lineCSV(" || ", list) + ')';
-                case DISJOINT -> "disj[" + Util.lineCSV(",", list) + "]";
-                default -> exprList.op + "[" + Util.lineCSV(",", list) + "]";
+                case AND -> '(' + ParseUtil.lineCSV(" && ", list) + ')';
+                case OR -> '(' + ParseUtil.lineCSV(" || ", list) + ')';
+                case DISJOINT -> "disj[" + ParseUtil.lineCSV(",", list) + "]";
+                default -> exprList.op + "[" + ParseUtil.lineCSV(",", list) + "]";
             };
         }
 
         @Override
         public String visit(ExprCall exprCall) throws Err {
             List<String> arguments = exprCall.args.stream().map(this::visitThis).toList();
-            return exprCall.fun.label.replace("this/", "") + "[" + Util.lineCSV(",", arguments) + "]";
+            String label = exprCall.fun.label.replace("this/", "");
+            String res = label + "[" + ParseUtil.lineCSV(",", arguments) + "]";
+            if (label.contains("/"))
+                return "(" + res + ")";
+            return res;
         }
 
         @Override
@@ -63,12 +68,23 @@ public class ExprStringify {
 
         @Override
         public String visit(ExprQt exprQt) throws Err {
-            String decString = Util.lineCSV(",", exprQt.decls.stream().map(e -> Util.lineCSV(",", e.names.stream().map(x -> x.label).toList()) + ":" + visitThis(e.expr)).toList());
+            String decString = ParseUtil.lineCSV(",", exprQt.decls.stream().map(e -> ParseUtil.lineCSV(",", e.names.stream().map(x -> x.label).toList()) + ":" + visitThis(e.expr)).toList());
             String sub = visitThis(exprQt.sub);
 
             if (exprQt.op == ExprQt.Op.COMPREHENSION)
-                return "{" + decString + "|" + sub + "}";
+                if (Objects.equals(sub.strip(), "true"))
+                    return "{" + decString + "}";
+                else return "{" + decString + "|" + sub + "}";
             else return "(" + exprQt.op + " " + decString + "|" + sub + ")";
+        }
+
+        public boolean isInt(String s) {
+            try {
+                Integer.parseInt(s);
+                return true;
+            } catch (NumberFormatException e) {
+                return false;
+            }
         }
 
         @Override
@@ -80,8 +96,8 @@ public class ExprStringify {
                 case ONEOF -> "(one " + sub + ')';
                 case SETOF -> "(set " + sub + ')';
                 case EXACTLYOF -> "(exactly " + sub + ')';
-                case CAST2INT -> "int[" + sub + "]";
-                case CAST2SIGINT -> "Int[" + sub + "]";
+                case CAST2INT -> isInt(sub) ? sub : "int[" + sub + "]";
+                case CAST2SIGINT -> isInt(sub) ? sub : "Int[" + sub + "]";
                 case PRIME -> "(" + sub + ")'";
                 case NOOP -> sub;
                 default -> '(' + exprUnary.op.toString() + ' ' + sub + ")";

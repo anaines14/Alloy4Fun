@@ -26,11 +26,6 @@ public class EditOperation {
         return target;
     }
 
-    //The development of the oracle was abandoded this method is obsulete
-    public String getPattern() {
-        return "";
-    }
-
     @Override
     public String toString() {
         return "{\"type\"=\"" + type + (value != null ? ("\",\"value\"=\"" + value) : "") + "\",\"target\"=\"" + target + "\"}";
