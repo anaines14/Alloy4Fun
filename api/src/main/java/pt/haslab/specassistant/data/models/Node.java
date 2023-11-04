@@ -51,8 +51,11 @@ public class Node extends PanacheMongoEntity {
 
     private Double score;
 
+    private Double minSolutionTed;
+    private ObjectId minSolution;
+
     @BsonIgnore
-    @ToString.Include(rank = 2,name = "id")
+    @ToString.Include(rank = 2, name = "id")
     public ObjectId getId() {
         return this.id;
     }

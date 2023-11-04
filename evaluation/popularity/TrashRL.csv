@@ -1,0 +1,390 @@
+;predicate;formula;frequency;closest_solution;solution_distance
+0;this/inv1;;234;(no Trash);3
+1;this/inv2;;123;(File in Trash);4
+2;this/inv4;;117;(no ref0:(one Protected)|(ref0 in Trash));5
+3;this/inv3;;114;(some Trash);3
+4;this/inv7;;113;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));5
+5;this/inv5;;111;(all ref0:(one (File - Protected))|(ref0 in Trash));5
+6;this/inv6;;107;((File <: link) in (File ->lone File));6
+7;this/inv8;;103;(no (File <: link));3
+8;this/inv9;;97;(no ((File <: link) . (File <: link)));5
+9;this/inv7;(all ref0:(one File)|((ref0 . (File <: link)) !in Trash));40;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+10;this/inv5;((File - Protected) = Trash);37;((File - (Protected - Trash)) = Trash);2
+11;this/inv6;(lone (File . (File <: link)));31;(all ref0:(one File)|(lone (ref0 . (File <: link))));3
+12;this/inv4;(Protected !in Trash);28;(no (Protected & Trash));3
+13;this/inv7;(no (Trash . (File <: link)));22;(no ((File <: link) . Trash));2
+14;this/inv7;(all ref0:(one Trash)|(no (ref0 . (File <: link))));16;(no ((File <: link) . Trash));3
+15;this/inv6;(((File <: link) . (~ (File <: link))) in iden);14;(((~ (File <: link)) . (File <: link)) in iden);2
+16;this/inv5;(no (Protected & Trash));14;(no ((File - Protected) - Trash));4
+17;this/inv2;(no File);13;(no (File - Trash));2
+18;this/inv7;(all ref0:(one File)|((some (ref0 . (File <: link))) => (ref0 !in Trash)));13;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));4
+19;this/inv6;(all ref0:(one File)|(lone ref1:(one File)|((ref0 . (File <: link)) = ref1)));11;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+20;this/inv6;(lone (File <: link));9;(all ref0:(one File)|(lone (ref0 . (File <: link))));3
+21;this/inv6;(all ref0:(one File)|(one (ref0 . (File <: link))));8;(all ref0:(one File)|(lone (ref0 . (File <: link))));4
+22;this/inv7;(no (((File <: link) . File) & Trash));7;(no ((File <: link) & (File -> Trash)));2
+23;this/inv4;(! (Protected in Trash));7;(! (some ref0:(one Protected)|(ref0 in Trash)));3
+24;this/inv7;((File . (File <: link)) !in Trash);6;(no ((File . (File <: link)) & Trash));3
+25;this/inv7;(((File <: link) . File) !in Trash);6;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));5
+26;this/inv1;(some Trash);6;(no Trash);2
+27;this/inv9;(((File <: link) . (File <: link)) in iden);6;(no ((File <: link) . (File <: link)));3
+28;this/inv1;(no (Trash . (File <: link)));5;(no Trash);2
+29;this/inv5;(all ref0:(one File)|((ref0 !in Protected) && (ref0 in Trash)));5;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));4
+30;this/inv6;(all ref0:(one File)|(lone ((File <: link) . ref0)));5;(all ref0:(one File)|(lone (ref0 . (File <: link))));4
+31;this/inv7;(no ref0:(one File)|((ref0 . (File <: link)) in Trash));5;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));4
+32;this/inv5;((no (Protected & Trash)) && ((File - Protected) = Trash));5;((File - (Protected - Trash)) = Trash);7
+33;this/inv6;(lone ((File <: link) - iden));5;(all ref0:(one File)|(lone (ref0 . (File <: link))));5
+34;this/inv3;(File in Trash);5;(some Trash);3
+35;this/inv5;(! (Protected in Trash));5;((File - Protected) in Trash);3
+36;this/inv7;(all ref0:(one File)|((some (ref0 . (File <: link))) => ((ref0 . (File <: link)) !in Trash)));5;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));6
+37;this/inv5;(File = (Trash - Protected));5;((File - (Protected - Trash)) = Trash);4
+38;this/inv6;(one (File . (File <: link)));4;(all ref0:(one File)|(lone (ref0 . (File <: link))));5
+39;this/inv5;(no (Protected -> Trash));4;(no ((File - Protected) - Trash));4
+40;this/inv7;(all ref0:(one File)|(((File <: link) . ref0) !in Trash));4;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+41;this/inv9;(all ref0:(one File),ref1:(one File)|((ref0 . (File <: link)) != (ref1 . (File <: link))));4;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));8
+42;this/inv7;(all ref0:(one File)|(no ((File <: link) . ref0)));4;(all ref0:(one Trash)|(no ((File <: link) . ref0)));2
+43;this/inv2;(no (File & Trash));4;(no (File - Trash));2
+44;this/inv7;(all ref0:(one Trash)|(none = (ref0 . (File <: link))));4;(((File <: link) . Trash) = none);5
+45;this/inv9;(((File <: link) . (File <: link)) !in (File <: link));4;(no ((File <: link) . (File <: link)));3
+46;this/inv6;(all ref0:(one File)|(some (ref0 . (File <: link))));4;(all ref0:(one File)|(lone (ref0 . (File <: link))));4
+47;this/inv6;(lone ((File <: link) . File));4;(all ref0:(one File)|(lone (ref0 . (File <: link))));3
+48;this/inv7;(all ref0:(one File)|((ref0 in Trash) => (none = (ref0 . (File <: link)))));4;(all ref0:(one File)|((ref0 in Trash) => (no ((File <: link) . ref0))));7
+49;this/inv4;(all ref0:(one File)|(ref0 = (Protected - Trash)));4;(Protected = (Protected - Trash));3
+50;this/inv5;(no (Trash - Protected));4;(no ((File - Protected) - Trash));4
+51;this/inv3;(some ref0:(one File)|(ref0 = Trash));4;(some Trash);4
+52;this/inv5;(all ref0:(one Protected)|(no (ref0 & Trash)));4;(all ref0:(one (File - Protected))|(ref0 in Trash));5
+53;this/inv5;(Protected in Trash);3;((File - Protected) in Trash);2
+54;this/inv7;(! (some ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) && (ref0 in Trash))));3;(! (some ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) && (ref1 in Trash))));6
+55;this/inv2;(no Protected);3;(no (File - Trash));4
+56;this/inv5;((File !in Protected) => (File in Trash));3;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));5
+57;this/inv1;(all ref0:(one File)|(ref0 in Trash));3;(no ref0:(one File)|(ref0 in Trash));2
+58;this/inv4;(no (Protected + Trash));3;(no (Protected & Trash));2
+59;this/inv7;(all ref0:(one File)|((ref0 . (File <: link)) in Trash));3;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));4
+60;this/inv7;((File . (File <: link)) in Protected);3;(Trash in (Trash - (File . (File <: link))));4
+61;this/inv9;(all ref0:(one File)|(one ((File <: link) . ref0)));3;(no ((File <: link) . (File <: link)));5
+62;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref0 !in Trash) && (ref1 !in Trash))));3;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in Trash)));8
+63;this/inv9;(all ref0:(one File),ref1:(one File)|((ref0 != ref1) => (no ((ref0 . (File <: link)) & (ref1 . (File <: link))))));3;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));9
+64;this/inv4;(Protected in Trash);3;(Protected in (File - Trash));2
+65;this/inv4;(all ref0:(one Protected)|(no Trash));3;(no (Protected & Trash));3
+66;this/inv3;(some (File - Trash));3;(some Trash);2
+67;this/inv5;(all ref0:(one File),ref1:(one Protected)|((ref0 - ref1) in Trash));3;(all ref0:(one (File - Protected))|(ref0 in Trash));5
+68;this/inv1;(no File);3;(no Trash);2
+69;this/inv5;(no (Protected - Trash));3;(no ((File - Protected) - Trash));2
+70;this/inv6;(all ref0:(one File)|(lone (File <: link)));3;(all ref0:(one File)|(lone (ref0 . (File <: link))));4
+71;this/inv7;(no ((((File <: link) . File) + (File . (File <: link))) & Trash));3;(no ((File . (File <: link)) & Trash));4
+72;this/inv9;(all ref0:(one File)|(lone (ref0 . (File <: link))));3;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));4
+73;this/inv7;(all ref0:(one ((File <: link) . File))|(ref0 !in File));3;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+74;this/inv7;(no (File . (File <: link)));3;(no ((File . (File <: link)) & Trash));2
+75;this/inv5;(Trash in (File - Protected));3;((File - Protected) in Trash);2
+76;this/inv9;(((File <: link) . (~ (File <: link))) in iden);3;(no ((File <: link) . (File <: link)));4
+77;this/inv3;((no (Protected & Trash)) && (File = (Protected + Trash)));3;((some File) && (some Trash));9
+78;this/inv7;(all ref0:(one File)|((some (ref0 . (File <: link))) => (! (ref0 in Trash))));3;(all ref0:(one (File . (File <: link)))|(! (ref0 in Trash)));7
+79;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 !in Trash) && ((ref0 -> ref1) in (File <: link))) => (ref1 !in Trash)));3;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in Trash)));8
+80;this/inv9;(all ref0:(one File),ref1:(one File)|(none = ((ref0 . (File <: link)) & (ref1 . (File <: link)))));3;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));7
+81;this/inv6;((File <: link) in (File one-> File));2;((File <: link) in (File ->lone File));2
+82;this/inv6;((File <: link) in (File lone-> File));2;((File <: link) in (File ->lone File));2
+83;this/inv6;(some (File <: link));2;((File <: link) in (File ->lone File));5
+84;this/inv5;((no (Protected & Trash)) && (File in Trash));2;((File - Protected) in Trash);7
+85;this/inv6;(all ref0:(one File)|(lone ((File <: link) :> ref0)));2;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+86;this/inv7;(all ref0:(one File)|(no (ref0 . (File <: link))));2;(no ((File <: link) . Trash));3
+87;this/inv6;(some ref0:(one File)|(lone (ref0 . (File <: link))));2;(all ref0:(one File)|(lone (ref0 . (File <: link))));2
+88;this/inv4;(File = (Protected + Trash));2;(none = (Protected & Trash));4
+89;this/inv4;((no (Protected & Trash)) && (File = (Protected + Trash)));2;(no (Protected & Trash));6
+90;this/inv5;((no (Protected & Trash)) && (File = (Protected + Trash)));2;(File = (Protected + Trash));5
+91;this/inv7;(all ref0:(one File)|(! ((ref0 . (File <: link)) in Trash)));2;(all ref0:(one (File . (File <: link)))|(! (ref0 in Trash)));4
+92;this/inv3;(one Trash);2;(some Trash);2
+93;this/inv6;(all ref0:(one univ),ref1:(one univ),ref2:(one univ)|(((ref0 in File) && ((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => (ref1 = ref2)));2;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));13
+94;this/inv9;(all ref0:(one File),ref1:(one File)|((ref0 != ref1) => ((ref0 . (File <: link)) != (ref1 . (File <: link)))));2;(all ref0:(one File)|((some (ref0 . (File <: link))) => (no ((File <: link) . ref0))));11
+95;this/inv5;(all ref0:(one Trash)|(ref0 !in Protected));2;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));6
+96;this/inv6;(some ref0:(one File)|((ref0 . (File <: link)) in File));2;((File <: link) in (File ->lone File));5
+97;this/inv5;((all ref0:(one (File - Protected))|(ref0 in Trash)) && (no ref1:(one Protected)|(ref1 in Trash)));2;(all ref0:(one (File - Protected))|(ref0 in Trash));7
+98;this/inv1;(all ref0:(one Trash)|((ref0 . (File <: link)) != File));2;(all ref0:(one Trash)|(ref0 !in univ));8
+99;this/inv8;(all ref0:(one univ),ref1:(one univ)|(((ref0 -> ref1) in (File <: link)) => (ref1 in Trash)));2;(all ref0:(one File),ref1:(one File)|(! ((ref0 -> ref1) in (File <: link))));9
+100;this/inv9;(all ref0:(one File)|(ref0 !in (ref0 . (File <: link))));2;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));5
+101;this/inv5;(! ((File & Protected) in Trash));2;((File - Protected) in Trash);3
+102;this/inv6;((File <: link) in (File lone->lone File));2;((File <: link) in (File ->lone File));2
+103;this/inv9;(all ref0:(one univ),ref1:(one univ)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in (File . (File <: link)))));2;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref1 -> ref2) !in (File <: link))));9
+104;this/inv5;((File & Protected) in Trash);2;((File - Protected) in Trash);2
+105;this/inv2;(all ref0:(one File),ref1:(one Trash)|(ref0 in ref1));2;(all ref0:(one File)|(some ref1:(one Trash)|(ref0 in ref1)));4
+106;this/inv4;((no Trash) && (File = Protected));2;(no (Protected & Trash));6
+107;this/inv7;(some (File . (File <: link)));2;(no ((File . (File <: link)) & Trash));4
+108;this/inv5;(some (Trash - Protected));2;((File - Protected) in Trash);5
+109;this/inv5;(one (Trash - Protected));2;((File - Protected) in Trash);5
+110;this/inv5;(Trash = (Trash - Protected));2;((File - (Protected - Trash)) = Trash);6
+111;this/inv2;(all ref0:(one File)|(ref0 = Trash));2;(File = Trash);3
+112;this/inv5;(no (Protected + Trash));2;(File = (Protected + Trash));3
+113;this/inv5;(all ref0:(one Protected)|(ref0 !in Trash));2;(all ref0:(one (File - Protected))|(ref0 in Trash));4
+114;this/inv5;(all ref0:(one File)|((ref0 !in Protected) <=> (ref0 in Trash)));2;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));4
+115;this/inv5;(all ref0:(one File)|((ref0 in Trash) => (ref0 !in Protected)));2;(all ref0:(one (File - Protected))|(ref0 in Trash));6
+116;this/inv3;((some Trash) && (File = Trash));2;(some Trash);4
+117;this/inv3;((some Trash) && (File = (Protected + Trash)));2;(some Trash);6
+118;this/inv5;(one (Protected - Trash));2;(no ((File - Protected) - Trash));4
+119;this/inv4;((no Protected) && (File = Trash));2;(Protected in (File - Trash));5
+120;this/inv7;(all ref0:(one File)|(((File <: link) . ref0) in Trash));2;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));4
+121;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (File <: link)))));2;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));5
+122;this/inv9;(all ref0:(one File),ref1:(one File)|(no (((File <: link) . ref0) & (ref0 . (File <: link)))));2;(no (((File <: link) . File) & (File . (File <: link))));6
+123;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) -> (ref1 . (File <: link)))));2;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));7
+124;this/inv7;(all ref0:(one File)|(some (ref0 . (File <: link))));2;(no ((File <: link) . Trash));5
+125;this/inv9;(all ref0:(one File),ref1:(one File)|((! disj[ref0,ref1]) || (none = ((ref0 . (^ (File <: link))) & (ref1 . (^ (File <: link)))))));2;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));14
+126;this/inv9;(all ref0:(one File),ref1:(one File)|((! disj[ref0,ref1]) || (none = ((ref0 . (File <: link)) & (ref1 . (File <: link))))));2;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));12
+127;this/inv1;(Trash in File);1;(Trash in none);2
+128;this/inv2;(all ref0:(one File)|(none = ref0));1;(File = Trash);5
+129;this/inv2;(all ref0:(one File)|(ref0 in Protected));1;(all ref0:(one File)|(ref0 in Trash));4
+130;this/inv2;((no (File & Protected)) && (File = (Protected + Trash)));1;(File = Trash);7
+131;this/inv5;((File in Trash) => (File in (File + Trash)));1;((File - Protected) in Trash);8
+132;this/inv7;(all ref0:(one (File - Protected))|((ref0 . (File <: link)) !in Trash));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+133;this/inv3;((File - Trash) in Trash);1;(some Trash);5
+134;this/inv1;(no ref0:(one Trash)|(ref0 in (ref0 . (File <: link))));1;(all ref0:(one Trash)|(ref0 in none));6
+135;this/inv5;((no (Protected & Trash)) && ((File . (File <: link)) in Trash));1;((File - Protected) in Trash);9
+136;this/inv6;((all ref0:(one File),ref1:(one File),ref2:(one File)|((((ref0 -> ref1) + (ref0 -> ref2)) in (File <: link)) => (ref0 = ref1))) && (all ref3:(one File)|(lone (ref3 . (File <: link)))));1;((all ref0:(one File),ref1:(one File),ref2:(one File)|((((ref0 -> ref1) + (ref0 -> ref2)) in (File <: link)) => (ref1 = ref2))) && (all ref3:(one File)|(lone (ref3 . (File <: link)))));10
+137;this/inv5;((no (Protected & Trash)) && ((File + (File . (File <: link))) in Trash));1;((File - Protected) in Trash);11
+138;this/inv7;((File . (File <: link)) in Trash);1;(no ((File . (File <: link)) & Trash));3
+139;this/inv7;(File in Protected);1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));5
+140;this/inv7;((all ref0:(one (File . (File <: link)))|(ref0 !in Trash)) && ((File . (File <: link)) !in Trash));1;((all ref0:(one (File . (File <: link)))|(ref0 !in Trash)) && (no ((File . (File <: link)) & Trash)));5
+141;this/inv7;(all ref0:(one File)|((ref0 . (File <: link)) in Protected));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));6
+142;this/inv7;(all ref0:(one File)|(ref0 !in Trash));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));2
+143;this/inv7;((all ref0:(one File)|((ref0 . (File <: link)) in Protected)) && (no (Protected & Trash)));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) & Trash)));10
+144;this/inv6;(some ref0:(one File)|(lone ((File <: link) :> ref0)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+145;this/inv9;(all ref0:(one (File . (File <: link))),ref1:(one (File . (File <: link)))|(ref0 !in ref1));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));8
+146;this/inv2;(eventually (no File));1;(eventually (File in Trash));3
+147;this/inv4;(all ref0:(one File)|(ref0 !in Trash));1;(all ref0:(one Protected)|(ref0 !in Trash));2
+148;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref0 -> ref1) in (File <: link))));1;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (! (ref1 in Trash))));9
+149;this/inv3;(eventually (File in Trash));1;(some Trash);4
+150;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref0 -> ref1) !in (File <: link))));1;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in Trash)));8
+151;this/inv7;(no ref0:(one File)|(ref0 in Trash));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));2
+152;this/inv5;((no (File <: link)) && (no (Protected & Trash)) && ((File - Protected) = Trash));1;((File - (Protected - Trash)) = Trash);9
+153;this/inv7;(no ref0:(one File)|((((File <: link) . ref0) & ref0) in Trash));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));6
+154;this/inv4;(some ref0:(one File)|((ref0 in Protected) => (ref0 !in Trash)));1;(all ref0:(one univ)|((ref0 in Protected) => (ref0 !in Trash)));2
+155;this/inv7;(no ((File <: link) -> Trash));1;(no ((File <: link) :> Trash));2
+156;this/inv9;(no ((File <: link) . (~ (File <: link))));1;(no ((File <: link) . (File <: link)));1
+157;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref0 !in Trash)));1;(all ref0:(one File),ref1:(one File)|((ref0 in (ref1 . (File <: link))) => (ref0 !in Trash)));6
+158;this/inv9;(one (^ (File <: link)));1;(no ((File <: link) . (File <: link)));5
+159;this/inv9;((# (File <: link)) = 1);1;(no ((File <: link) . (File <: link)));6
+160;this/inv6;(all ref0:(one (File . (File <: link)))|(lone (ref0 . (File <: link))));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));2
+161;this/inv7;(no ref0:(one File),ref1:(one File)|(((ref0 . (File <: link)) = ref1) => (ref1 !in Trash)));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) & Trash)));10
+162;this/inv5;(all ref0:(one File)|((ref0 in Protected) => (ref0 in Trash)));1;(all ref0:(one File)|((! (ref0 in Protected)) => (ref0 in Trash)));3
+163;this/inv9;(lone (^ (File <: link)));1;(no ((File <: link) . (File <: link)));5
+164;this/inv7;(! (some ref0:(one File),ref1:(one File)|((ref0 -> ref1) !in (File <: link))));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));8
+165;this/inv6;(no ((File <: link) . Trash));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));5
+166;this/inv9;(lone (~ (File <: link)));1;(no ((File <: link) . (File <: link)));5
+167;this/inv3;(some File);1;(some Trash);2
+168;this/inv8;(all ref0:(one File)|(no ref1:(one File)|((ref0 . (File <: link)) = ref1)));1;(all ref0:(one File)|(none = (ref0 . (File <: link))));5
+169;this/inv9;(lone (File . (^ (File <: link))));1;(no ((File <: link) . (File <: link)));5
+170;this/inv9;(all ref0:(one File),ref1:(one File)|((ref0 != ref1) => (no (((File <: link) . ref0) & ((File <: link) . ref1)))));1;(no (((File <: link) . File) & (File . (File <: link))));10
+171;this/inv8;(no ref0:(one File)|((ref0 . (File <: link)) in File));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) & File)));5
+172;this/inv6;(one ((File <: link) . (~ (File <: link))));1;(((~ (File <: link)) . (File <: link)) in iden);5
+173;this/inv9;(no ref0:(one File)|(((ref0 . (File <: link)) . (File <: link)) in File));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) . (File <: link))));5
+174;this/inv1;(all ref0:(one univ)|(ref0 in Trash));1;(no ref0:(one File)|(ref0 in Trash));2
+175;this/inv6;(all ref0:(one File),ref1:(one univ),ref2:(one univ),ref3:(one univ)|(((ref1 in File) && ((ref2 -> ref1) in (File <: link)) && ((ref3 -> ref1) in (File <: link))) => (ref2 = ref3)));1;(all ref0:(one univ),ref1:(one univ),ref2:(one univ)|((((ref0 -> ref1) in (File <: link)) && ((ref0 -> ref2) in (File <: link))) => (ref1 = ref2)));18
+176;this/inv9;(all ref0:(one File),ref1:(one (ref0 . (File <: link))),ref2:(one (ref0 . (File <: link)))|((! disj[ref1,ref2]) || (ref1 != ref2)));1;(no ((File <: link) . (File <: link)));15
+177;this/inv6;(all ref0:(one File),ref1:(one univ),ref2:(one univ)|((((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => (ref1 = ref2)));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));10
+178;this/inv6;(all ref0:(one File),ref1:(one univ),ref2:(one univ)|((((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => ((lone ((File <: link) . ref0)) && (ref1 = ref2))));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));15
+179;this/inv6;(all ref0:(one File)|(lone File));1;((File <: link) in (File ->lone File));6
+180;this/inv6;((all ref0:(one File),ref1:(one univ),ref2:(one univ)|((((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => (ref1 = ref2))) && (all ref3:(one File)|(lone ((File <: link) . ref3))));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));16
+181;this/inv6;((all ref0:(one File),ref1:(one univ),ref2:(one univ)|((((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => (ref1 = ref2))) && (all ref3:(one File),ref4:(one File),ref5:(one univ)|((((ref3 -> ref5) in (File <: link)) && ((ref4 -> ref5) in (File <: link))) => (ref3 = ref4))));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));29
+182;this/inv4;(all ref0:(one File)|((Protected in ref0) => (ref0 !in Trash)));1;(all ref0:(one univ)|((ref0 in Protected) => (ref0 !in Trash)));4
+183;this/inv6;(all ref0:(one File),ref1:(one File),ref2:(one univ)|((((ref0 -> ref2) in (File <: link)) && ((ref1 -> ref2) in (File <: link))) => (ref0 = ref1)));1;(all ref0:(one univ),ref1:(one univ),ref2:(one univ)|((((ref0 -> ref1) in (File <: link)) && ((ref0 -> ref2) in (File <: link))) => (ref1 = ref2)));12
+184;this/inv7;(((~ (File <: link)) . (File <: link)) in iden);1;(no ((File <: link) . Trash));6
+185;this/inv6;(all ref0:(one File),ref1:(one File),ref2:(one File)|((((ref1 -> ref0) in (File <: link)) && ((ref2 -> ref0) in (File <: link))) => (ref1 = ref2)));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref1 in (ref0 . (File <: link))) && (ref2 in (ref0 . (File <: link)))) => (ref1 = ref2)));10
+186;this/inv5;((no Protected) && ((File - Protected) = Trash));1;((File - (Protected - Trash)) = Trash);5
+187;this/inv1;(all ref0:(one Trash)|(none = (Trash . (File <: link))));1;(none = Trash);3
+188;this/inv1;(all ref0:(one Trash)|(none = (ref0 . (File <: link))));1;(none = Trash);5
+189;this/inv6;(no ((File . (File <: link)) & Trash));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));7
+190;this/inv7;(all ref0:(one univ)|((ref0 -> Trash) !in (File <: link)));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+191;this/inv6;(all ref0:(one File)|(some ref1:(one File)|((ref0 . (File <: link)) = ref1)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+192;this/inv6;(((File <: link) . (~ (File <: link))) in ((~ (File <: link)) . (File <: link)));1;(((~ (File <: link)) . (File <: link)) in iden);5
+193;this/inv7;(all ref0:(one univ)|((ref0 -> Trash) in (File <: link)));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));4
+194;this/inv7;(all ref0:(one univ),ref1:(one univ)|((ref0 -> ref1) in (File <: link)));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));7
+195;this/inv3;((File - Trash) = Trash);1;(some Trash);5
+196;this/inv4;(Protected != Trash);1;(no (Protected & Trash));3
+197;this/inv7;(all ref0:(one (((File <: link) . File) + (File . (File <: link))))|(ref0 !in Trash));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));2
+198;this/inv6;(one ((File <: link) - iden));1;(((~ (File <: link)) . (File <: link)) in iden);6
+199;this/inv6;(lone ref0:(one File)|(all ref1:(one File)|((ref0 . (File <: link)) = ref1)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+200;this/inv3;(no (File & Trash));1;(some (File & Trash));2
+201;this/inv6;(lone ref0:(one File)|(all ref1:(one File)|((ref0 != ref1) && ((ref0 . (File <: link)) = ref1))));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));10
+202;this/inv5;(no Protected);1;(no ((File - Protected) - Trash));4
+203;this/inv9;(all ref0:(one File)|(ref0 !in (ref0 . (~ (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));6
+204;this/inv6;(lone (iden - (File <: link)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));5
+205;this/inv4;(Protected = Trash);1;(none = (Protected & Trash));2
+206;this/inv7;(! ((File . (File <: link)) in Trash));1;(no ((File . (File <: link)) & Trash));4
+207;this/inv7;(all ref0:(one univ),ref1:(one univ)|(((ref0 -> ref1) in (File <: link)) => (ref1 in Trash)));1;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (! (ref1 in Trash))));5
+208;this/inv6;(lone ref0:(one File)|(ref0 in (File . (File <: link))));1;(((~ (File <: link)) . (File <: link)) in iden);6
+209;this/inv9;(all ref0:(one univ),ref1:(one univ),ref2:(one univ)|(((ref0 -> ref1) in (File <: link)) => (((ref0 -> ref2) !in (File <: link)) && ((ref1 -> ref2) !in (File <: link)))));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref1 -> ref2) !in (File <: link))));12
+210;this/inv6;(no ((^ (File <: link)) & iden));1;(((~ (File <: link)) . (File <: link)) in iden);7
+211;this/inv8;(File = Trash);1;(none = (File . (File <: link)));4
+212;this/inv5;(! (some ref0:(one Protected)|(ref0 !in Trash)));1;(all ref0:(one (File - Protected))|(ref0 in Trash));5
+213;this/inv9;(all ref0:(one File),ref1:(one File)|(((ref0 . (File <: link)) = (ref1 . (File <: link))) => (ref0 = ref1)));1;(all ref0:(one File)|((some (ref0 . (File <: link))) => (no ((File <: link) . ref0))));11
+214;this/inv1;(none in Trash);1;(Trash in none);2
+215;this/inv6;(all ref0:(one File)|(one ref1:(one File)|((ref0 . (File <: link)) = ref1)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));6
+216;this/inv6;(one (File <: link));1;((File <: link) in (File ->lone File));5
+217;this/inv1;(all ref0:(one Trash)|(lone File));1;(no Trash);5
+218;this/inv9;(all ref0:(one File),ref1:(one File)|((some (ref0 . (File <: link))) => ((ref0 . (File <: link)) != (ref1 . (File <: link)))));1;(all ref0:(one File)|((some (ref0 . (File <: link))) => (no ((ref0 . (File <: link)) . (File <: link)))));8
+219;this/inv9;(all ref0:(one univ)|((File -> ref0) !in (File <: link)));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));7
+220;this/inv7;(no ref0:(one File)|(ref0 = (File . (File <: link))));1;(((File <: link) . Trash) = none);5
+221;this/inv1;(lone File);1;(no Trash);4
+222;this/inv6;((all ref0:(one File),ref1:(one File)|((ref1 in (ref0 . (File <: link))) => (ref0 != ref1))) && (lone (File <: link)));1;(all ref0:(one File)|(lone ref1:(one File)|(ref1 in (ref0 . (File <: link)))));11
+223;this/inv7;(no ref0:(one Trash)|(ref0 = (File . (File <: link))));1;(((File <: link) . Trash) = none);5
+224;this/inv9;(no ref0:(one (File . (File <: link))),ref1:(one (File . (File <: link)))|((! disj[ref0,ref1]) || (ref0 = ref1)));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));12
+225;this/inv1;(lone Trash);1;(no Trash);2
+226;this/inv7;(no ref0:(one File)|(ref0 = (Trash . (File <: link))));1;(((File <: link) . Trash) = none);5
+227;this/inv9;(no (File . (File <: link)));1;(no ((File <: link) . (File <: link)));2
+228;this/inv9;(no ref0:(one File),ref1:(one File)|((! disj[ref0,ref1]) || ((ref0 . (File <: link)) = (ref1 . (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));12
+229;this/inv9;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in (File . (File <: link)))));1;(all ref0:(one File),ref1:(one File),ref2:(one File)|(((ref0 -> ref1) in (File <: link)) => ((ref1 -> ref2) !in (File <: link))));9
+230;this/inv7;((File -> File) = (File -> Trash));1;(no ((File <: link) & (File -> Trash)));7
+231;this/inv7;(all ref0:(one File)|((ref0 . (^ (File <: link))) !in Trash));1;(all ref0:(one File)|(no ((ref0 . (^ (File <: link))) & Trash)));5
+232;this/inv9;(all ref0:(one File)|(((ref0 . (File <: link)) . (File <: link)) !in (File . (File <: link))));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) . (File <: link))));7
+233;this/inv7;((File -> File) = (Trash -> File));1;(((File <: link) . Trash) = none);8
+234;this/inv7;(no Trash);1;(no ((File <: link) :> Trash));2
+235;this/inv9;(all ref0:(one univ),ref1:(one univ)|(((ref0 -> ref1) in (File <: link)) => ((File . (File <: link)) !in ref1)));1;(all ref0:(one univ),ref1:(one univ)|(((ref0 -> ref1) in (File <: link)) => (no (ref1 . (File <: link)))));9
+236;this/inv7;(no ref0:(one Trash)|(none != (ref0 . (File <: link))));1;(no ((File <: link) . Trash));6
+237;this/inv2;(Trash = univ);1;(File = Trash);2
+238;this/inv7;(none = (Trash . (File <: link)));1;(((File <: link) . Trash) = none);4
+239;this/inv6;(some (File . (File <: link)));1;(all ref0:(one File)|(lone (ref0 . (File <: link))));5
+240;this/inv6;(some ((File <: link) . File));1;((File <: link) in (File ->lone File));5
+241;this/inv6;((File <: link) in iden);1;(((~ (File <: link)) . (File <: link)) in iden);3
+242;this/inv9;(all ref0:(one File)|(none != (ref0 . (File <: link))));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));4
+243;this/inv1;(all ref0:(one Trash)|(no (ref0 . (File <: link))));1;(no Trash);5
+244;this/inv3;(one (File - Trash));1;(some Trash);4
+245;this/inv3;(lone (File - Trash));1;(some Trash);4
+246;this/inv6;((File <: link) in (File ->one File));1;((File <: link) in (File ->lone File));2
+247;this/inv7;((File . (File <: link)) !in File);1;(no ((File . (File <: link)) & Trash));5
+248;this/inv7;(all ref0:(one File)|((none != (ref0 . (File <: link))) => ((ref0 . (File <: link)) !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));9
+249;this/inv7;(all ref0:(one (File . (File <: link)))|(ref0 !in File));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));4
+250;this/inv6;((File <: link) in (File one->one File));1;((File <: link) in (File ->lone File));2
+251;this/inv7;(all ref0:(one File)|((none != (ref0 . (File <: link))) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));7
+252;this/inv4;(no Trash);1;(no (Protected & Trash));2
+253;this/inv4;(File = (Protected - Trash));1;(Protected = (Protected - Trash));2
+254;this/inv7;(0 = 0);1;(((File <: link) . Trash) = none);6
+255;this/inv4;(File = (Trash - Protected));1;(Protected = (Protected - Trash));4
+256;this/inv7;(0 = 1);1;(((File <: link) . Trash) = none);6
+257;this/inv9;(all ref0:(one File)|(no (((File <: link) . ref0) . (File <: link))));1;(no ((File <: link) . (File <: link)));3
+258;this/inv4;(all ref0:(one File)|(ref0 = (Protected <: Trash)));1;(none = (Protected & Trash));5
+259;this/inv4;(all ref0:(one File)|(ref0 = (Protected :> Trash)));1;(none = (Protected & Trash));5
+260;this/inv4;(Protected in File);1;(Protected in (File - Trash));2
+261;this/inv7;(all ref0:(one File)|((ref0 !in Trash) <=> (some (ref0 . (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));7
+262;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) && (ref1 !in Trash)));1;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref1 !in Trash)));6
+263;this/inv2;(all ref0:(one File)|(ref0 !in Trash));1;(! (some ref0:(one File)|(ref0 !in Trash)));3
+264;this/inv5;(all ref0:(one File)|(lone (ref0 . (File <: link))));1;(all ref0:(one (File - Protected))|(ref0 in Trash));7
+265;this/inv1;(File !in Trash);1;(all ref0:(one File)|(ref0 !in Trash));3
+266;this/inv2;(some Trash);1;(File in Trash);3
+267;this/inv7;(all ref0:(one File)|((one (ref0 . (File <: link))) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));6
+268;this/inv5;(all ref0:(one File)|(ref0 = (Trash - Protected)));1;(all ref0:(one (File - Protected))|(ref0 in Trash));6
+269;this/inv5;(lone (Trash - Protected));1;((File - Protected) in Trash);5
+270;this/inv7;(all ref0:(one File)|(((ref0 . (File <: link)) !in Trash) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));7
+271;this/inv7;(all ref0:(one File)|((some ((File <: link) . ref0)) => (((File <: link) . ref0) !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));4
+272;this/inv5;(File = (Protected - Trash));1;((File - (Protected - Trash)) = Trash);2
+273;this/inv9;(all ref0:(one File),ref1:(one File)|(! ((ref0 . (File <: link)) = ref1)));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));6
+274;this/inv9;(all ref0:(one File),ref1:(one File)|(! ((ref0 . (File <: link)) = (ref1 . (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));8
+275;this/inv2;(all ref0:(one Trash)|(ref0 = File));1;(File = Trash);3
+276;this/inv7;(all ref0:(one File)|((some (ref0 . (File <: link))) => (ref0 in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));6
+277;this/inv7;(all ref0:(one File)|(no (((File <: link) . ref0) & Trash)));1;(no ((File . (File <: link)) & Trash));3
+278;this/inv7;(no ref0:(one File)|((ref0 in Trash) => (none != (ref0 . (File <: link)))));1;(all ref0:(one File)|((ref0 in Trash) => (no ((File <: link) . ref0))));7
+279;this/inv7;(all ref0:(one File)|(some ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (ref0 !in Trash))));1;(all ref0:(one File),ref1:(one File)|((ref0 in (ref1 . (File <: link))) => (ref0 !in Trash)));6
+280;this/inv7;(all ref0:(one File)|(some ref1:(one File)|(((ref1 -> ref0) in (File <: link)) => (ref0 !in Trash))));1;(all ref0:(one File),ref1:(one File)|((ref0 in (ref1 . (File <: link))) => (ref0 !in Trash)));8
+281;this/inv5;(no (Trash -> Protected));1;(no ((File - Protected) - Trash));6
+282;this/inv5;(one (Trash -> Protected));1;(all ref0:(one (File - Protected))|(ref0 in Trash));6
+283;this/inv9;((File <: link) !in (^ (File <: link)));1;(no ((File <: link) . (File <: link)));4
+284;this/inv5;((all ref0:(one Protected)|(ref0 !in Trash)) && (all ref1:(one File)|(ref1 in Trash)));1;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));9
+285;this/inv5;(lone (Trash -> Protected));1;(all ref0:(one (File - Protected))|(ref0 in Trash));6
+286;this/inv5;(all ref0:(one File)|((ref0 in Protected) && (ref0 in Trash)));1;(all ref0:(one File)|((ref0 in Protected) || (ref0 in Trash)));4
+287;this/inv1;(all ref0:(one File)|((ref0 !in Protected) && (ref0 in Trash)));1;(no ref0:(one File)|(ref0 in Trash));6
+288;this/inv5;(some (Trash -> Protected));1;(all ref0:(one (File - Protected))|(ref0 in Trash));6
+289;this/inv9;(all ref0:(one File)|(one (ref0 . (File <: link))));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));4
+290;this/inv5;(all ref0:(one File)|((ref0 !in Trash) && (ref0 in Protected)));1;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));8
+291;this/inv5;(all ref0:(one File)|((ref0 in Protected) implies (ref0 !in Trash) else (ref0 in Trash)));1;(all ref0:(one File)|((ref0 !in Protected) => (ref0 in Trash)));6
+292;this/inv7;(all ref0:(one File)|((lone (ref0 . (File <: link))) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));6
+293;this/inv5;(some (Protected -> Trash));1;((File - Protected) in Trash);5
+294;this/inv9;(all ref0:(one File)|(lone ((File <: link) . ref0)));1;(no ((File <: link) . (File <: link)));5
+295;this/inv5;((Protected - File) = Trash);1;((File - (Protected - Trash)) = Trash);4
+296;this/inv4;(no ref0:(one Protected)|(! (ref0 in Trash)));1;(! (some ref0:(one Protected)|(ref0 in Trash)));2
+297;this/inv5;(one (Protected -> Trash));1;((File - Protected) in Trash);5
+298;this/inv4;((no Protected) && (no Trash));1;(no (Protected & Trash));5
+299;this/inv5;(lone (Protected -> Trash));1;((File - Protected) in Trash);5
+300;this/inv5;((File & Trash) = (File - Protected));1;((File - (Protected - Trash)) = Trash);6
+301;this/inv5;(no (Protected :> Trash));1;(no ((File - Protected) - Trash));4
+302;this/inv5;(no (Protected <: Trash));1;(no ((File - Protected) - Trash));4
+303;this/inv5;(no (Trash :> Protected));1;(no ((File - Protected) - Trash));6
+304;this/inv5;(no (Trash <: Protected));1;(no ((File - Protected) - Trash));6
+305;this/inv1;(all ref0:(one File),ref1:(one Trash)|(! (ref0 in (ref1 . (File <: link)))));1;(! (some ref0:(one File)|(ref0 in Trash)));7
+306;this/inv3;((some Trash) && (File = (Protected & Trash)));1;(some Trash);6
+307;this/inv7;(all ref0:(one File)|(no ((((File <: link) . ref0) & Trash) + ((ref0 . (File <: link)) & Trash))));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) & Trash)));8
+308;this/inv3;((lone Trash) && (File = Trash));1;((some File) && (some Trash));5
+309;this/inv9;(((File <: link) . (File <: link)) in (File <: link));1;(no ((File <: link) . (File <: link)));3
+310;this/inv3;((some Trash) && (File = Protected));1;(some Trash);4
+311;this/inv3;((one Trash) && (File = Protected));1;(some Trash);6
+312;this/inv9;(((~ (File <: link)) . (File <: link)) in (File <: link));1;(no ((File <: link) . (File <: link)));4
+313;this/inv9;(((~ (File <: link)) . (File <: link)) !in (File <: link));1;(no ((File <: link) . (File <: link)));4
+314;this/inv3;(all ref0:(one File)|(some Trash));1;(some Trash);1
+315;this/inv5;(some (Protected - Trash));1;(no ((File - Protected) - Trash));4
+316;this/inv3;(all ref0:(one File)|(one Trash));1;(some Trash);3
+317;this/inv9;(((File <: link) . (~ (File <: link))) !in (File <: link));1;(no ((File <: link) . (File <: link)));4
+318;this/inv9;(((File <: link) . (~ (File <: link))) in (File <: link));1;(no ((File <: link) . (File <: link)));4
+319;this/inv3;(one ref0:(one File)|(ref0 in Trash));1;(some ref0:(one File)|(ref0 in Trash));2
+320;this/inv7;(all ref0:(one File)|(((some ((File <: link) . ref0)) || (some (ref0 . (File <: link)))) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));7
+321;this/inv3;((no Protected) && (File = (Protected + Trash)));1;((some File) && (some Trash));7
+322;this/inv5;(Protected in (File & Trash));1;((File - Protected) in Trash);4
+323;this/inv5;(all ref0:(one File)|((ref0 in Protected) => (! (ref0 in Trash))));1;(all ref0:(one File)|((! (ref0 in Protected)) => (ref0 in Trash)));4
+324;this/inv5;(one (Protected & Trash));1;((File - Protected) in Trash);5
+325;this/inv7;(((File <: link) . (~ (File <: link))) in iden);1;(no ((File <: link) . Trash));6
+326;this/inv7;(all ref0:(one File)|(((some ((File <: link) . ref0)) || (some (ref0 . (File <: link)))) => (ref0 in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));9
+327;this/inv5;((Protected - Trash) = Trash);1;((File - (Protected - Trash)) = Trash);2
+328;this/inv1;(iden in iden);1;(Trash in none);4
+329;this/inv3;(lone ref0:(one File)|(ref0 in Trash));1;(some ref0:(one File)|(ref0 in Trash));2
+330;this/inv7;(no ((((File <: link) . univ) + (univ . (File <: link))) & Trash));1;(no ((File . (File <: link)) & Trash));6
+331;this/inv5;(no (File - Protected));1;(no ((File - Protected) - Trash));2
+332;this/inv4;(File = Trash);1;(none = (Protected & Trash));4
+333;this/inv4;(Trash !in Protected);1;(all ref0:(one Protected)|(ref0 !in Trash));3
+334;this/inv7;(all ref0:(one File)|(no ((ref0 . (File <: link)) - Trash)));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) & Trash)));4
+335;this/inv4;((no Trash) && (some Protected));1;(no (Protected & Trash));5
+336;this/inv7;(all ref0:(one File)|(no (Trash - (ref0 . (File <: link)))));1;(no ((File <: link) . Trash));5
+337;this/inv9;(all ref0:(one File)|((ref0 !in (ref0 . (File <: link))) || (ref0 !in (ref0 . (* (File <: link))))));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) . (File <: link))));12
+338;this/inv4;(all ref0:(one File)|(! (ref0 in Trash)));1;(! (some ref0:(one Protected)|(ref0 in Trash)));2
+339;this/inv7;(all ref0:(one (File - Trash))|(lone (ref0 . (File <: link))));1;(no ((File <: link) . Trash));5
+340;this/inv7;(all ref0:(one File)|((no ((File <: link) . ref0)) => (ref0 !in Trash)));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));4
+341;this/inv7;(all ref0:(one File)|((no ((File <: link) . ref0)) && (ref0 !in Trash)));1;(all ref0:(one Trash)|(no ((File <: link) . ref0)));6
+342;this/inv7;(all ref0:(one File)|(((ref0 . (File <: link)) in File) => (ref0 !in Trash)));1;(all ref0:(one File),ref1:(one File)|((ref0 in (ref1 . (File <: link))) => (ref0 !in Trash)));7
+343;this/inv7;(all ref0:(one Trash)|((no ((File <: link) . ref0)) && (no (ref0 . (File <: link)))));1;(all ref0:(one Trash)|(no ((File <: link) . ref0)));7
+344;this/inv7;(all ref0:(one Trash)|((no (ref0 . (File <: link))) && (no (ref0 . (~ (File <: link))))));1;(no ((File <: link) . Trash));9
+345;this/inv9;(all ref0:(one File),ref1:(one File)|(no (((File <: link) . ref0) & ((File <: link) . ref0))));1;(no (((File <: link) . File) & (File . (File <: link))));6
+346;this/inv9;(all ref0:(one File),ref1:(one File)|(no (((File <: link) . ref0) & ((File <: link) . ref1))));1;(no (((File <: link) . File) & (File . (File <: link))));6
+347;this/inv4;(no ref0:(one File)|((ref0 in File) && (ref0 in Protected)));1;(no ref0:(one File)|((ref0 in Protected) && (ref0 in Trash)));6
+348;this/inv4;(all ref0:(one File)|((ref0 !in Trash) <=> (ref0 in Protected)));1;(no ref0:(one Trash)|(ref0 in Protected));6
+349;this/inv8;(no ((File <: link) . Trash));1;(no (File . (File <: link)));2
+350;this/inv9;(all ref0:(one File)|(no (((File <: link) . ref0) & (ref0 . (File <: link)))));1;(no (((File <: link) . File) & (File . (File <: link))));5
+351;this/inv9;(all ref0:(one File)|(lone (ref0 . (^ (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));5
+352;this/inv7;(all ref0:(one File)|((ref0 in Trash) => (no (ref0 . (File <: link)))));1;(all ref0:(one File)|((ref0 in Trash) => (no ((File <: link) . ref0))));4
+353;this/inv7;(no (File <: link));1;(no ((File <: link) :> Trash));2
+354;this/inv7;(all ref0:(one Trash)|(some (ref0 . (File <: link))));1;(no ((File <: link) . Trash));5
+355;this/inv9;(all ref0:(one File)|((ref0 . (File <: link)) in Trash));1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));5
+356;this/inv7;(some ref0:(one Trash)|(some (ref0 . (File <: link))));1;(no ((File <: link) . Trash));5
+357;this/inv9;(all ref0:(one File)|(((ref0 . (File <: link)) . (File <: link)) in Trash));1;(all ref0:(one File)|(no ((ref0 . (File <: link)) . (File <: link))));5
+358;this/inv7;(some ref0:(one Trash)|(no (ref0 . (File <: link))));1;(no ((File <: link) . Trash));3
+359;this/inv7;(all ref0:(one File)|((ref0 !in Trash) => ((ref0 . (File <: link)) !in Trash)));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));8
+360;this/inv7;(all ref0:(one File)|((ref0 !in Trash) <=> ((ref0 . (File <: link)) !in Trash)));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));8
+361;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) + (ref1 . (File <: link)))));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));7
+362;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) - (ref1 . (File <: link)))));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));7
+363;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) - (ref1 . (^ (File <: link))))));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));8
+364;this/inv7;(no ref0:(one Trash)|(some (ref0 . (File <: link))));1;(no ((File <: link) . Trash));5
+365;this/inv9;(File = (File . (^ (File <: link))));1;(none = ((File . (File <: link)) . (File <: link)));5
+366;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (^ (File <: link))))));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));6
+367;this/inv9;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (* (File <: link))))));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));6
+368;this/inv9;(File = (File . (* (File <: link))));1;(none = ((File . (File <: link)) . (File <: link)));5
+369;this/inv7;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (after ((ref0 -> ref1) in (File <: link)))));1;(all ref0:(one File),ref1:(one File)|(((ref0 -> ref1) in (File <: link)) => (! (ref1 in Trash))));10
+370;this/inv9;((File . (File <: link)) = (File . (^ (File <: link))));1;(none = ((File . (File <: link)) . (File <: link)));5
+371;this/inv7;(all ref0:(one File)|(some ref1:(one (ref0 . (File <: link)))|(ref1 !in Trash)));1;(all ref0:(one File),ref1:(one (ref0 . (File <: link)))|(ref1 !in Trash));4
+372;this/inv9;((File . (File <: link)) = (File . (* (File <: link))));1;(none = ((File . (File <: link)) . (File <: link)));5
+373;this/inv9;(((File . (File <: link)) - (File . iden)) = (File . (^ (File <: link))));1;(none = ((File . (File <: link)) . (File <: link)));9
+374;this/inv9;(all ref0:(one File)|((ref0 . (* (File <: link))) = (ref0 . (^ (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));8
+375;this/inv7;(all ref0:(one Trash)|(no (File <: link)));1;(no ((File <: link) :> Trash));3
+376;this/inv7;(all ref0:(one Trash)|(ref0 !in (ref0 . (File <: link))));1;(all ref0:(one (File . (File <: link)))|(ref0 !in Trash));6
+377;this/inv7;(all ref0:(one File)|((no (ref0 . (File <: link))) && (ref0 in Trash)));1;(no ref0:(one (File . (File <: link)))|(ref0 in Trash));7
+378;this/inv7;((File in Trash) => (no (File . (File <: link))));1;(all ref0:(one File)|((ref0 in Trash) => (no ((File <: link) . ref0))));5
+379;this/inv7;(some ref0:(one File)|(some (ref0 . (File <: link))));1;(no ((File <: link) . Trash));5
+380;this/inv9;(all ref0:(one File)|(none = (ref0 . (^ (File <: link)))));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));3
+381;this/inv9;(all ref0:(one (File . (File <: link))),ref1:(one (File . (File <: link)))|(none = (ref0 & ref1)));1;(all ref0:(one (File . (File <: link)))|(none = (ref0 . (File <: link))));7
+382;this/inv7;((no ((File . (File <: link)) - Trash)) && (no (Trash . (File <: link))));1;(no ((File . (File <: link)) & Trash));7
+383;this/inv7;(all ref0:(one File),ref1:(one Trash)|(no (ref1 . (File <: link))));1;(no ((File <: link) . Trash));4
+384;this/inv7;((all ref0:(one File)|(no (ref0 . (File <: link)))) && (File = Trash));1;(all ref0:(one File)|((ref0 . (File <: link)) in (File - Trash)));7
+385;this/inv7;((some ((File <: link) . File)) => (((File <: link) . File) !in Trash));1;(all ref0:(one File)|((some ((File <: link) . ref0)) => (ref0 !in Trash)));7
+386;this/inv9;(all ref0:(one File),ref1:(one File)|((! disj[ref0,ref1]) || disj[(ref0 . (File <: link)),(ref1 . (File <: link))]));1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));13
+387;this/inv9;(all ref0:(one File),ref1:(one File)|disj[(ref0 . (File <: link)),(ref1 . (File <: link))]);1;(all ref0:(one File),ref1:(one File)|(no ((ref0 . (File <: link)) & (ref1 . (~ (File <: link))))));8
+388;this/inv9;(all ref0:(one File)|disj[ref0,(ref0 . (File <: link))]);1;(all ref0:(one (File . (File <: link)))|(no (ref0 . (File <: link))));5

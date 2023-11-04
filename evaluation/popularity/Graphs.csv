@@ -1,0 +1,647 @@
+;predicate;formula;frequency;closest_solution;solution_distance
+0;this/undirected;;144;(graph/undirected[(Node <: adj)]);2
+1;this/oriented;;109;(no ((Node <: adj) & (~ (Node <: adj))));6
+2;this/weaklyConnected;;98;(graph/weaklyConnected[(Node <: adj)]);2
+3;this/acyclic;;95;(graph/dag[(Node <: adj)]);2
+4;this/complete;;93;((Node <: adj) = (Node -> Node));6
+5;this/noLoops;;90;(graph/noSelfLoops[(Node <: adj)]);2
+6;this/stonglyConnected;;75;(graph/stronglyConnected[(Node <: adj)]);2
+7;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));18;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+8;this/stonglyConnected;(all ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));17;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));4
+9;this/noLoops;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));15;(all ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));3
+10;this/undirected;(all ref0:(one Node)|(ref0 in ((ref0 . (Node <: adj)) . (~ (Node <: adj)))));14;((Node <: adj) in (~ (Node <: adj)));5
+11;this/stonglyConnected;(Node in (Node . (^ (Node <: adj))));12;((Node -> Node) in (* (Node <: adj)));4
+12;this/noLoops;(no ((^ (Node <: adj)) & iden));12;(no ((Node <: adj) & iden));1
+13;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));12;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));4
+14;this/undirected;(((Node <: adj) . (~ (Node <: adj))) in iden);12;((Node <: adj) in (~ (Node <: adj)));2
+15;this/complete;(all ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));11;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));3
+16;this/stonglyConnected;(all ref0:(one Node)|((ref0 . (^ (Node <: adj))) = Node));10;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));4
+17;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));10;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+18;this/weaklyConnected;(all ref0:(one Node)|(Node in (((* (Node <: adj)) . ref0) + (ref0 . (* (Node <: adj))))));10;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));8
+19;this/complete;(all ref0:(one Node)|((ref0 . (Node <: adj)) = (Node - ref0)));9;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));4
+20;this/complete;(all ref0:(one Node)|((Node - ref0) in (ref0 . (Node <: adj))));9;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));4
+21;this/noLoops;(all ref0:(one Node)|(ref0 != (ref0 . (Node <: adj))));8;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));4
+22;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));8;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+23;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (^ (Node <: adj))))));8;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));6
+24;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (* (~ (Node <: adj)))))));8;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));7
+25;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (^ (Node <: adj))))));8;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));16
+26;this/complete;(all ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));7;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));5
+27;this/undirected;(no (Node <: adj));7;(no ((Node <: adj) - (~ (Node <: adj))));3
+28;this/oriented;((Node <: adj) != (~ (Node <: adj)));7;(no ((Node <: adj) & (~ (Node <: adj))));3
+29;this/weaklyConnected;(all ref0:(one Node)|((ref0 + ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))) = Node));7;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));9
+30;this/acyclic;(all ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));7;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));3
+31;this/weaklyConnected;(all ref0:(one Node)|(((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj))))) = Node));7;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));7
+32;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj)))) || (ref1 in (ref0 . (^ (Node <: adj))))));7;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));20
+33;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (Node <: adj)) . ref0) + (ref0 . (^ (Node <: adj))))));6;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));8
+34;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) <=> (ref0 = (ref1 . (Node <: adj)))));6;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+35;this/complete;(all ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));6;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));3
+36;this/complete;(all ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));6;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));4
+37;this/noLoops;(all ref0:(one Node)|(ref0 !in (ref0 . (* (Node <: adj)))));6;(all ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));3
+38;this/oriented;(((Node <: adj) & (~ (Node <: adj))) in iden);6;(no ((Node <: adj) & (~ (Node <: adj))));3
+39;this/weaklyConnected;(Node in (Node . (^ (Node <: adj))));6;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));7
+40;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (~ (* (Node <: adj)))))));6;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+41;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 in (ref1 . (Node <: adj))) || (ref0 in (ref1 . (~ (Node <: adj))))) && ((ref1 in (ref0 . (Node <: adj))) || (ref1 in (ref0 . (~ (Node <: adj)))))));6;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));26
+42;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ (Node <: adj)))));5;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));5
+43;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 . (Node <: adj)) = ref1) <=> (ref0 = (ref1 . (Node <: adj))))));5;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));12
+44;this/complete;(all ref0:(one Node)|(ref0 in (ref0 . (* (Node <: adj)))));5;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));5
+45;this/undirected;(all ref0:(one Node)|(ref0 = ((ref0 . (Node <: adj)) . (Node <: adj))));5;((Node <: adj) = (~ (Node <: adj)));6
+46;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) || (ref1 in (ref0 . (^ (Node <: adj))))));5;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));16
+47;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (^ (Node <: adj)))));5;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* (Node <: adj)))));6
+48;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + ((~ (* (Node <: adj))) . ref0))));5;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));10
+49;this/weaklyConnected;(all ref0:(one Node)|(Node in (((* (~ (Node <: adj))) . ref0) + (ref0 . (* (Node <: adj))))));5;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));9
+50;this/oriented;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref1) !in (Node <: adj))));5;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj))));6
+51;this/acyclic;(iden !in (^ (Node <: adj)));5;(iden = (iden - (^ (Node <: adj))));4
+52;this/oriented;(no (Node <: adj));4;(no ((Node <: adj) & (~ (Node <: adj))));3
+53;this/complete;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (^ (Node <: adj)))));4;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));5
+54;this/noLoops;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));4;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));3
+55;this/undirected;(((~ (Node <: adj)) . (Node <: adj)) in iden);4;((Node <: adj) in (~ (Node <: adj)));4
+56;this/oriented;(no (((Node <: adj) . (~ (Node <: adj))) & iden));4;(no (((Node <: adj) . (Node <: adj)) & iden));1
+57;this/weaklyConnected;(all ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));4;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+58;this/complete;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ (Node <: adj)))));4;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));5
+59;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . ((Node <: adj) + (~ (Node <: adj))))));4;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));3
+60;this/weaklyConnected;(all ref0:(one Node)|(Node in (((Node <: adj) . ref0) + (ref0 . (Node <: adj)))));4;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));8
+61;this/weaklyConnected;((^ (Node <: adj)) = (Node -> Node));4;(graph/weaklyConnected[(Node <: adj)]);7
+62;this/weaklyConnected;(all ref0:(one Node)|((ref0 . (^ (Node <: adj))) = Node));4;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));7
+63;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* (Node <: adj)))));4;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+64;this/stonglyConnected;(all ref0:(one Node)|((some (Node <: adj)) && (Node in (ref0 . (^ (Node <: adj))))));4;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));7
+65;this/weaklyConnected;(all ref0:(one Node)|((ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))) = Node));4;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));4
+66;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));4;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));6
+67;this/oriented;(all ref0:(one Node)|((ref0 . (Node <: adj)) !in ((Node <: adj) . ref0)));4;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));6
+68;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));4;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));5
+69;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (Node <: adj)) . ref0) + (ref0 . (* (Node <: adj))))));4;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));8
+70;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));4;(graph/weaklyConnected[(Node <: adj)]);8
+71;this/oriented;(no ((Node <: adj) + (~ (Node <: adj))));4;(no ((Node <: adj) & (~ (Node <: adj))));2
+72;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj)))));4;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+73;this/complete;(all ref0:(one Node)|((ref0 . (^ (Node <: adj))) = Node));4;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));3
+74;this/oriented;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (ref0 = ref1)));4;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));9
+75;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj))))));4;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+76;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj))));4;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));12
+77;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj)))) || (ref1 in (ref0 . (^ (Node <: adj))))));4;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));12
+78;this/oriented;(! ((Node <: adj) = (~ (Node <: adj))));4;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));3
+79;this/oriented;((Node <: adj) !in (~ (Node <: adj)));4;(no ((Node <: adj) & (~ (Node <: adj))));3
+80;this/stonglyConnected;(all ref0:(one Node)|(Node in ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));4;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));6
+81;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (^ (Node <: adj)))));4;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));9
+82;this/undirected;(no ((Node <: adj) & (~ (Node <: adj))));4;(no ((Node <: adj) - (~ (Node <: adj))));2
+83;this/noLoops;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj)))));4;(all ref0:(one Node)|(! ((ref0 -> ref0) in (Node <: adj))));11
+84;this/undirected;(all ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));4;(all ref0:(one Node)|(((Node <: adj) . ref0) in (ref0 . (Node <: adj))));5
+85;this/weaklyConnected;(Node in (((Node <: adj) . Node) + (Node . (Node <: adj))));4;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));8
+86;this/oriented;(! (all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj)))));3;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(! (ref0 in (ref1 . (Node <: adj)))));4
+87;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj))))));3;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));10
+88;this/complete;(all ref0:(one Node)|(ref0 in (Node . (Node <: adj))));3;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));5
+89;this/noLoops;(all ref0:(one Node)|(no (ref0 -> ref0)));3;(all ref0:(one Node)|((ref0 -> ref0) !in (Node <: adj)));5
+90;this/undirected;(all ref0:(one Node)|(ref0 in (ref0 . (* (Node <: adj)))));3;(all ref0:(one Node)|(((Node <: adj) . ref0) in (ref0 . (Node <: adj))));5
+91;this/oriented;(all ref0:(one Node)|(((Node <: adj) . ref0) != (ref0 . (Node <: adj))));3;(all ref0:(one Node)|(no (((Node <: adj) . ref0) & (ref0 . (Node <: adj)))));5
+92;this/weaklyConnected;((^ ((Node <: adj) + (~ (Node <: adj)))) = (Node -> Node));3;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));7
+93;this/weaklyConnected;(all ref0:(one Node)|(((((^ (Node <: adj)) . ref0) :> Node) + ((ref0 . (^ (Node <: adj))) :> Node)) = Node));3;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));12
+94;this/undirected;((Node <: adj) = (Node <: adj));3;((Node <: adj) = (~ (Node <: adj)));1
+95;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) || ((ref1 -> ref0) in (Node <: adj))));3;(graph/weaklyConnected[(Node <: adj)]);14
+96;this/undirected;(all ref0:(one Node)|(some ((Node <: adj) . ref0)));3;(graph/undirected[(Node <: adj)]);6
+97;this/complete;(Node in (Node . (^ (Node <: adj))));3;((Node -> Node) in (Node <: adj));3
+98;this/complete;(Node = (Node . (^ (Node <: adj))));3;((Node <: adj) = (Node -> Node));5
+99;this/complete;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (^ (Node <: adj)))));3;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (Node <: adj))));5
+100;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (~ (Node <: adj))) . ref0) + (ref0 . (^ (Node <: adj))))));3;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+101;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));3;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));6
+102;this/weaklyConnected;(all ref0:(one Node)|((ref0 . ((Node <: adj) + (~ (Node <: adj)))) = Node));3;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));3
+103;this/undirected;(all ref0:(one Node)|(no (ref0 . (Node <: adj))));3;(no ((Node <: adj) - (~ (Node <: adj))));6
+104;this/noLoops;(all ref0:(one Node)|(no (ref0 . (^ (Node <: adj)))));3;(no ((Node <: adj) & iden));6
+105;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + (~ (Node <: adj))))));3;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));4
+106;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) in ref1) <=> ((ref1 . (Node <: adj)) in ref0)));3;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+107;this/acyclic;(no (Node . (* (Node <: adj))));3;(graph/dag[(Node <: adj)]);6
+108;this/oriented;(no (~ (Node <: adj)));3;(no ((Node <: adj) & (~ (Node <: adj))));2
+109;this/weaklyConnected;((* ((Node <: adj) + (~ (Node <: adj)))) = (Node -> Node));3;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));5
+110;this/stonglyConnected;((* (Node <: adj)) = (Node -> Node));3;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));5
+111;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (^ (Node <: adj)))))));3;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));21
+112;this/weaklyConnected;(Node in (Node . (* (Node <: adj))));3;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));5
+113;this/weaklyConnected;(((^ (Node <: adj)) + (^ (~ (Node <: adj)))) = (Node -> Node));3;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));8
+114;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some (((^ (Node <: adj)) . ref1) & ref0)));3;(graph/weaklyConnected[(Node <: adj)]);10
+115;this/complete;(all ref0:(one Node)|(some ((Node <: adj) . ref0)));3;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));7
+116;this/weaklyConnected;(some ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));3;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+117;this/oriented;(((Node <: adj) . (~ (Node <: adj))) in iden);2;(no (((Node <: adj) . (Node <: adj)) & iden));4
+118;this/undirected;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (~ (Node <: adj)))));2;((Node <: adj) in (~ (Node <: adj)));7
+119;this/acyclic;(all ref0:(one Node)|(no (ref0 . (* (Node <: adj)))));2;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));6
+120;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) && (ref1 in (ref0 . (* (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));6
+121;this/acyclic;(all ref0:(one Node)|(no (ref0 & (ref0 . (* (Node <: adj))))));2;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));4
+122;this/oriented;((! (all ref2:(one Node),ref3:(one (ref2 . (Node <: adj)))|(ref2 in (ref3 . (Node <: adj))))) && (no ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj)))));2;(no ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));13
+123;this/acyclic;(all ref0:(one Node)|(no (ref0 . (^ (Node <: adj)))));2;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));4
+124;this/complete;((Node <: adj) = ((Node -> Node) - iden));2;((Node <: adj) = (Node -> Node));2
+125;this/noLoops;(no ref0:(one Node)|(ref0 in (ref0 . (* (Node <: adj)))));2;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));3
+126;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) || (ref1 in (ref0 . (* (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+127;this/oriented;(no ((Node <: adj) - (~ (Node <: adj))));2;(no ((Node <: adj) & (~ (Node <: adj))));2
+128;this/oriented;(no (((Node <: adj) - (~ (Node <: adj))) - iden));2;(no ((Node <: adj) & (~ (Node <: adj))));4
+129;this/weaklyConnected;(all ref0:(one Node)|(ref0 in (ref0 . (* (Node <: adj)))));2;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+130;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj)))));2;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));12
+131;this/undirected;(all ref0:(one Node)|(ref0 in (ref0 . (~ (Node <: adj)))));2;((Node <: adj) in (~ (Node <: adj)));5
+132;this/stonglyConnected;((Node <: adj) = (Node -> Node));2;((Node -> Node) in (* (Node <: adj)));5
+133;this/undirected;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in ref1));2;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));6
+134;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 + ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj))))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+135;this/stonglyConnected;(Node in ((^ (Node <: adj)) . Node));2;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));5
+136;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* (Node <: adj)))));2;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+137;this/weaklyConnected;((^ (Node <: adj)) = ((Node -> Node) - iden));2;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));9
+138;this/weaklyConnected;(all ref0:(one Node)|(ref0 in (Node . (Node <: adj))));2;(graph/weaklyConnected[(Node <: adj)]);7
+139;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+140;this/weaklyConnected;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));2;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));5
+141;this/acyclic;(all ref0:(one Node)|(ref0 !in (ref0 . (~ (Node <: adj)))));2;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));4
+142;this/weaklyConnected;((Node -> Node) in (* ((Node <: adj) & (~ (Node <: adj)))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));2
+143;this/weaklyConnected;(all ref0:(one Node)|((ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))) = (Node - ref0)));2;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));6
+144;this/stonglyConnected;(all ref0:(one Node)|(((ref0 . (^ (Node <: adj))) :> Node) = Node));2;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));6
+145;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (ref0 -> (ref0 . (* (Node <: adj)))))));2;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));9
+146;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (ref0 -> ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));11
+147;this/stonglyConnected;(all ref0:(one Node)|((some (ref0 . (Node <: adj))) && (Node in (ref0 . (^ (Node <: adj))))));2;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));9
+148;this/oriented;(all ref0:(one Node)|(no ((Node <: adj) . ref0)));2;(no (((Node <: adj) . (Node <: adj)) & iden));5
+149;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));10
+150;this/noLoops;(all ref0:(one Node)|((ref0 -> ref0) in (Node <: adj)));2;(no ref0:(one Node)|((ref0 -> ref0) in (Node <: adj)));2
+151;this/undirected;(no ((Node <: adj) & (Node <: adj)));2;(no ((Node <: adj) - (~ (Node <: adj))));3
+152;this/noLoops;(((Node <: adj) . (~ (Node <: adj))) !in iden);2;(no ((Node <: adj) & iden));6
+153;this/oriented;(all ref0:(one Node)|(! ((ref0 . (Node <: adj)) in ((Node <: adj) . ref0))));2;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(! (ref0 in (ref1 . (Node <: adj)))));7
+154;this/weaklyConnected;(Node = (Node . ((Node <: adj) + (~ (Node <: adj)))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));5
+155;this/acyclic;(all ref0:(one Node)|(ref0 !in (ref0 . (* (Node <: adj)))));2;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));4
+156;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ((ref0 . (* (Node <: adj))) & (ref1 . (* (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));13
+157;this/acyclic;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));2;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));5
+158;this/oriented;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));9
+159;this/complete;(all ref0:(one Node)|((ref0 . (^ (Node <: adj))) = (Node - ref0)));2;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));5
+160;this/weaklyConnected;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj)))) && (all ref2:(one Node)|(Node in (ref2 . (* (Node <: adj))))));2;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));21
+161;this/acyclic;((* (Node <: adj)) !in iden);2;(graph/dag[(Node <: adj)]);5
+162;this/complete;(all ref0:(one Node)|(ref0 in ((Node <: adj) . ref0)));2;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));5
+163;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) || (ref1 in (ref0 . (^ (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));8
+164;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref2) in (Node <: adj))) => (! (ref0 = ref2))));2;(graph/dag[(Node <: adj)]);20
+165;this/acyclic;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));2;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));3
+166;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref2) in (Node <: adj))) => (ref0 = ref2)));2;(graph/dag[(Node <: adj)]);19
+167;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + (^ (~ (Node <: adj)))))));2;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+168;this/acyclic;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (! (ref0 = (ref0 & ref1)))));2;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));20
+169;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+170;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj))));2;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj))));6
+171;this/weaklyConnected;(Node in ((Node . (^ (Node <: adj))) + (Node . (^ (~ (Node <: adj))))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));9
+172;this/weaklyConnected;(Node = ((Node . (^ (Node <: adj))) + (Node . (^ (~ (Node <: adj))))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+173;this/acyclic;(all ref0:(one Node)|(ref0 != (ref0 . (Node <: adj))));2;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));5
+174;this/acyclic;(no ((Node <: adj) & iden));2;(no ((^ (Node <: adj)) & iden));1
+175;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((Node <: adj) . ref0) + (ref0 . (Node <: adj))) + ref0)));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+176;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (Node <: adj)) + ((~ (Node <: adj)) . ref0))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));8
+177;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 + ((ref0 . (Node <: adj)) + ((~ (Node <: adj)) . ref0)))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+178;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) in ref1) => ((ref1 . (Node <: adj)) in ref0)));2;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));8
+179;this/acyclic;(no (Node . (^ (Node <: adj))));2;(no ((^ (Node <: adj)) & iden));4
+180;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in ((Node <: adj) . ref1))));2;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));11
+181;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 . (Node <: adj)) in ref1) => ((ref1 . (Node <: adj)) in ref0))));2;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));8
+182;this/undirected;(some (((Node <: adj) . (Node <: adj)) & iden));2;((Node <: adj) in (~ (Node <: adj)));6
+183;this/undirected;(iden in ((Node <: adj) . (Node <: adj)));2;((Node <: adj) in (~ (Node <: adj)));3
+184;this/oriented;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) <=> (ref1 !in (ref0 . (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));11
+185;this/undirected;(all ref0:(one Node)|(ref0 in ((ref0 . (Node <: adj)) . (Node <: adj))));2;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));6
+186;this/undirected;(iden in ((Node <: adj) . (~ (Node <: adj))));2;((Node <: adj) in (~ (Node <: adj)));2
+187;this/undirected;((Node <: adj) in ((Node <: adj) . (Node <: adj)));2;((Node <: adj) in (~ (Node <: adj)));3
+188;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (Node <: adj)) . ref0) + (ref0 + (ref0 . (^ (Node <: adj)))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+189;this/undirected;(Node in Node);2;(graph/undirected[(Node <: adj)]);4
+190;this/oriented;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) <=> ((ref1 -> ref0) !in (Node <: adj))));2;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj))));6
+191;this/undirected;(lone Node);2;(graph/undirected[(Node <: adj)]);3
+192;this/undirected;(all ref0:(one Node)|(((ref0 !in (ref0 . (Node <: adj))) && (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))) || (no (ref0 . (Node <: adj)))));2;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));17
+193;this/complete;((Node . (^ (Node <: adj))) in Node);2;((Node -> Node) in (Node <: adj));5
+194;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref1 !in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (^ (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));9
+195;this/weaklyConnected;(all ref0:(one Node)|((some (ref0 . (Node <: adj))) || (some (ref0 . (~ (Node <: adj))))));2;(graph/weaklyConnected[(Node <: adj)]);12
+196;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (^ (Node <: adj)))));2;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));9
+197;this/undirected;(((Node <: adj) . (~ (Node <: adj))) = iden);2;((Node <: adj) = (~ (Node <: adj)));2
+198;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) <=> (ref1 in (ref0 . (Node <: adj))))));6
+199;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref1 = (ref1 . (Node <: adj)))));2;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+200;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (((* (Node <: adj)) . ref0) + (ref0 . (* (Node <: adj))))));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));11
+201;this/complete;(all ref0:(one Node)|(some (ref0 . (Node <: adj))));2;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));5
+202;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) && (ref1 in (ref0 . (* (Node <: adj))))));2;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+203;this/acyclic;(! (iden in (^ (Node <: adj))));2;(all ref0:(one Node)|(! (ref0 in (ref0 . (^ (Node <: adj))))));5
+204;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((^ (Node <: adj)) . ref0) + (ref0 . (^ (Node <: adj)))) - ref0)));2;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+205;this/acyclic;(iden !in ((* (Node <: adj)) - (Node <: adj)));2;(iden = (iden - (^ (Node <: adj))));6
+206;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* (Node <: adj)))));2;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+207;this/undirected;(some ((Node <: adj) & (~ (Node <: adj))));2;((Node <: adj) in (~ (Node <: adj)));3
+208;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((^ (Node <: adj)) . ref0) in ((^ (Node <: adj)) . ref1)));2;(graph/weaklyConnected[(Node <: adj)]);12
+209;this/undirected;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) => (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))));2;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));9
+210;this/weaklyConnected;((Node . (^ (Node <: adj))) in Node);2;(graph/weaklyConnected[(Node <: adj)]);7
+211;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in ((^ (Node <: adj)) . ref1)) && (ref1 in ((^ (Node <: adj)) . ref0))));2;(graph/weaklyConnected[(Node <: adj)]);16
+212;this/weaklyConnected;(all ref0:(one Node)|((ref0 -> (ref0 . (^ (Node <: adj)))) in (Node -> Node)));2;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));11
+213;this/weaklyConnected;((Node . (* (Node <: adj))) in Node);2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));7
+214;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (* (Node <: adj)))) => (ref1 in (ref0 . (* (Node <: adj)))))));2;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));13
+215;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) in ref1) <=> (ref0 in (ref1 . (Node <: adj)))));2;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));8
+216;this/weaklyConnected;(((* (Node <: adj)) + (* (~ (Node <: adj)))) = (Node -> Node));2;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));8
+217;this/oriented;(some Node);2;(no ((Node <: adj) & (~ (Node <: adj))));7
+218;this/weaklyConnected;((some (Node <: adj)) && (Node in (((Node <: adj) . Node) + (Node . (Node <: adj)))));2;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+219;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref1 -> ref0) in (Node <: adj)));1;((Node <: adj) in (~ (Node <: adj)));7
+220;this/undirected;((some (Node . (Node <: adj))) => (some ((Node <: adj) . Node)));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));9
+221;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in ((ref1 . (Node <: adj)) . (~ (Node <: adj))))));1;((Node <: adj) in (~ (Node <: adj)));11
+222;this/oriented;(all ref0:(one Node)|(ref0 in ((ref0 . (Node <: adj)) . (~ (Node <: adj)))));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));5
+223;this/noLoops;(no (iden & (Node <: (^ (Node <: adj)))));1;(no ((Node <: adj) & iden));5
+224;this/oriented;((Node <: adj) = (~ (Node <: adj)));1;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));2
+225;this/noLoops;(no ((* (Node <: adj)) & iden));1;(no ((Node <: adj) & iden));1
+226;this/undirected;(all ref0:(one Node)|(ref0 = (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(((Node <: adj) . ref0) = (ref0 . (Node <: adj))));4
+227;this/undirected;((all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj)))) && (no (Node <: adj)));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));7
+228;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));10
+229;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref1 in (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (Node <: adj))));10
+230;this/undirected;(all ref0:(one Node)|((none != (ref0 . (Node <: adj))) && (ref0 = ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));12
+231;this/noLoops;(all ref0:(one Node)|((ref0 . (integer/next[])) !in ref0));1;(all ref0:(one Node)|((ref0 -> ref0) !in (Node <: adj)));6
+232;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (* (Node <: adj)))) && (ref1 in (ref0 . (* (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));11
+233;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref1 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (Node <: adj))));10
+234;this/stonglyConnected;(all ref0:(one Node)|(ref0 in (ref0 . (~ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));6
+235;this/stonglyConnected;(all ref0:(one Node)|(Node in (ref0 . (~ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));4
+236;this/noLoops;(all ref0:(one Node)|(no (((^ (Node <: adj)) . ref0) & (ref0 . (^ (Node <: adj))))));1;(no ((Node <: adj) & iden));9
+237;this/undirected;(all ref0:(one Node)|(some (ref0 & ((ref0 . (Node <: adj)) . (~ (Node <: adj))))));1;((Node <: adj) in (~ (Node <: adj)));8
+238;this/undirected;(all ref0:(one Node)|(lone (ref0 & ((ref0 . (Node <: adj)) . (~ (Node <: adj))))));1;((Node <: adj) in (~ (Node <: adj)));8
+239;this/undirected;(all ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));7
+240;this/acyclic;(all ref0:(one Node)|(no ((ref0 . (Node <: adj)) . (* (Node <: adj)))));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (* (Node <: adj)))));5
+241;this/undirected;(all ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(((Node <: adj) . ref0) = (ref0 . (Node <: adj))));6
+242;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));6
+243;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (((Node <: adj) . ref0) + (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));11
+244;this/undirected;(all ref0:(one Node)|(ref0 != (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(((Node <: adj) . ref0) = (ref0 . (Node <: adj))));6
+245;this/oriented;(relation/antisymmetric[(Node <: adj)]);1;(no ((Node <: adj) & (~ (Node <: adj))));6
+246;this/weaklyConnected;(all ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);7
+247;this/oriented;(relation/irreflexive[(Node <: adj)]);1;(no ((Node <: adj) & (~ (Node <: adj))));6
+248;this/undirected;(no ((Node <: adj) & iden));1;(no ((Node <: adj) - (~ (Node <: adj))));5
+249;this/oriented;(no ((Node <: adj) - ((~ (Node <: adj)) - iden)));1;(no ((Node <: adj) & (~ (Node <: adj))));4
+250;this/complete;((Node <: adj) in (Node -> Node));1;((Node <: adj) = (Node -> Node));2
+251;this/undirected;(no ((^ (Node <: adj)) & iden));1;(no ((Node <: adj) - (~ (Node <: adj))));6
+252;this/undirected;(all ref0:(one Node)|(ref0 in (Node . (Node <: adj))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));5
+253;this/acyclic;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(no (ref2 . (Node <: adj)))));1;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));10
+254;this/oriented;(((Node <: adj) & (~ (Node <: adj))) = iden);1;(no ((Node <: adj) & (~ (Node <: adj))));3
+255;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+256;this/undirected;(all ref0:(one Node)|((ref0 in ((Node <: adj) . Node)) || (ref0 in (Node . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));11
+257;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (! (ref1 in (ref0 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));9
+258;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (((Node <: adj) . ref1) + (ref1 . (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));11
+259;this/undirected;(all ref0:(one Node)|((ref0 in (Node . (Node <: adj))) || (ref0 in (Node . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));12
+260;this/stonglyConnected;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));3
+261;this/noLoops;(all ref0:(one Node),ref1:(one Node)|((! ((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (Node <: adj))))) || (! disj[ref0,ref1])));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref0 != ref1)));17
+262;this/noLoops;(all ref0:(one Node),ref1:(one Node)|(! ((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (Node <: adj))))));1;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));13
+263;this/oriented;(all ref0:(one Node)|(some ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 !in (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 !in (ref1 . (Node <: adj)))));4
+264;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in ((ref0 . (Node <: adj)) . (* (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));9
+265;this/acyclic;(no (iden & (~ (Node <: adj))));1;(no ((^ (Node <: adj)) & iden));4
+266;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (ref0 . ((Node <: adj) + (~ (Node <: adj))))));1;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));3
+267;this/oriented;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(! (ref0 in ref1)));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(! (ref0 in (ref1 . (Node <: adj)))));6
+268;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in ((ref1 . (Node <: adj)) . (* (Node <: adj)))) && (ref1 in ((ref0 . (Node <: adj)) . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));18
+269;this/oriented;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in ((Node <: adj) . ref0))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));6
+270;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . ((Node <: adj) + (~ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+271;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((Node <: adj) . ref0) + (ref0 . (Node <: adj))) . (Node <: adj))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));10
+272;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . ((Node <: adj) + (~ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));10
+273;this/stonglyConnected;(all ref0:(one Node)|(((ref0 -> ref0) in (Node <: adj)) && (Node in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));10
+274;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));8
+275;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((Node <: adj) . ref0) + (ref0 . (Node <: adj))) . (^ (Node <: adj)))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));11
+276;this/stonglyConnected;(all ref0:(one Node)|((iden in (Node <: adj)) && (Node in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));8
+277;this/weaklyConnected;(((Node -> Node) - iden) in (^ (Node <: adj)));1;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));3
+278;this/oriented;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));1;(no ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));4
+279;this/acyclic;(all ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));2
+280;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((Node <: adj) . ref0) + (ref0 . (Node <: adj))) . (* (Node <: adj)))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));9
+281;this/stonglyConnected;(Node in ((* (Node <: adj)) . Node));1;(all ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));3
+282;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((Node <: adj) . ref0) + (ref0 + (ref0 . (Node <: adj)))) . (* (Node <: adj)))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+283;this/stonglyConnected;((^ ((Node <: adj) + (~ (Node <: adj)))) = (Node -> Node));1;((Node -> Node) in (* (Node <: adj)));9
+284;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (Node <: adj)) . (* (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+285;this/weaklyConnected;(all ref0:(one Node)|(((ref0 . (^ (Node <: adj))) & (ref0 . (^ (~ (Node <: adj))))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));9
+286;this/complete;(all ref0:(one Node),ref1:(one Node)|(((ref0 in (ref1 . (Node <: adj))) || (ref0 in (ref1 . (^ (Node <: adj))))) && ((ref1 in (ref0 . (Node <: adj))) || (ref1 in (ref0 . (^ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));18
+287;this/acyclic;(some ref0:(one Node)|(no (((Node <: adj) . ref0) & (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));5
+288;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((^ (Node <: adj)) . ref0) + (ref0 . (^ (Node <: adj)))) + ref0)));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+289;this/weaklyConnected;(all ref0:(one Node)|(((^ (Node <: adj)) . ref0) = Node));1;(graph/weaklyConnected[(Node <: adj)]);8
+290;this/noLoops;(Node !in (Node . (Node <: adj)));1;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));5
+291;this/acyclic;(some ref0:(one Node),ref1:(one Node)|((ref0 -> ref0) in (Node <: adj)));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));6
+292;this/noLoops;(all ref0:(one Node)|(! (ref0 in (ref0 . (^ (Node <: adj))))));1;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));4
+293;this/weaklyConnected;(all ref0:(one Node)|(((* (Node <: adj)) . ref0) = Node));1;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));7
+294;this/acyclic;(some ref0:(one Node)|((ref0 -> ref0) in (Node <: adj)));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));5
+295;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ref2:(one Node)|(ref0 in ((ref2 . (^ (Node <: adj))) + ((~ (~ (Node <: adj))) . ref1)))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));13
+296;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));5
+297;this/weaklyConnected;(all ref0:(one Node)|((((^ (Node <: adj)) . ref0) + ((^ (~ (Node <: adj))) . ref0)) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));9
+298;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 & (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+299;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ref2:(one Node)|(ref0 in ((ref2 . (* (Node <: adj))) + ((~ (~ (Node <: adj))) . ref1)))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));13
+300;this/oriented;(((~ (Node <: adj)) . (Node <: adj)) in iden);1;(no (((Node <: adj) . (Node <: adj)) & iden));4
+301;this/undirected;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (ref0 = ref1)));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj))));8
+302;this/weaklyConnected;(all ref0:(one Node)|(some ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));10
+303;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 & (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+304;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) <=> ((ref1 -> ref0) in (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);14
+305;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 -> ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj))))))));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));12
+306;this/weaklyConnected;((all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))) && (all ref2:(one Node)|(Node in (ref2 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));22
+307;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 . (ref0 -> ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))))));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));14
+308;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (Node <: adj)) . ref0) & (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));10
+309;this/weaklyConnected;(all ref0:(one Node)|((Node in (ref0 . (Node <: adj))) || (Node in (ref0 . (^ (Node <: adj))))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));12
+310;this/undirected;(no ((Node <: adj) . (Node <: adj)));1;(no ((Node <: adj) - (~ (Node <: adj))));3
+311;this/undirected;(all ref0:(one Node)|(no ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+312;this/undirected;(((Node <: adj) . Node) = (Node . (Node <: adj)));1;((Node <: adj) = (~ (Node <: adj)));5
+313;this/acyclic;(Node !in (Node . (Node <: adj)));1;(graph/dag[(Node <: adj)]);6
+314;this/oriented;(all ref0:(one Node)|(no (((Node <: adj) . Node) & (Node . (Node <: adj)))));1;(no ((Node <: adj) & (~ (Node <: adj))));6
+315;this/undirected;(some ((Node <: adj) . (Node <: adj)));1;((Node <: adj) in (~ (Node <: adj)));4
+316;this/oriented;(some ref0:(one Node)|(no ((Node <: adj) . ref0)));1;(no (((Node <: adj) . (Node <: adj)) & iden));5
+317;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (^ (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);9
+318;this/acyclic;(Node !in (Node . (^ (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));5
+319;this/stonglyConnected;(all ref0:(one Node)|(Node in ((^ (Node <: adj)) . ref0)));1;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));6
+320;this/weaklyConnected;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) && (some (Node <: adj)));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+321;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (Node <: adj)) . ref0) & (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+322;this/oriented;(all ref0:(one Node)|(no ((Node <: adj) :> ref0)));1;(no ((Node <: adj) & (~ (Node <: adj))));6
+323;this/weaklyConnected;(all ref0:(one Node)|((ref0 in ((Node <: adj) . ref0)) || (ref0 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));13
+324;this/oriented;(all ref0:(one Node)|(((Node <: adj) :> ref0) != (ref0 <: (Node <: adj))));1;(no ((Node <: adj) & (~ (Node <: adj))));9
+325;this/oriented;(all ref0:(one Node)|(((Node <: adj) . ref0) !in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(no (((Node <: adj) . ref0) & (ref0 . (Node <: adj)))));5
+326;this/undirected;((((Node <: adj) . (~ (Node <: adj))) in iden) && (((~ (Node <: adj)) . (Node <: adj)) in iden));1;(((Node <: adj) in (~ (Node <: adj))) && ((~ (Node <: adj)) in (Node <: adj)));4
+327;this/weaklyConnected;(all ref0:(one Node)|((ref0 in (ref0 . (^ (Node <: adj)))) || (ref0 in (Node . (^ (Node <: adj))))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));13
+328;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(Node in ((ref0 <: (^ (Node <: adj))) . ref1)));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+329;this/oriented;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 !in (ref1 . (Node <: adj))));5
+330;this/undirected;((iden in ((Node <: adj) . (~ (Node <: adj)))) && (((~ (Node <: adj)) . (Node <: adj)) in iden));1;(((Node <: adj) in (~ (Node <: adj))) && ((~ (Node <: adj)) in (Node <: adj)));4
+331;this/weaklyConnected;(all ref0:(one Node)|((ref0 in ((Node <: adj) . Node)) || (ref0 in (Node . (^ (Node <: adj))))));1;(graph/weaklyConnected[(Node <: adj)]);14
+332;this/stonglyConnected;(Node = (Node . (^ (Node <: adj))));1;((Node -> Node) in (* (Node <: adj)));6
+333;this/noLoops;((Node <: adj) = (~ iden));1;(no ((Node <: adj) & iden));4
+334;this/undirected;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj)))) && (no ((Node <: adj) & (Node <: adj))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj))));9
+335;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 = ref1) || (ref0 in ((Node <: adj) . ref1)) || (ref0 in (ref1 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));18
+336;this/undirected;((iden in ((~ (Node <: adj)) . (Node <: adj))) && (((~ (Node <: adj)) . (Node <: adj)) in iden));1;(((Node <: adj) in (~ (Node <: adj))) && ((~ (Node <: adj)) in (Node <: adj)));6
+337;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ((ref0 <: (^ (Node <: adj))) . ref1)));1;(graph/weaklyConnected[(Node <: adj)]);10
+338;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (~ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));8
+339;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(Node in ((ref0 . (* (Node <: adj))) & (ref1 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));11
+340;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in ((Node <: adj) . ref1)) || (ref0 in (ref1 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj))))));9
+341;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref1 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));11
+342;this/stonglyConnected;(Node = (Node . (Node <: adj)));1;((Node -> Node) in (* (Node <: adj)));5
+343;this/oriented;(all ref0:(one Node)|(ref0 = ((ref0 . (Node <: adj)) . (~ (Node <: adj)))));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));5
+344;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ((ref0 . (* (Node <: adj))) + (ref1 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));13
+345;this/weaklyConnected;(all ref0:(one Node)|((((((^ (Node <: adj)) . ref0) :> Node) + ((ref0 . (^ (Node <: adj))) :> Node)) + ((ref0 . (^ (Node <: adj))) :> ref0)) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));19
+346;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 = ref1) || (ref0 in ((Node <: adj) . ref1)) || (ref0 in (ref1 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj))))));12
+347;this/oriented;(all ref0:(one Node)|(no ((ref0 . (Node <: adj)) & ((~ (Node <: adj)) . ref0))));1;(all ref0:(one Node)|(no ((ref0 . (Node <: adj)) & (ref0 . (~ (Node <: adj))))));4
+348;this/weaklyConnected;(all ref0:(one Node)|((((((^ (Node <: adj)) . ref0) :> Node) + ((ref0 . (^ (Node <: adj))) :> Node)) = Node) && (some ((ref0 . (Node <: adj)) :> ref0))));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));19
+349;this/oriented;(no ((Node . (Node <: adj)) & (Node . (~ (Node <: adj)))));1;(no ((Node <: adj) & (~ (Node <: adj))));4
+350;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref0 -> ref0) in (Node <: adj)))));1;(all ref0:(one Node)|(! (ref0 in (ref0 . (^ (Node <: adj))))));12
+351;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ((ref0 <: (^ (Node <: adj))) & (ref1 <: (^ (Node <: adj))))));1;(graph/weaklyConnected[(Node <: adj)]);13
+352;this/acyclic;((Node <: adj) !in ((Node <: adj) . (^ (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));5
+353;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref2 -> ref1) in (Node <: adj))) => (ref1 = ref2)));1;(graph/dag[(Node <: adj)]);19
+354;this/stonglyConnected;(all ref0:(one Node)|((Node . (Node <: adj)) in (ref0 . (^ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . ((^ (Node <: adj)) + iden))));6
+355;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some ((ref0 . (^ (Node <: adj))) & (ref1 . (^ (Node <: adj))))));1;(graph/weaklyConnected[(Node <: adj)]);13
+356;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! (((ref0 -> ref0) in (Node <: adj)) && ((ref1 -> ref1) in (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((no (ref0 & (ref0 . (^ (Node <: adj))))) && ((ref1 -> ref0) !in (Node <: adj)))));15
+357;this/acyclic;(all ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));3
+358;this/acyclic;((^ (Node <: adj)) !in iden);1;(no ((^ (Node <: adj)) & iden));3
+359;this/weaklyConnected;(all ref0:(one Node)|((ref0 + (ref0 . ((^ (Node <: adj)) + (~ (Node <: adj))))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));4
+360;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! (((ref1 -> ref0) in (Node <: adj)) && ((ref1 -> ref1) in (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((no (ref0 & (ref0 . (^ (Node <: adj))))) && ((ref1 -> ref0) !in (Node <: adj)))));17
+361;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref2 -> ref1) in (Node <: adj))) => ((ref0 = ref2) && (ref1 = ref2))));1;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));22
+362;this/undirected;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));7
+363;this/weaklyConnected;(all ref0:(one Node)|((ref0 + (ref0 . (^ (Node <: adj)))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));5
+364;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (~ (^ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+365;this/weaklyConnected;(all ref0:(one Node)|((one Node) || (Node in (ref0 . (^ (Node <: adj))))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));9
+366;this/weaklyConnected;(all ref0:(one Node)|(ref0 in (Node . (* (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));8
+367;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((^ (ref1 -> ref0)) !in (Node <: adj))));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));13
+368;this/complete;(Node = (Node . (Node <: adj)));1;((Node <: adj) = (Node -> Node));4
+369;this/weaklyConnected;(all ref0:(one Node)|(((Node in ((^ (Node <: adj)) . ref0)) && (Node in (ref0 . (^ (Node <: adj))))) || (one Node)));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));12
+370;this/oriented;(some ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 !in (ref0 . (Node <: adj))) && disj[ref0,ref1]));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));9
+371;this/weaklyConnected;((Node -> Node) in (^ ((Node <: adj) + (~ (Node <: adj)))));1;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));2
+372;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((^ (ref0 -> ref1)) in (Node <: adj)) => ((^ (ref1 -> ref0)) !in (Node <: adj))));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));14
+373;this/weaklyConnected;(((Node <: adj) + (^ (Node <: adj))) in (Node <: adj));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));7
+374;this/complete;(all ref0:(one Node)|(ref0 in ((Node <: adj) . Node)));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));5
+375;this/undirected;((Node . (Node <: adj)) = ((~ (Node <: adj)) . Node));1;((Node <: adj) = (~ (Node <: adj)));4
+376;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (ref0 . (* (Node <: adj)))));1;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));7
+377;this/weaklyConnected;(all ref0:(one Node)|((((Node <: adj) in (~ (Node <: adj))) && (Node in (ref0 . (^ (Node <: adj))))) || (one Node)));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));10
+378;this/acyclic;(all ref0:(one Node),ref1:(one Node)|(((^ (ref0 -> ref1)) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj))));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));13
+379;this/undirected;(all ref0:(one Node)|(ref0 in ((Node <: adj) . (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));6
+380;this/acyclic;(no (^ (Node <: adj)));1;(no ((^ (Node <: adj)) & iden));2
+381;this/noLoops;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));1;(no ((Node <: adj) & iden));6
+382;this/weaklyConnected;((all ref0:(one Node)|((one Node) || (Node in (ref0 . (^ (Node <: adj)))))) && ((Node <: adj) in (~ (Node <: adj))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));14
+383;this/noLoops;(no ((Node <: adj) & (~ (Node <: adj))));1;(no (((Node <: adj) & iden) & (~ (Node <: adj))));2
+384;this/weaklyConnected;(all ref0:(one Node)|((((^ (~ (Node <: adj))) . ref0) + (ref0 . (^ (Node <: adj)))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));9
+385;this/acyclic;(all ref0:(one Node)|(no ((^ (Node <: adj)) . ref0)));1;(all ref0:(one Node)|(no (((^ (Node <: adj)) . ref0) & ref0)));4
+386;this/noLoops;(all ref0:(one Node)|(no (ref0 . (~ (Node <: adj)))));1;(no ((Node <: adj) & iden));6
+387;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref2) in (Node <: adj))) => (ref0 = (ref0 & ref2))));1;(graph/dag[(Node <: adj)]);21
+388;this/undirected;((all ref0:(one Node)|(ref0 in ((Node <: adj) . (ref0 . (Node <: adj))))) && (all ref1:(one Node),ref2:(one Node)|((! disj[ref1,ref2]) || ((ref2 in (ref1 . (Node <: adj))) => (ref1 in (ref2 . (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj))))));19
+389;this/noLoops;(no (((Node <: adj) . Node) & (Node . (Node <: adj))));1;(no ((Node <: adj) & iden));6
+390;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (^ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));4
+391;this/acyclic;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref2) in (Node <: adj))) => (ref0 = (ref2 & ref2))));1;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));20
+392;this/noLoops;(all ref0:(one Node)|(no (ref0 . ((Node <: adj) . (~ (Node <: adj))))));1;(no (((Node <: adj) & iden) & (~ (Node <: adj))));7
+393;this/acyclic;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (ref0 = (ref0 & ref1))));1;((all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))) && (all ref2:(one Node)|(ref2 !in (ref2 . (^ (Node <: adj))))));19
+394;this/noLoops;((Node <: adj) = ((Node -> Node) - iden));1;(no ((Node <: adj) & iden));7
+395;this/undirected;(all ref0:(one Node)|(lone ((Node <: adj) . ref0)));1;(graph/undirected[(Node <: adj)]);6
+396;this/complete;(all ref0:(one Node)|((ref0 . (Node <: adj)) in Node));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));4
+397;this/undirected;((all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))))) && (all ref2:(one Node)|(ref2 in ((ref2 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));13
+398;this/noLoops;(all ref0:(one Node)|((ref0 . (Node <: adj)) !in ref0));1;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));4
+399;this/complete;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));4
+400;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 != ref1) && (ref1 in ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj))))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));14
+401;this/undirected;(some ((Node <: adj) & (Node <: adj)));1;((Node <: adj) in (~ (Node <: adj)));4
+402;this/noLoops;(all ref0:(one Node)|(! (ref0 = (ref0 . (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));5
+403;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (^ (Node <: adj)))) || (ref1 in (ref0 . (~ (^ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));15
+404;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (^ (Node <: adj)))) || (ref1 in (ref0 . (^ (~ (Node <: adj)))))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));15
+405;this/oriented;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj)))));5
+406;this/undirected;(no ((Node <: adj) + (Node <: adj)));1;(no ((Node <: adj) - (~ (Node <: adj))));3
+407;this/complete;(all ref0:(one Node)|(((ref0 . (Node <: adj)) - ref0) = (Node - ref0)));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));6
+408;this/undirected;(all ref0:(one Node)|(some ref1:(one (ref0 . (Node <: adj)))|((ref0 in (ref1 . (Node <: adj))) && ((ref1 . (Node <: adj)) in ref0))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));10
+409;this/weaklyConnected;(all ref0:(one Node)|(Node in (((* (^ (Node <: adj))) . ref0) + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));9
+410;this/complete;(all ref0:(one Node)|((! ((ref0 -> ref0) in (Node <: adj))) && (ref0 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) && (Node in (ref0 . (Node <: adj)))));10
+411;this/weaklyConnected;(all ref0:(one Node)|((ref0 . ((Node <: adj) + (~ (Node <: adj)))) in Node));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));5
+412;this/noLoops;(all ref0:(one Node)|(no (ref0 . (* (Node <: adj)))));1;(no ((Node <: adj) & iden));6
+413;this/acyclic;(no ref0:(one Node)|(Node in (ref0 . (Node <: adj))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));5
+414;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|(ref1 in ((ref0 . (^ (Node <: adj))) - ref0)));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* (Node <: adj)))));8
+415;this/weaklyConnected;(all ref0:(one Node)|((ref0 . ((Node <: adj) + (~ (Node <: adj)))) in (Node - ref0)));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));7
+416;this/undirected;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|((ref0 in (ref1 . (Node <: adj))) && ((ref1 . (Node <: adj)) in ref0)));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));10
+417;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in ((ref0 . (^ (Node <: adj))) - ref0)));1;(all ref0:(one Node)|((Node - ref0) in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))));7
+418;this/acyclic;(no ref0:(one Node)|(Node in (ref0 . (* (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));6
+419;this/noLoops;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj)))));1;(all ref0:(one Node)|(! ((ref0 -> ref0) in (Node <: adj))));12
+420;this/undirected;(no ((Node <: adj) - (Node <: adj)));1;(no ((Node <: adj) - (~ (Node <: adj))));1
+421;this/complete;((all ref0:(one Node)|((ref0 . (Node <: adj)) = (Node - ref0))) && (all ref1:(one Node),ref2:(one Node)|((! disj[ref1,ref2]) || (ref1 in ((Node <: adj) . ref2)))));1;((all ref0:(one Node)|((ref0 . (Node <: adj)) = Node)) && (all ref1:(one Node),ref2:(one Node)|((! disj[ref1,ref2]) || (ref1 in ((Node <: adj) . ref2)))));8
+422;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (~ (Node <: adj))) . ref0) + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));9
+423;this/weaklyConnected;(all ref0:(one Node)|((ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))) in Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));6
+424;this/complete;(all ref0:(one Node)|((# (ref0 . (Node <: adj))) = (# (Node - ref0))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));6
+425;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . ((* (Node <: adj)) + (~ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));4
+426;this/undirected;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|((# ((ref0 -> (ref1 . (Node <: adj))) + ((ref1 . (Node <: adj)) -> ref0))) = 2));1;((Node <: adj) = (~ (Node <: adj)));14
+427;this/acyclic;(no ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));4
+428;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (* (Node <: adj))) . ref0) + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));9
+429;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref1 in (ref0 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (Node <: adj))));9
+430;this/complete;(all ref0:(one Node)|((ref0 in (ref0 . (^ (Node <: adj)))) => (ref0 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) && (Node in (ref0 . (Node <: adj)))));10
+431;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 + ref1) in (ref0 . (^ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));7
+432;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref0 . (^ (Node <: adj)))) => ((ref0 -> ref1) in (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));11
+433;this/stonglyConnected;(all ref0:(one Node)|(((ref0 . (^ (Node <: adj))) = Node) && (some (Node <: adj))));1;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));7
+434;this/weaklyConnected;((one Node) || (Node = ((Node . (^ (Node <: adj))) + (Node . (^ (~ (Node <: adj)))))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));12
+435;this/stonglyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));6
+436;this/stonglyConnected;(all ref0:(one Node)|(((ref0 . (^ (Node <: adj))) = Node) && (some (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));9
+437;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (^ (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* (Node <: adj)))));6
+438;this/oriented;((Node <: adj) !in ((Node <: adj) & (~ (Node <: adj))));1;(no ((Node <: adj) & (~ (Node <: adj))));3
+439;this/acyclic;(all ref0:(one Node)|(no (ref0 & (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|(no (ref0 & (ref0 . (^ (Node <: adj))))));3
+440;this/stonglyConnected;((one Node) || (Node = (Node . (^ (Node <: adj)))));1;(all ref0:(one Node)|((one Node) || (Node in (ref0 . (^ (Node <: adj))))));5
+441;this/noLoops;(iden !in (^ (Node <: adj)));1;(graph/noSelfLoops[(Node <: adj)]);5
+442;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((^ (~ (Node <: adj))) . ref0) + (ref0 . (^ (Node <: adj)))) + ref0)));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));11
+443;this/undirected;(all ref0:(one Node)|(((ref0 . (Node <: adj)) . (Node <: adj)) in ref0));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));4
+444;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ ((Node <: adj) + (~ (Node <: adj)))))) || (ref1 in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));1;((all ref0:(one Node)|(Node in (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))) || (one Node));16
+445;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (^ (~ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));6
+446;this/complete;(no ((Node <: adj) & (^ (Node <: adj))));1;((Node <: adj) = (Node -> Node));8
+447;this/complete;(no ((Node <: adj) & (* (Node <: adj))));1;((Node <: adj) = (Node -> Node));8
+448;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 . (Node <: adj)) in ref1) <=> ((ref1 . (Node <: adj)) in ref0))));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));10
+449;this/oriented;(all ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));4
+450;this/noLoops;(no ((~ (Node <: adj)) . (Node <: adj)));1;(no ((Node <: adj) & iden));5
+451;this/complete;(no ((Node <: adj) & (~ (Node <: adj))));1;((Node <: adj) = (Node -> Node));8
+452;this/complete;(no ((Node <: adj) + (~ (Node <: adj))));1;((Node <: adj) = (Node -> Node));8
+453;this/complete;(all ref0:(one Node)|(no (ref0 + (ref0 . (~ (Node <: adj))))));1;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));8
+454;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 + ref1) = ((ref0 . (^ (Node <: adj))) + (ref1 . (^ (Node <: adj))))));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));15
+455;this/undirected;(no ((Node <: adj) & (~ (* (Node <: adj)))));1;(no ((Node <: adj) - (~ (Node <: adj))));3
+456;this/weaklyConnected;(all ref0:(one Node)|((ref0 + (ref0 . (Node <: adj))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));6
+457;this/undirected;(iden in ((~ (Node <: adj)) . (Node <: adj)));1;((Node <: adj) in (~ (Node <: adj)));4
+458;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (^ (Node <: adj))) + (ref1 . (^ (Node <: adj)))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));11
+459;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));6
+460;this/oriented;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) <=> (ref1 !in (ref0 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));6
+461;this/weaklyConnected;((Node -> Node) in (^ ((Node <: adj) & (~ (Node <: adj)))));1;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));4
+462;this/undirected;(no ((Node <: adj) . (~ (Node <: adj))));1;(no ((Node <: adj) - (~ (Node <: adj))));2
+463;this/weaklyConnected;(((Node -> Node) - iden) in (^ ((Node <: adj) & (~ (Node <: adj)))));1;(((Node -> Node) - iden) in (^ ((Node <: adj) + (~ (Node <: adj)))));2
+464;this/complete;(all ref0:(one Node)|((ref0 . (Node <: adj)) = (ref0 . (~ (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) = Node));7
+465;this/oriented;(((Node <: adj) . Node) != (Node . (Node <: adj)));1;(no ((Node <: adj) & (~ (Node <: adj))));8
+466;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) in (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);14
+467;this/weaklyConnected;(all ref0:(one Node)|(Node in (((^ (~ (Node <: adj))) . ref0) + (ref0 + (ref0 . (^ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));11
+468;this/oriented;(no ((Node <: adj) . (Node <: adj)));1;(no (((Node <: adj) . (Node <: adj)) & iden));2
+469;this/complete;((all ref0:(one Node)|((ref0 . (Node <: adj)) = Node)) && (all ref1:(one Node),ref2:(one Node)|(ref2 in (ref1 . (Node <: adj)))) && (all ref3:(one Node)|((ref3 . (Node <: adj)) = (Node - ref3))));1;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) && (Node in (ref0 . (Node <: adj)))));18
+470;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node),ref2:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref2 -> ref1) in (Node <: adj))) => ((ref0 -> ref2) in (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);21
+471;this/oriented;((Node <: adj) != ((Node <: adj) + (~ (Node <: adj))));1;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));4
+472;this/weaklyConnected;(all ref0:(one Node)|((ref0 + ((ref0 . (^ (Node <: adj))) & (ref0 . (^ (~ (Node <: adj)))))) = Node));1;(all ref0:(one Node)|((ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj)))))) = Node));9
+473;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 . (^ (Node <: adj))) = ref1));1;(graph/weaklyConnected[(Node <: adj)]);9
+474;this/weaklyConnected;((* ((Node <: adj) & (~ (Node <: adj)))) = (Node -> Node));1;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));7
+475;this/acyclic;((all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj))))) && (iden != (iden - (^ (Node <: adj)))) && (no ((^ (Node <: adj)) & iden)));1;((all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj))))) && (iden = (iden - (^ (Node <: adj)))) && (no ((^ (Node <: adj)) & iden)));4
+476;this/undirected;(all ref0:(one Node)|((no (ref0 . (Node <: adj))) || (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+477;this/weaklyConnected;((some (Node . (Node <: adj))) || (some (Node . (~ (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+478;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (* (Node <: adj))) + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));8
+479;this/oriented;(all ref0:(one Node)|(((ref0 . (Node <: adj)) -> ref0) !in (Node <: adj)));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));6
+480;this/noLoops;(no ((Node <: adj) + iden));1;(no ((Node <: adj) & iden));2
+481;this/stonglyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));1;((Node -> Node) in (* (Node <: adj)));7
+482;this/complete;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) & (ref1 -> ref0)) in (Node <: adj)));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) + (ref1 -> ref0)) in (Node <: adj)));6
+483;this/undirected;((Node <: adj) in ((~ (Node <: adj)) . (Node <: adj)));1;((Node <: adj) in (~ (Node <: adj)));2
+484;this/undirected;(all ref0:(one Node)|((ref0 !in (ref0 . (Node <: adj))) || (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));12
+485;this/noLoops;(no ((Node <: adj) - iden));1;(no ((Node <: adj) & iden));2
+486;this/weaklyConnected;(all ref0:(one Node)|((some (Node . (Node <: adj))) || (some (Node . (~ (Node <: adj))))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));12
+487;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))));1;(graph/weaklyConnected[(Node <: adj)]);14
+488;this/undirected;(one Node);1;(graph/undirected[(Node <: adj)]);3
+489;this/oriented;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (Node <: adj))) => (((ref1 !in (ref0 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))) => (ref0 !in (ref1 . (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 !in (ref0 . (Node <: adj)))));21
+490;this/undirected;(all ref0:(one Node)|((ref0 !in (ref0 . (Node <: adj))) && (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));12
+491;this/weaklyConnected;((some (Node . (Node <: adj))) && (some (Node . (~ (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+492;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(Node in ((ref0 + (ref0 . (^ (Node <: adj)))) + (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+493;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 . (* (Node <: adj)))));1;(graph/weaklyConnected[(Node <: adj)]);7
+494;this/oriented;(all ref0:(one Node)|((ref0 . (Node <: adj)) !in ref0));1;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));6
+495;this/undirected;(all ref0:(one Node)|(ref0 !in ((ref0 . (Node <: adj)) . (Node <: adj))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));8
+496;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 + (ref0 . (^ (Node <: adj)))) + (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+497;this/noLoops;(all ref0:(one Node)|(no (ref0 . (Node <: adj))));1;(no ((Node <: adj) & iden));5
+498;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 -> (ref0 . (* (Node <: adj))))));1;(graph/weaklyConnected[(Node <: adj)]);9
+499;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (^ (Node <: adj)))) && (ref1 in (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));15
+500;this/weaklyConnected;(all ref0:(one Node)|(some (ref0 . (ref0 -> (ref0 . (* (Node <: adj)))))));1;(graph/weaklyConnected[(Node <: adj)]);11
+501;this/stonglyConnected;((Node -> Node) in (^ (Node <: adj)));1;((Node -> Node) in (* (Node <: adj)));2
+502;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (((ref1 -> ref0) !in (Node <: adj)) && (Node in (((^ (Node <: adj)) . ref0) + (ref0 + (ref0 . (^ (Node <: adj)))))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));23
+503;this/noLoops;(no ((Node <: adj) . (~ (Node <: adj))));1;(no (((Node <: adj) & iden) & (~ (Node <: adj))));4
+504;this/complete;(all ref0:(one Node)|((ref0 . (Node <: adj)) in (Node - ref0)));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));6
+505;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref0 . (Node <: adj)) = ref1));1;((Node <: adj) = (~ (Node <: adj)));7
+506;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 -> ref1) + (ref1 -> ref0)) in (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) + (ref1 -> ref0)) in (Node <: adj)));9
+507;this/weaklyConnected;((Node -> Node) in (* (Node <: adj)));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));3
+508;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (^ (Node <: adj)))) && (ref1 in (ref1 . (Node <: adj)))));1;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) && (Node in (ref0 . (Node <: adj)))));10
+509;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (((ref1 -> ref0) !in (Node <: adj)) && (Node in (ref0 + (ref0 . (^ (Node <: adj))))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));18
+510;this/undirected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 . (Node <: adj)) = ref1)));1;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj))))));12
+511;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 -> ref1) in (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));9
+512;this/weaklyConnected;(all ref0:(one Node)|((some (ref0 . (Node <: adj))) || (some (ref0 . (^ (Node <: adj))))));1;(graph/weaklyConnected[(Node <: adj)]);12
+513;this/oriented;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)) && disj[ref0,ref1])));1;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));7
+514;this/oriented;(no (Node . (Node <: adj)));1;(no (((Node <: adj) . (Node <: adj)) & iden));4
+515;this/complete;(all ref0:(one Node)|(no ref1:(one Node)|(ref1 !in (ref0 . (^ (Node <: adj))))));1;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));6
+516;this/weaklyConnected;(all ref0:(one Node)|(((some (ref0 . (Node <: adj))) || (some (ref0 . (~ (Node <: adj))))) && (ref0 != (ref0 . (Node <: adj)))));1;(graph/weaklyConnected[(Node <: adj)]);18
+517;this/oriented;((! ((Node <: adj) = (~ (Node <: adj)))) || (no (Node <: adj)));1;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));6
+518;this/undirected;(((Node . (Node <: adj)) -> ((Node <: adj) . Node)) in (Node <: adj));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));7
+519;this/weaklyConnected;(((Node <: adj) = (Node -> Node)) && ((Node <: adj) = (~ (Node <: adj))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));7
+520;this/undirected;(all ref0:(one Node)|(((ref0 . (Node <: adj)) -> ((Node <: adj) . ref0)) in (Node <: adj)));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));4
+521;this/undirected;(all ref0:(one Node)|(lone ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+522;this/oriented;(no ((Node <: adj) . (~ (Node <: adj))));1;(no ((Node <: adj) & (~ (Node <: adj))));2
+523;this/stonglyConnected;(((Node <: adj) = (Node -> Node)) && (no ((Node <: adj) & (~ (Node <: adj)))));1;((Node -> Node) in (* (Node <: adj)));9
+524;this/weaklyConnected;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+525;this/weaklyConnected;((((* (Node <: adj)) . Node) & (Node . (* (Node <: adj)))) = Node);1;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));11
+526;this/undirected;(all ref0:(one Node)|((Node <: adj) = ((ref0 . (Node <: adj)) -> ((Node <: adj) . ref0))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));6
+527;this/complete;(all ref0:(one Node)|(ref0 in (ref0 . (~ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));5
+528;this/weaklyConnected;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));8
+529;this/undirected;(all ref0:(one Node)|(one ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+530;this/complete;(all ref0:(one Node)|(ref0 in ((ref0 . (Node <: adj)) . (Node <: adj))));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));6
+531;this/complete;(all ref0:(one Node)|(ref0 in (Node . (^ (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));6
+532;this/weaklyConnected;((((^ (Node <: adj)) . Node) & (Node . (^ (Node <: adj)))) = Node);1;(graph/weaklyConnected[(Node <: adj)]);12
+533;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref0 . (Node <: adj)) = (ref1 . (Node <: adj))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));7
+534;this/undirected;(all ref0:(one Node)|(one ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) <=> (ref0 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+535;this/complete;(all ref0:(one Node)|(ref0 in (Node . (* (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (Node <: adj))));6
+536;this/undirected;(iden in (Node <: adj));1;((Node <: adj) in (~ (Node <: adj)));3
+537;this/undirected;(all ref0:(one Node)|(one ref1:(one Node)|(ref0 = (ref1 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));6
+538;this/acyclic;(no ref0:(one Node)|(ref0 !in (ref0 . (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));3
+539;this/oriented;(0 = 1);1;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));7
+540;this/stonglyConnected;(some ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));1;(all ref0:(one Node)|((ref0 . (* (Node <: adj))) = Node));2
+541;this/undirected;(all ref0:(one Node)|(lone ref1:(one Node)|(ref0 = (ref1 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));6
+542;this/complete;(Node in (Node . (* (Node <: adj))));1;((Node -> Node) in (Node <: adj));3
+543;this/undirected;((all ref0:(one Node)|(lone ref1:(one Node)|(ref0 = (ref1 . (Node <: adj))))) && (all ref2:(one Node)|(lone ref3:(one Node)|((ref2 . (Node <: adj)) = ref3))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));14
+544;this/acyclic;(no ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));1;(all ref0:(one Node)|(ref0 !in (ref0 . (^ (Node <: adj)))));2
+545;this/undirected;((all ref0:(one Node)|(lone ref1:(one Node)|(ref0 = (ref1 . (Node <: adj))))) && (all ref2:(one Node)|(one ref3:(one Node)|((ref2 . (Node <: adj)) = ref3))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));14
+546;this/noLoops;(Node !in (Node . (* (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));6
+547;this/complete;(Node in (Node . (Node <: adj)));1;((Node -> Node) in (Node <: adj));2
+548;this/weaklyConnected;(all ref0:(one Node)|(Node in ((ref0 . (^ (Node <: adj))) - ref0)));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+549;this/oriented;(no (Node . (~ (Node <: adj))));1;(no ((Node <: adj) & (~ (Node <: adj))));4
+550;this/undirected;((all ref0:(one Node)|(one ref1:(one Node)|(ref0 = (ref1 . (Node <: adj))))) && (all ref2:(one Node)|(one ref3:(one Node)|((ref2 . (Node <: adj)) = ref3))));1;(all ref0:(one Node),ref1:(one (ref0 . (Node <: adj)))|(ref0 in (ref1 . (Node <: adj))));14
+551;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (^ (Node <: adj)))) && (ref1 in (ref0 . (^ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));11
+552;this/undirected;((Node <: adj) = ((Node <: adj) . (Node <: adj)));1;((Node <: adj) = (~ (Node <: adj)));3
+553;this/undirected;(all ref0:(one Node),ref1:(one Node)|(ref0 = ((ref0 . (Node <: adj)) . (Node <: adj))));1;((Node <: adj) = (~ (Node <: adj)));7
+554;this/noLoops;(Node !in (Node . (^ (Node <: adj))));1;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));6
+555;this/acyclic;(all ref0:(one Node)|(some ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => ((ref1 -> ref0) !in (Node <: adj)))));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));12
+556;this/acyclic;(all ref0:(one Node)|((ref0 -> ref0) !in (Node <: adj)));1;(all ref0:(one Node)|((ref0 -> ref0) !in (^ (Node <: adj))));3
+557;this/acyclic;(no ref0:(one Node)|(ref0 in (ref0 . (~ (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));4
+558;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) <=> (ref1 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));16
+559;this/complete;(all ref0:(one Node),ref1:(one Node)|(some (ref0 -> ref1)));1;(all ref0:(one Node),ref1:(one Node)|((ref0 -> ref1) in (Node <: adj)));7
+560;this/noLoops;(! (iden in (^ (Node <: adj))));1;(all ref0:(one Node)|(! ((ref0 -> ref0) in (Node <: adj))));6
+561;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) || (ref1 in (ref0 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));6
+562;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref1 in ((* (Node <: adj)) . ref0)) || (ref1 in (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+563;this/complete;(iden in ((~ (Node <: adj)) . (Node <: adj)));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));6
+564;this/undirected;(all ref0:(one Node)|(one ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref1 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+565;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) && (ref1 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+566;this/noLoops;(all ref0:(one Node)|(ref0 !in ((^ (Node <: adj)) . ref0)));1;(all ref0:(one Node)|(ref0 !in ((Node <: adj) . ref0)));3
+567;this/complete;(iden in ((Node <: adj) . (~ (Node <: adj))));1;(all ref0:(one Node)|(Node in (ref0 . (Node <: adj))));6
+568;this/complete;(all ref0:(one Node)|(some (((Node <: adj) . ref0) + (ref0 . (Node <: adj)))));1;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));9
+569;this/complete;(Node in (((Node <: adj) . Node) + (Node . (Node <: adj))));1;((Node -> Node) in (Node <: adj));6
+570;this/noLoops;(no ((Node <: adj) & (Node -> Node)));1;(no ((Node <: adj) & iden));4
+571;this/acyclic;(iden !in (* (Node <: adj)));1;(graph/dag[(Node <: adj)]);5
+572;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) <=> (ref1 = (ref1 . (Node <: adj)))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));11
+573;this/undirected;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (ref0 . (Node <: adj)))));6
+574;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in ((ref0 . (^ (Node <: adj))) + (ref0 . (^ (~ (Node <: adj)))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));9
+575;this/oriented;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (ref0 != ref1)));1;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));9
+576;this/acyclic;(iden !in ((^ (Node <: adj)) - (Node <: adj)));1;(iden = (iden - (^ (Node <: adj))));4
+577;this/oriented;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) <=> (ref0 != ref1)));1;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));9
+578;this/acyclic;(! (iden in (* (Node <: adj))));1;(graph/dag[(Node <: adj)]);6
+579;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (((^ (Node <: adj)) . ref0) + (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+580;this/noLoops;(all ref0:(one Node)|(ref0 in (ref0 . (^ (Node <: adj)))));1;(no ref0:(one Node)|(ref0 in (ref0 . (Node <: adj))));3
+581;this/oriented;(all ref0:(one Node),ref1:(one Node)|((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) <=> (ref0 = ref1)));1;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));9
+582;this/weaklyConnected;(all ref0:(one Node)|((ref0 - ref0) in ref0));1;(graph/weaklyConnected[(Node <: adj)]);7
+583;this/weaklyConnected;(all ref0:(one Node)|(ref0 in ((Node <: adj) . ref0)));1;(graph/weaklyConnected[(Node <: adj)]);7
+584;this/weaklyConnected;(all ref0:(one Node)|(Node in (ref0 . (^ ((^ (Node <: adj)) + (^ (~ (Node <: adj))))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));6
+585;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (((* (Node <: adj)) . ref0) + (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));10
+586;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in ((Node <: adj) . ref1)));1;(graph/weaklyConnected[(Node <: adj)]);8
+587;this/complete;((^ (Node <: adj)) = (Node -> Node));1;((Node <: adj) = (Node -> Node));1
+588;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((ref0 in ((Node <: adj) . ref1)) && (ref1 in ((Node <: adj) . ref0))));1;(graph/weaklyConnected[(Node <: adj)]);14
+589;this/oriented;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) <=> (ref1 in (univ - (ref0 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (ref1 in (univ - (ref0 . (Node <: adj))))));6
+590;this/weaklyConnected;(all ref0:(one Node)|((Node - ref0) in (((* (Node <: adj)) . ref0) + (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (* ((Node <: adj) + (~ (Node <: adj))))))));10
+591;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(some (ref0 <: ((^ (Node <: adj)) . ref1))));1;(graph/weaklyConnected[(Node <: adj)]);10
+592;this/oriented;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj))) => (ref0 = ref1))));1;(! (some ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) && ((ref1 -> ref0) in (Node <: adj)))));14
+593;this/acyclic;(iden in (^ (Node <: adj)));1;(iden = (iden - (^ (Node <: adj))));4
+594;this/oriented;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|(((ref0 -> ref1) in (Node <: adj)) => (! ((ref1 -> ref0) in (Node <: adj)))));9
+595;this/oriented;((Node <: adj) = ((Node <: adj) & (~ (Node <: adj))));1;((Node <: adj) = ((Node <: adj) - (~ (Node <: adj))));2
+596;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 . (* (Node <: adj)))) + ((ref0 . (~ (* (Node <: adj)))) + ((~ (* (Node <: adj))) . ref0)))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+597;this/undirected;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) => (ref0 = ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));11
+598;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((ref0 in (ref1 . (^ (Node <: adj)))) || (ref0 in (ref1 . (~ (^ (Node <: adj)))))) && ((ref1 in (ref0 . (^ (Node <: adj)))) || (ref1 in (ref0 . (~ (^ (Node <: adj))))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));30
+599;this/undirected;(one ((Node <: adj) & (~ (Node <: adj))));1;((Node <: adj) in (~ (Node <: adj)));3
+600;this/undirected;(all ref0:(one Node)|(some ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) => (ref0 = (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+601;this/acyclic;((iden !in (^ (Node <: adj))) || (iden in (Node <: adj)));1;(no ((^ (Node <: adj)) & iden));7
+602;this/weaklyConnected;(((Node <: adj) + (~ (Node <: adj))) in (Node -> Node));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));7
+603;this/undirected;(all ref0:(one Node)|(one (ref0 . (Node <: adj))));1;(graph/undirected[(Node <: adj)]);6
+604;this/weaklyConnected;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + ((ref0 . (* (Node <: adj))) + (ref0 . (~ (* (Node <: adj)))))) + ((~ (* (Node <: adj))) . ref0))));1;(all ref0:(one Node)|(Node in ((((* (Node <: adj)) . ref0) + (ref0 + (ref0 . (* (Node <: adj))))) . (* ((Node <: adj) + (~ (Node <: adj)))))));14
+605;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(((^ (Node <: adj)) . ref0) in (((^ (Node <: adj)) . ref1) & ref0)));1;(graph/weaklyConnected[(Node <: adj)]);14
+606;this/undirected;(all ref0:(one Node)|(one ((ref0 . (Node <: adj)) & (ref0 . (~ (Node <: adj))))));1;(all ref0:(one Node)|((ref0 . (Node <: adj)) in ((Node <: adj) . ref0)));8
+607;this/weaklyConnected;((^ (Node <: adj)) in (Node -> Node));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));7
+608;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (* (Node <: adj)))) && (ref1 in (ref0 . (* (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|(ref1 in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));19
+609;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) => (ref1 in (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));8
+610;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|(ref0 in (((^ (Node <: adj)) . ref1) & ref0)));1;(graph/weaklyConnected[(Node <: adj)]);11
+611;this/undirected;(all ref0:(one Node)|(((ref0 . (Node <: adj)) in Node) && (ref0 in ((ref0 . (Node <: adj)) . (Node <: adj)))));1;(((Node <: adj) in (~ (Node <: adj))) && ((~ (Node <: adj)) in (Node <: adj)));11
+612;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 . (Node <: adj)) = ref1) <=> (ref0 in (ref1 . (Node <: adj)))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));10
+613;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (* (Node <: adj)))) <=> (ref1 in (ref0 . (* (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));8
+614;this/complete;((Node <: adj) = (^ (Node <: adj)));1;((Node <: adj) = (Node -> Node));5
+615;this/oriented;(all ref0:(one Node),ref1:(one Node)|((ref0 in ((^ (Node <: adj)) . ref1)) && (ref1 in ((^ (Node <: adj)) . ref0))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) => (! (ref1 in (ref0 . (Node <: adj))))));13
+616;this/complete;((Node <: adj) = (* (Node <: adj)));1;((Node <: adj) = (Node -> Node));5
+617;this/undirected;(all ref0:(one Node),ref1:(one Node)|(((ref0 in (ref1 . (Node <: adj))) && (ref0 in (ref1 . (Node <: adj)))) <=> ((ref0 . (Node <: adj)) in ref1)));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) <=> (ref1 in (ref0 . (Node <: adj)))));12
+618;this/weaklyConnected;(((Node <: adj) . (^ (Node <: adj))) in (Node <: adj));1;(graph/weaklyConnected[(Node <: adj)]);7
+619;this/weaklyConnected;((Node -> Node) in ((* (Node <: adj)) + (* (~ (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));3
+620;this/weaklyConnected;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || (ref0 in (ref1 . (^ (Node <: adj)))) || (ref0 in (ref1 . (~ (^ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|(ref0 in (ref1 . (* ((Node <: adj) + (~ (Node <: adj)))))));19
+621;this/undirected;(all ref0:(one Node)|(some ref1:(one Node)|(((ref0 . (Node <: adj)) in ref1) <=> (ref0 in (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));8
+622;this/complete;(all ref0:(one Node),ref1:(one Node)|((! disj[ref0,ref1]) || ((ref0 in (ref1 . (^ (Node <: adj)))) => (ref1 in (ref0 . (^ (Node <: adj)))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));13
+623;this/complete;((* (Node <: adj)) in (Node -> Node));1;((Node <: adj) = (Node -> Node));3
+624;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) => (ref1 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));8
+625;this/undirected;(all ref0:(one Node)|(lone ref1:(one Node)|(((ref0 . (Node <: adj)) in ref1) <=> (ref0 in (ref1 . (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref1 in (ref0 . (Node <: adj))) => (ref0 in (ref1 . (Node <: adj)))));8
+626;this/complete;((* (Node <: adj)) = (Node -> Node));1;((Node <: adj) = (Node -> Node));1
+627;this/undirected;(no Node);1;(graph/undirected[(Node <: adj)]);3
+628;this/complete;((Node -> Node) in (* (Node <: adj)));1;((Node -> Node) in (Node <: adj));1
+629;this/complete;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (^ (Node <: adj)))) <=> (ref1 in (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node),ref1:(one Node)|((ref0 in (ref1 . (Node <: adj))) && (ref1 in (ref0 . (Node <: adj)))));8
+630;this/weaklyConnected;((* (Node <: adj)) = (Node -> Node));1;(graph/weaklyConnected[(Node <: adj)]);7
+631;this/noLoops;(no iden);1;(no ((Node <: adj) & iden));2
+632;this/weaklyConnected;(all ref0:(one Node)|((ref0 . ((Node <: adj) + (~ (Node <: adj)))) = (Node - ref0)));1;(all ref0:(one Node)|((ref0 . (* ((Node <: adj) + (~ (Node <: adj))))) = Node));5
+633;this/complete;(all ref0:(one Node)|(some (ref0 . (^ (Node <: adj)))));1;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));6
+634;this/complete;(all ref0:(one Node)|(some ((^ (Node <: adj)) . ref0)));1;(no ref0:(one Node)|(Node !in (ref0 . (Node <: adj))));8
+635;this/weaklyConnected;(Node = (Node . (* ((Node <: adj) + (~ (Node <: adj))))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));4
+636;this/weaklyConnected;(Node in (((* (Node <: adj)) . Node) + (Node . (* (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));10
+637;this/oriented;(all ref0:(one Node)|(some ((Node <: adj) . ref0)));1;(no (((Node <: adj) . (Node <: adj)) & iden));7
+638;this/weaklyConnected;(some ref0:(one Node)|(Node in (ref0 . (^ (Node <: adj)))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));7
+639;this/weaklyConnected;(some ref0:(one Node)|(Node in (ref0 + (ref0 . (^ (Node <: adj))))));1;(all ref0:(one Node)|(Node in (ref0 + (ref0 . (^ ((Node <: adj) + (~ (Node <: adj))))))));5
+640;this/undirected;((Node <: adj) in (Node <: adj));1;((Node <: adj) in (~ (Node <: adj)));1
+641;this/weaklyConnected;(Node in (Node . (Node <: adj)));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));6
+642;this/weaklyConnected;((some (Node <: adj)) => (Node in (((Node <: adj) . Node) + (Node . (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+643;this/weaklyConnected;((lone Node) || (Node in (((Node <: adj) . Node) + (Node . (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));11
+644;this/weaklyConnected;(((Node <: adj) . (~ (Node <: adj))) in iden);1;(all ref0:(one Node)|(Node in (ref0 . (* ((Node <: adj) + (~ (Node <: adj)))))));6
+645;this/weaklyConnected;((! (lone Node)) => (Node in (((Node <: adj) . Node) + (Node . (Node <: adj)))));1;((Node -> Node) in (* ((Node <: adj) + (~ (Node <: adj)))));12

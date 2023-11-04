@@ -14,10 +14,8 @@ import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.specassistant.data.policy.PolicyOption;
-import pt.haslab.specassistant.services.GraphIngestor;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.SpecAssistantTestService;
-import pt.haslab.specassistant.util.FutureUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -71,34 +69,46 @@ public class AlloyHint {
      */
     @GET
     @Path("/specassistant-setup")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response genGraphs(List<String> model_ids, @DefaultValue("Unkown") @QueryParam("prefix") String prefix) {
-        specAssistantTestService.genGraphs(prefix,model_ids);
-        return Response.ok("Setup in progress.").build();
+        specAssistantTestService.genGraphs(prefix, model_ids);
+        return Response.ok("Setup completed for " + prefix + " with model_ids " + model_ids).build();
+    }
+
+    @GET
+    @Path("/debug-drop-db")
+    public Response dropDB(){
+        graphManager.dropEverything();
+        return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     @POST
     @Path("/higena-hint")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHiGenAHint(HintRequest request) {
-        log.info("HiGenA Hint requested");
-        // Get expression from model
-        ExprExtractor extractor = new ExprExtractor(request.model);
-        String expression = extractor.parse(request.predicate);
-        HintGenType hintGenType = HintGenType.valueOf(request.hintGenType.toUpperCase());
-        // Turn off create new paths
-        org.higena.hint.HintGenerator.turnOffPathCreation();
+        try {
+            log.info("HiGenA Hint requested");
+            // Get expression from model
+            ExprExtractor extractor = new ExprExtractor(request.model);
+            String expression = extractor.parse(request.predicate);
+            HintGenType hintGenType = HintGenType.valueOf(request.hintGenType.toUpperCase());
+            // Turn off create new paths
+            org.higena.hint.HintGenerator.turnOffPathCreation();
 
-        // Generate hint
-        Graph graph = new Graph(request.challenge, request.predicate);
-        org.higena.hint.HintGenerator hintGen = graph.generateHint(expression, request.model, hintGenType);
+            // Generate hint
+            Graph graph = new Graph(request.challenge, request.predicate);
+            org.higena.hint.HintGenerator hintGen = graph.generateHint(expression, request.model, hintGenType);
 
-        // Build response
-        if (hintGen.getHint() == null) // Failed
-            return Response.ok(InstanceMsg.error("No hint available")).build();
-        // Success
-        JSONObject response = hintGen.getJSON();
-        return Response.ok(response.toString()).build();
+            // Build response
+            if (hintGen.getHint() == null) // Failed
+                return Response.ok(InstanceMsg.error("No hint available")).build();
+            // Success
+            JSONObject response = hintGen.getJSON();
+            return Response.ok(response.toString()).build();
+        } catch (Exception e) {
+            log.error(e);
+            return Response.serverError().build();
+        }
     }
 
     @POST

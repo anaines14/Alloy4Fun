@@ -342,7 +342,7 @@ public class SpecAssistantTestService {
         // Create graph
         makeGraphAndChallengesFromCommands(prefix, model_ids);
         // Fill graph
-        FutureUtil.forEachAsync(model_ids, id -> graphIngestor.parseModelTree(id, x -> true)).whenComplete(FutureUtil.logTrace(log, "Setup Completed")).get();
+        FutureUtil.runEachAsync(model_ids, id -> graphIngestor.parseModelTree(id, x -> true)).whenComplete(FutureUtil.logTrace(log, "Setup Completed")).get();
     }
 
 }
