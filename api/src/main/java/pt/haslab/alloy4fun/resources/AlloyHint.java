@@ -1,6 +1,9 @@
 package pt.haslab.alloy4fun.resources;
 
 
+import edu.mit.csail.sdg.ast.Expr;
+import edu.mit.csail.sdg.ast.Sig;
+import edu.mit.csail.sdg.parser.CompModule;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -13,6 +16,7 @@ import org.json.JSONObject;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.services.HintMerge;
+import pt.haslab.alloyaddons.ParseUtil;
 import pt.haslab.specassistant.data.policy.PolicyOption;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.SpecAssistantTestService;
@@ -77,7 +81,7 @@ public class AlloyHint {
 
     @GET
     @Path("/debug-drop-db")
-    public Response dropDB(){
+    public Response dropDB() {
         graphManager.dropEverything();
         return Response.status(Response.Status.NO_CONTENT).build();
     }
