@@ -1,0 +1,7 @@
+Predicate;Formula
+inv1;all p: Photo |some u: User | u -> p in posts
+inv1;all p: Photo | p in User . posts
+inv1;all p: Photo, u: User | p in u . posts
+inv5;all i: Influencer, u: User | i in u . follows
+inv5;all u: User | Influencer in u . follows
+inv5;all u: User | u . follows in Influencer

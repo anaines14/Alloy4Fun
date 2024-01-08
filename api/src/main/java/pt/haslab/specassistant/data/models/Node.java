@@ -14,6 +14,7 @@ import org.bson.codecs.pojo.annotations.BsonIgnore;
 import org.bson.types.ObjectId;
 import pt.haslab.alloyaddons.*;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
@@ -66,6 +67,20 @@ public class Node extends PanacheMongoEntity {
 
     public static Map<String, Expr> getNormalizedFormulaExprFrom(CompModule world, Set<String> functions) {
         return getNormalizedFormulaExprFrom(world.getAllFunc().makeConstList(), functions);
+    }
+
+    public static Map<String, Expr> getNormalizedFormulaFrom(CompModule base, Map<String, String> predicatesToFormulas) {
+        return predicatesToFormulas.entrySet().stream().collect(toMap(x -> {
+            if (!x.getKey().contains("/"))
+                return "this/" + x.getKey();
+            return x.getKey();
+        }, x -> {
+            try {
+                return ExprNormalizer.normalize(base.parseOneExpressionFromString(x.getValue()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
 
     public static Map<String, Expr> getNormalizedFormulaExprFrom(Collection<Func> skolem, Set<String> functions) {

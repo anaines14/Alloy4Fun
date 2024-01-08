@@ -161,7 +161,7 @@ public class SpecAssistantTestService {
         testRepo.deleteTestsByNotType("TAR");
         map.forEach(this::makeGraphAndChallengesFromCommands);
         fixTestGraphIds();
-        testal();
+        splitDatasetAndTrain();
     }
 
     private void writeSetToFile(Set<String> stringSet, String filePath) {
@@ -200,9 +200,9 @@ public class SpecAssistantTestService {
     }
 
     @SneakyThrows
-    public void retest() {
+    public void testPartitionFromFile(String filename) {
         testRepo.deleteTestsByNotType("TAR");
-        Set<String> testing_dataset = readSetFromFile("testing.txt");
+        Set<String> testing_dataset = readSetFromFile(filename);
 
         Log.trace("Parsing test dataset");
 
@@ -237,7 +237,7 @@ public class SpecAssistantTestService {
 
 
     @SneakyThrows
-    private void testal() {
+    private void splitDatasetAndTrain() {
         Map<String, Set<String>> mToC = challengeRepo.findAll().stream().collect(Collectors.groupingBy(Challenge::getModel_id, Collectors.mapping(Challenge::getCmd_n, Collectors.toSet())));
 
         Log.trace("Splittig testing dataset");

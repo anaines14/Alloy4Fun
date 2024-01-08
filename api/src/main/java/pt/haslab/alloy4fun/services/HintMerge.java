@@ -11,6 +11,7 @@ import org.higena.parser.A4FParser;
 import org.higena.parser.ExprExtractor;
 import pt.haslab.alloy4fun.util.ParseUtil;
 import pt.haslab.specassistant.data.aggregation.Transition;
+import pt.haslab.specassistant.data.models.Challenge;
 import pt.haslab.specassistant.data.models.Node;
 import pt.haslab.specassistant.data.transfer.HintMsg;
 import pt.haslab.specassistant.services.HintGenerator;
@@ -41,6 +42,20 @@ public class HintMerge {
         return Map.of("hint", new Hint(oldAST, newAST).toString(), "nextExpr", new_expr, "targetExpr", "");
     }
 
+    public Map<String, String> specAssistantGraphToHigenaFormula(CompModule base_world, Challenge challenge, String formula) {
+        Optional<Transition> target = specAssistantGen.externalFormulaTransition(base_world, challenge, formula);
+
+        if (target.isEmpty()) return null; //
+
+        String old_expr = target.orElseThrow().getFrom().getFormula().values().stream().findFirst().orElseThrow();
+        String new_expr = target.orElseThrow().getTo().getFormula().values().stream().findFirst().orElseThrow();
+
+        // Generate hint message
+        String oldAST = A4FParser.parse(old_expr, base_world).toTreeString(),
+                newAST = A4FParser.parse(new_expr, base_world).toTreeString();
+
+        return Map.of("hint", new Hint(oldAST, newAST).toString(), "nextExpr", new_expr, "oldExpr", old_expr);
+    }
     public HintMsg higenaGraphToSpecAssistant(String challenge, String predicate, String model) {
         CompModule world = ParseUtil.parseModel(model);
 
