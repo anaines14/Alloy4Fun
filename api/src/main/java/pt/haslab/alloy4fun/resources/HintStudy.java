@@ -11,14 +11,11 @@ import jakarta.ws.rs.core.Response;
 import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
-import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.specassistant.data.models.Challenge;
 import pt.haslab.specassistant.data.models.Model;
 import pt.haslab.specassistant.data.policy.PolicyOption;
-import pt.haslab.specassistant.services.GraphIngestor;
 import pt.haslab.specassistant.services.GraphManager;
-import pt.haslab.specassistant.services.HintGenerator;
 import pt.haslab.specassistant.services.PolicyManager;
 
 import java.util.ArrayList;
@@ -30,16 +27,8 @@ import java.util.stream.Collectors;
 @Path("/study")
 public class HintStudy {
 
-
-    @Inject
-    Logger log;
     @Inject
     GraphManager graphManager;
-
-    @Inject
-    HintGenerator hintGenerator;
-    @Inject
-    GraphIngestor graphIngestor;
     @Inject
     PolicyManager policyManager;
 
