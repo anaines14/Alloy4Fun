@@ -3,41 +3,47 @@
  * by both client and server.
  */
 
-export { containsValidSecret,
+export {
+    containsValidSecret,
     getCommandsFromCode,
     secretTag,
     paragraphKeywords,
-    extractSecrets }
+    extractSecrets
+}
 
 /** The secret tag used in Alloy code. */
 secretTag = '//SECRET'
 /** The keywords that identify paragraphs. */
 paragraphKeywords = 'sig|fact|assert|check|fun|pred|run'
 
+const repairOptions = 'REPAIR\\s+([^\\n\\s])*'
+
+const comment_regex = '(?:(?:\\/\\*(?:.|\\n)*?\\*\\/\\s*)|(?:\\/\\/.*\\n)|(?:--.*\\n))'
+
 /**
-  * Checks whether a the code of an Alloy model contains some valid 'secret' tag
-  * (i.e., a line exactly the tag secret). No white-spaces allowed before/after.
-  *
-  * @param {String} code the Alloy model with the potential secret
-  *
-  * @return true if there is a secrete tag
-  */
+ * Checks whether a code of an Alloy model contains some valid 'secret' tag
+ * (i.e., a line exactly the tag secret). No white-spaces allowed before/after.
+ *
+ * @param {String} code the Alloy model with the potential secret
+ *
+ * @return true if there is a secrete tag
+ */
 function containsValidSecret(code) {
     return (extractSecrets(code).secret != '')
 }
 
 /**
-  * Splits the Alloy code of a model between public and private paragraphs.
-  * Private paragraphs are preceeded by a secret tag.
-  *
-  * @param {String} code the complete code with possible secrets
-  * @return the public and private paragraphs of the code
-  */
+ * Splits the Alloy code of a model between public and private paragraphs.
+ * Private paragraphs are preceeded by a secret tag.
+ *
+ * @param {String} code the complete code with possible secrets
+ * @return the public and private paragraphs of the code
+ */
 function extractSecrets(code) {
     let secret = ''
     let public_code = ''
-    let s; let
-        i
+    let s
+    let i
     const tag = secretTag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     const pgs = paragraphKeywords
     const pgd = `(?:(?:var|one|abstract|lone|some)\\s+)*${pgs}`
@@ -78,12 +84,49 @@ function getCommandsFromCode(code) {
 
     while (matches != null) {
         const pre = matches[0].includes('run') ? 'run ' : 'check '
-        if (matches[6]) commands.push(pre + matches[6])
-        else if (matches[12]) commands.push(pre + matches[12])
-        else commands.push(pre + commandNumber)
+        if (matches[6]) {
+            commands.push(pre + matches[6])
+        } else if (matches[12]) {
+            commands.push(pre + matches[12])
+        } else {
+            commands.push(pre + commandNumber)
+        }
         commandNumber++
         matches = pattern.exec(code)
     }
 
     return commands
+}
+
+
+/**
+
+ @param {String} code the Alloy model to be analysed
+
+ @return a list of secret identifiers for commands in the code
+ */
+export function getSecretNamesFromCode(code) {
+    const tag = secretTag.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const cmdKw = 'run|check'
+    const funcKw = 'pred|fun'
+    const expr = `${tag}\\s*(?:${comment_regex})*?\\s*(?:(${cmdKw})|(${funcKw}))\\s*([a-zA-Z_]\\w*)?`
+    const pattern = RegExp(expr, 'g')
+    const commands = []
+    const functions = []
+
+    const matches = code.matchAll(pattern)
+
+
+    for (const match of matches) {
+        if (matches[1]) {
+            commands.push(match[3])
+        } else if (matches[2]) {
+            functions.push(match[3])
+        }
+    }
+
+    return {
+        commands,
+        functions
+    }
 }

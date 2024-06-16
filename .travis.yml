@@ -1,8 +1,6 @@
 language: node_js
 node_js:
   - "6"
-addons:
-  chrome: stable
 before_script:
   - cd meteor
   - curl https://install.meteor.com | /bin/sh

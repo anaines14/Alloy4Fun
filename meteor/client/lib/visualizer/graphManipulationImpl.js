@@ -82,6 +82,10 @@ getEdges = function (inst) {
     const result = []
     inst.rels.forEach((field) => {
         field.atoms.forEach((relation) => {
+            inst.types.forEach((sig) => {
+                if (sig.atoms.includes(relation[0])) 
+                    parent_sig = sig.name
+            })
             result.push({
                 group: 'edges',
                 selectable: true,
@@ -89,11 +93,13 @@ getEdges = function (inst) {
                     relation: field.name,
                     source: relation[0],
                     target: relation[relation.length - 1],
-                    atoms: relation
+                    atoms: relation,
+                    parent_sig: parent_sig
                 }
             })
         })
     })
+    
     return result
 }
 
@@ -140,7 +146,7 @@ initGraphViewer = function (element) {
                         const subsigs = ele.data().subsetSigs.length > 0 ? `\n(${ele.data().subsetSigs.map(x => x.split(':')[0])})` : ''
 
                         // relations as attributes labels
-                        let attributes = relationSettings.getAttributeLabel(getCurrentState(),ele)
+                        let attributes = relationSettings.getAttributeLabel(ele)
                         return `${l}${subsigs}\n${attributes}`
                     },
                     'border-style'(ele) {
@@ -186,22 +192,22 @@ initGraphViewer = function (element) {
                 style: {
                     width: 1,
                     'line-color'(ele) { 
-                        return relationSettings.getEdgeColor(ele.data().relation) 
+                        return relationSettings.getEdgeColor(ele.data()) 
                     },
                     'target-arrow-color'(ele) { 
-                        return relationSettings.getEdgeColor(ele.data().relation) 
+                        return relationSettings.getEdgeColor(ele.data()) 
                     },
                     'target-arrow-shape': 'triangle',
                     'label'(ele) {
-                        return relationSettings.getEdgeLabel(ele)
+                        return relationSettings.getEdgeLabel(ele.data())
                     },
                     'curve-style': 'bezier',
                     'text-valign': 'center',
                     'text-outline-color': '#ff3300',
                     'edge-text-rotation': 'autorotate',
-                    'line-style'(ele) { return relationSettings.getEdgeStyle(ele.data().relation) },
+                    'line-style'(ele) { return relationSettings.getEdgeStyle(ele.data()) },
                     visibility(ele) {
-                        const val = relationSettings.isShowAsArcsOn(ele.data().relation)
+                        const val = relationSettings.isShowAsArcsOn(ele.data())
                         return val ? 'visible' : 'hidden'
                     }
                 }
@@ -297,7 +303,7 @@ initGraphViewer = function (element) {
             left: evt.originalEvent.screenX + 1 + 300 > $(window).width() ? evt.originalEvent.offsetX + 1 - 300 : evt.originalEvent.offsetX + 1
         }).fadeIn('slow')
         Session.set('rightClickSig', undefined)
-        Session.set('rightClickRel', [evt.cyTarget.data().relation])
+        Session.set('rightClickRel', [relationSettings.rel_id(evt.cyTarget.data())])
         updateRightClickContent()
         return false
     })
@@ -338,3 +344,4 @@ applyCurrentLayout = function () {
     // keep only the original ones
     cy.remove(cy.elements().subtract(tmp))
 }
+

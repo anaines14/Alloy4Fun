@@ -9,12 +9,14 @@ import './methods/getProjection'
 import './methods/shareInstance'
 import './methods/getModel'
 import './methods/downloadTree'
+import './methods/navInstance'
+import './methods/getHint'
 
 import './publications/modelFromLink'
 
 /**
-  If the database is empty, seeds a set of default models after startup.
-*/
+ If the database is empty, seeds a set of default models after startup.
+ */
 Meteor.startup(() => {
     if (!Model.find().count()) {
         // if there are no models, insert default ones

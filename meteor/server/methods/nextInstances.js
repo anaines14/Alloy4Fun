@@ -29,7 +29,8 @@ Meteor.methods({
                     model: code_with_secrets,
                     numberOfInstances: Meteor.settings.env.MAX_INSTANCES,
                     commandIndex,
-                    sessionId: currentModelId
+                    sessionId: currentModelId,
+                    parentId: ''
                 }
             }, (error, result) => {
                 if (error) reject(error)

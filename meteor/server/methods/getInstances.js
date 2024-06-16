@@ -33,7 +33,7 @@ Meteor.methods({
                 derivationOf: currentModelId
             }
 
-            // insert the new model
+            // insert  the new model
             const new_model_id = Model.insert(new_model)
 
             // call webservice to get instances
@@ -41,8 +41,9 @@ Meteor.methods({
                 data: {
                     model: code_with_secrets,
                     numberOfInstances: Meteor.settings.env.MAX_INSTANCES,
-                    commandIndex: commandIndex,
-                    sessionId: new_model_id
+                    commandIndex,
+                    sessionId: new_model_id,
+                    parentId: currentModelId || ''
                 }
             }, (error, result) => {
                 if (error) reject(error)
@@ -52,6 +53,7 @@ Meteor.methods({
                 let sat
                 let cmd_n
                 let chk
+                let msg
                 if (content.alloy_error) {
                     msg = content.msg
                     sat = -1
@@ -64,7 +66,7 @@ Meteor.methods({
                 }
                 let original
                 // if the model has secrets and the previous hadn't, then it is a new root
-                if (!currentModelId || (containsValidSecret(code) && !containsValidSecret(Model.findOne(currentModelId).code))) {
+                if (!currentModelId || fromPrivate || (containsValidSecret(code) && !containsValidSecret(Model.findOne(currentModelId).code))) {
                     original = new_model_id
                 }
                 // otherwise inherit the root

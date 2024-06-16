@@ -1,5 +1,6 @@
 import {savePositions,
     project } from '../../../lib/visualizer/projection'
+import {getCurrentState} from '../../../lib/editor/state'
 
 Template.frameNavigation.helpers({
     prevFrameEnabled() {
@@ -53,5 +54,9 @@ Template.frameNavigation.events({
 
 // retrieves the last index of atoms of a given type, used for frame navigation
 lastFrame = function (type) {
-    return allNodes.nodes(`[type='${type}']`).length - 1
+    inst = getCurrentState()
+    for (i in inst.types) {
+        if (inst.types[i].name == type)
+            return inst.types[i].atoms.length
+    }
 }

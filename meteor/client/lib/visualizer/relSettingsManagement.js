@@ -22,7 +22,6 @@ relationSettings = (function relationSettings() {
             edgeColors,
             edgeStyles,
             showAsAttributes,
-            showAsAttributes,
             showAsArcs }
         return data
     }
@@ -37,13 +36,13 @@ relationSettings = (function relationSettings() {
      * TODO: doc outdated
      */
     function getEdgeLabel(relEle) {
-        let relLabel = relEle.data().relation
+        let relLabel = relEle.relation
 
-        if (relEle.data().atoms.length > 2) {
+        if (relEle.atoms.length > 2) {
             let naryLabel = ''
-            for (let i = 1; i < relEle.data().atoms.length-1; i++) {
+            for (let i = 1; i < relEle.atoms.length-1; i++) {
                 // get the id the atom 
-                const currentLabel = relEle.data().atoms[i]
+                const currentLabel = relEle.atoms[i]
                 naryLabel += currentLabel
                 naryLabel += ','
             }
@@ -60,6 +59,7 @@ relationSettings = (function relationSettings() {
      * @returns {String} the value assigned to the property
      */
     function getEdgeColor(rel) {
+        rel = rel_id(rel)
         for (let i = 0; i < edgeColors.length; i++) {
             if (edgeColors[i].relation === rel) {
                 return edgeColors[i].color
@@ -92,6 +92,7 @@ relationSettings = (function relationSettings() {
      * @returns {String} the value assigned to the property
      */
     function getEdgeStyle(rel) {
+        rel = rel_id(rel)
         for (let i = 0; i < edgeStyles.length; i++) {
             if (edgeStyles[i].relation === rel) {
                 return edgeStyles[i].edgeStyle
@@ -124,6 +125,7 @@ relationSettings = (function relationSettings() {
      * @returns {String} the value assigned to the property
      */
     function isShowAsArcsOn(rel) {
+        rel = rel_id(rel)
         for (let i = 0; i < showAsArcs.length; i++) {
             if (showAsArcs[i].relation === rel) {
                 return showAsArcs[i].showAsArcs
@@ -156,6 +158,7 @@ relationSettings = (function relationSettings() {
      * @returns {String} the value assigned to the property
      */
     function isShowAsAttributesOn(rel) {
+        rel = rel_id(rel)
         for (let i = 0; i < showAsAttributes.length; i++) {
             if (showAsAttributes[i].relation === rel) {
                 return showAsAttributes[i].showAsAttributes
@@ -186,16 +189,16 @@ relationSettings = (function relationSettings() {
      *
      * @param {Object} nodeEle the cytoscape node element
      */
-    function getAttributeLabel(instance,nodeEle) {
+    function getAttributeLabel(nodeEle) {
 
         const aux = {}
         // retrieve all outgoing edges
-            getEdges(instance).forEach(edge => {
+        cy.edges().forEach(edge => {
             // if show as attribute, add tuple to map for later processing
-            if (edge.data.source === nodeEle.data().id)
-            if (edge.data.relation && isShowAsAttributesOn(edge.data.relation)) {
-                if (!aux[edge.data.relation]) aux[edge.data.relation] = []
-                aux[edge.data.relation].push(edge.data.atoms)
+            if (edge.data().source === nodeEle.data().id)
+            if (edge.data().relation && isShowAsAttributesOn(rel_id(edge.data()))) {
+                if (!aux[edge.data().relation]) aux[edge.data().relation] = []
+                aux[edge.data().relation].push(edge.data().atoms)
             }
         })
 
@@ -220,11 +223,17 @@ relationSettings = (function relationSettings() {
     function getAllHiddenRels() {
         const res = []
         for (let i = 0; i < showAsArcs.length; i++) {
-            if (!showAsArcs[i].showAsArcs) {
+            if (!showAsArcs[i].showAsArcs) {             
                 res.push(showAsArcs[i].relation)
             }
         }
         return res
+    }
+
+    rel_id = function(rel) {
+        if (typeof rel === 'string')
+            return rel
+        return rel.parent_sig +'<:'+rel.relation
     }
 
 
@@ -241,6 +250,7 @@ relationSettings = (function relationSettings() {
         updateEdgeColor,
         updateShowAsAttributes,
         updateShowAsArcs,
-        getAllHiddenRels
+        getAllHiddenRels,
+        rel_id
     }
 }())
