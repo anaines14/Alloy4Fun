@@ -9,6 +9,8 @@ function handleHintGet(err, result) {
         Session.set('hint-data', result)
         Session.set('hint-enabled', true)
         Session.set('hint-available', true)
+    } else {
+        Session.set('hint-enabled', true)
     }
 }
 

@@ -12,6 +12,7 @@ import edu.mit.csail.sdg.translator.A4Solution;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.util.List;
@@ -76,23 +77,5 @@ public interface ParseUtil {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
-    }
-
-    static Expr parseOneExprFromString(CompModule world, String value) {
-        try {
-            return world.parseOneExpressionFromString(value);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
-        }
-    }
-
-    static String lineCSV(String sep, List<String> strings) {
-        if (strings == null || strings.isEmpty())
-            return "";
-        StringBuilder res = new StringBuilder();
-        String last = strings.get(strings.size() - 1);
-        for (int i = 0; i < strings.size() - 1; i++) res.append(strings.get(i)).append(sep);
-
-        return res.append(last).toString();
     }
 }

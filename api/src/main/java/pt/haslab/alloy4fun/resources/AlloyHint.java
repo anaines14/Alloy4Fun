@@ -9,11 +9,12 @@ import org.higena.graph.Graph;
 import org.higena.hint.HintGenType;
 import org.higena.parser.ExprExtractor;
 import org.jboss.logging.Logger;
-import org.json.JSONObject;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.services.HintMerge;
+import pt.haslab.specassistant.data.models.Model;
 import pt.haslab.specassistant.data.policy.PolicyOption;
+import pt.haslab.specassistant.repositories.ModelRepository;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.SpecAssistantTestService;
 
@@ -35,14 +36,18 @@ public class AlloyHint {
     SpecAssistantTestService specAssistantTestService;
 
     @Inject
+    ModelRepository models;
+
+    @Inject
     HintMerge hintMerge;
 
     @POST
-    @Path("/spec-hint")
+    @Path("/spec-higena")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSpecHint(HintRequest request) {
         log.info("Spec Hint requested");
-        Map<String, String> hint = hintMerge.specAssistantGraphToHigena(request.challenge, request.predicate, request.model);
+        Model m = models.findById(request.challenge); //TEMPORARY WORKAROUND
+        Map<String, String> hint = hintMerge.specAssistantGraphToHigena(m.getOriginal(), m.getCmd_n(), m.getCode());
         if (hint == null)
             return Response.status(Response.Status.NO_CONTENT).build();
 
@@ -103,8 +108,7 @@ public class AlloyHint {
             if (hintGen.getHint() == null) // Failed
                 return Response.ok(InstanceMsg.error("No hint available")).build();
             // Success
-            JSONObject response = hintGen.getJSON();
-            return Response.ok(response.toString()).build();
+            return Response.ok(hintGen.getJSON().toString()).build();
         } catch (Exception e) {
             log.error(e);
             return Response.serverError().build();

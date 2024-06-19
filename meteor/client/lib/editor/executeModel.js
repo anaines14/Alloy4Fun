@@ -4,13 +4,11 @@
  * @module client/lib/editor/genUrl
  */
 
-import {
-    displayError,
+import log_messages from 'cytoscape/src/heap'
+import { displayError,
     markEditorError,
-    markEditorWarning
-} from './feedback'
-import {
-    getCommandIndex,
+    markEditorWarning } from './feedback'
+import { getCommandIndex,
     storeInstances,
     modelExecuted,
     getNextInstance,
@@ -19,8 +17,7 @@ import {
     isUnsatInstance,
     getCommandLabel,
     resetState,
-    currentState
-} from './state'
+    currentState } from './state'
 import { resetPositions, newInstanceSetup } from '../visualizer/projection'
 import { bufferHint } from './hintModel'
 
@@ -52,7 +49,7 @@ export function executeModel() {
 export function nextInstance() {
     log_messages = Session.get('log-message')
     log_classes = Session.get('log-class')
-    if (log_messages[log_messages.length - 1] == no_more_msg) {
+    if (log_messages[log_messages.length - 1] === no_more_msg) {
         log_messages.pop()
         log_classes.pop()
         Session.set('log-message', log_messages)
@@ -62,7 +59,7 @@ export function nextInstance() {
     const instanceIndex = Session.get('currentInstance')
     const maxInstanceNumber = Session.get('maxInstance')
     // no more local instances but still not unsat
-    if (instanceIndex == maxInstanceNumber - 1 && !isUnsatInstance(instanceIndex)) {
+    if (instanceIndex === maxInstanceNumber - 1 && !isUnsatInstance(instanceIndex)) {
         const model = textEditor.getValue()
         Meteor.call('nextInstances', model, getCommandIndex(), Session.get('last_id'), handleExecuteModel)
     }
@@ -93,7 +90,7 @@ export function nextInstance() {
 export function prevInstance() {
     log_messages = Session.get('log-message')
     log_classes = Session.get('log-class')
-    if (log_messages[log_messages.length - 1] == no_more_msg) {
+    if (log_messages[log_messages.length - 1] === no_more_msg) {
         log_messages.pop()
         log_classes.pop()
         Session.set('log-message', log_messages)
@@ -165,6 +162,8 @@ function handleExecuteModel(err, result) {
             log_messages.push(result.check ? `No counter-examples. ${command} may be valid.` : `No instance found. ${command} may be inconsistent.`)
             log_classes.push(result.check ? 'log-complete' : 'log-wrong')
         } else {
+            bufferHint()
+
             log_messages.push(result.check ? `Counter-example found. ${command} is invalid.` : `Instance found. ${command} is consistent.`)
             log_classes.push(result.check ? 'log-wrong' : 'log-complete')
             initGraphViewer('instance')
@@ -174,10 +173,8 @@ function handleExecuteModel(err, result) {
             newInstanceSetup()
         }
 
-        bufferHint()
 
         Session.set('log-message', log_messages)
         Session.set('log-class', log_classes)
-
     }
 }

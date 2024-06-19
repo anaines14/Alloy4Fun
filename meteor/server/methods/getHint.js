@@ -8,7 +8,7 @@ Meteor.methods({
      */
     getHint(currentModelId) {
         return new Promise((resolve, reject) => {
-            HTTP.call('GET', `${Meteor.settings.env.API_URL}/hint/check`, {
+            HTTP.call('GET', `${Meteor.settings.env.API_URL}/hint/spec-higena`, {
                 data: {
                     sessionId: currentModelId
                 }

@@ -23,8 +23,8 @@ import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.data.request.InstancesRequest;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
 import pt.haslab.alloy4fun.util.ParseUtil;
-import pt.haslab.alloy4fun.util.UncheckedIOException;
 
+import java.io.UncheckedIOException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
