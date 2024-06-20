@@ -22,12 +22,15 @@ import pt.haslab.alloy4fun.data.transfer.InstanceResponse;
 import pt.haslab.alloy4fun.data.transfer.InstanceTrace;
 import pt.haslab.alloy4fun.data.request.InstancesRequest;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
+import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.alloy4fun.util.ParseUtil;
 
 import java.io.UncheckedIOException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Path("/getInstances")
 @RequestScoped
@@ -37,6 +40,9 @@ public class AlloyGetInstances {
 
     @Inject
     SessionRepository sessionManager;
+
+    @Inject
+    HintMerge hintMerge;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,6 +89,10 @@ public class AlloyGetInstances {
             A4Solution ans = TranslateAlloyToKodkod.execute_command(rep, world.getAllReachableSigs(), command, options);
 
             result = Session.create(request.sessionId, ans, command, world.getAllFunc().makeConstList());
+
+            if (request.parentId != null && command.check && ans.satisfiable())
+                result.hintRequest = CompletableFuture.supplyAsync(() -> hintMerge.specAssistantGraphToHigena(request.parentId, command.label, request.model));
+            else result.hintRequest = CompletableFuture.completedFuture(Optional.empty());
 
             sessionManager.update(result);
         }

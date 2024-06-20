@@ -27,10 +27,10 @@ public class HintMerge {
     @Inject
     HintGenerator specAssistantGen;
 
-    public Map<String, String> specAssistantGraphToHigena(String originId, String command_label, String model) {
+    public Optional<String> specAssistantGraphToHigena(String originId, String command_label, String model) {
         Optional<Transition> target = specAssistantGen.bareTransition(originId, command_label, model);
 
-        if (target.isEmpty()) return null; //
+        if (target.isEmpty()) return Optional.empty(); //
 
         String old_expr = target.orElseThrow().getFrom().getFormula().values().stream().findFirst().orElseThrow();
         String new_expr = target.orElseThrow().getTo().getFormula().values().stream().findFirst().orElseThrow();
@@ -39,7 +39,7 @@ public class HintMerge {
         String oldAST = A4FParser.parse(old_expr, model).toTreeString(),
                 newAST = A4FParser.parse(new_expr, model).toTreeString();
 
-        return Map.of("hint", new Hint(oldAST, newAST).toString(), "nextExpr", new_expr, "targetExpr", "");
+        return Optional.of(new Hint(oldAST, newAST).toString());
     }
 
     public Map<String, String> specAssistantGraphToHigenaFormula(CompModule base_world, Challenge challenge, String formula) {
@@ -56,6 +56,7 @@ public class HintMerge {
 
         return Map.of("hint", new Hint(oldAST, newAST).toString(), "nextExpr", new_expr, "oldExpr", old_expr);
     }
+
     public HintMsg higenaGraphToSpecAssistant(String challenge, String predicate, String model) {
         CompModule world = ParseUtil.parseModel(model);
 

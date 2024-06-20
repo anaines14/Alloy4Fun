@@ -9,6 +9,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 public class Session {
 
@@ -21,6 +23,8 @@ public class Session {
     public Command cmd;
 
     public Collection<Func> skolem;
+
+    public CompletableFuture<Optional<String>> hintRequest;
 
 
     public static Session create(String sessionId, A4Solution ans, Command cmd, Collection<Func> skolem) {

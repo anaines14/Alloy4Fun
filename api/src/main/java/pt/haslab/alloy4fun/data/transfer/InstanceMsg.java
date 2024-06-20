@@ -69,6 +69,14 @@ public class InstanceMsg {
         return response;
     }
 
+    public static Object hint(String msg) {
+        InstanceMsg response = new InstanceMsg();
+
+        response.alloy_hint = true;
+        response.msg = msg;
+        return response;
+    }
+
     private void mapPos(Pos pos) {
         if (pos != null) {
             line = pos.y;

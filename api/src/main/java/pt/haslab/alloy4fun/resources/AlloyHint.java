@@ -11,15 +11,15 @@ import org.higena.parser.ExprExtractor;
 import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
+import pt.haslab.alloy4fun.repositories.SessionRepository;
 import pt.haslab.alloy4fun.services.HintMerge;
-import pt.haslab.specassistant.data.models.Model;
 import pt.haslab.specassistant.data.policy.PolicyOption;
 import pt.haslab.specassistant.repositories.ModelRepository;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.SpecAssistantTestService;
 
 import java.util.List;
-import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -36,24 +36,20 @@ public class AlloyHint {
     SpecAssistantTestService specAssistantTestService;
 
     @Inject
-    ModelRepository models;
+    SessionRepository sessions;
 
-    @Inject
-    HintMerge hintMerge;
 
     @POST
     @Path("/spec-higena")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getSpecHint(HintRequest request) {
         log.info("Spec Hint requested");
-        Model m = models.findById(request.challenge); //TEMPORARY WORKAROUND
-        if (m == null)
-            return Response.ok(InstanceMsg.error("No model found")).build();
-        Map<String, String> hint = hintMerge.specAssistantGraphToHigena(m.getOriginal(), m.getCmd_n(), m.getCode());
-        if (hint == null)
-            return Response.ok(InstanceMsg.error("No model found")).build();
-
-        return Response.ok(hint).build();
+        try {
+            String hint = sessions.findById(request.challenge).hintRequest.get().orElseThrow();
+            return Response.ok(InstanceMsg.hint(hint)).build();
+        } catch (InterruptedException | ExecutionException | NoSuchElementException | NullPointerException e) {
+            return Response.ok(InstanceMsg.error("No hint")).build();
+        }
     }
 
     @POST
