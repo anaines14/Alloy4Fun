@@ -14,13 +14,11 @@ services:
     depends_on:
       - mongo
     ports:
-      - "8080:8080" # if access id needed from the outside (otherwise no need)
+      - "8080:8080"
     links:
       - mongo
     environment:
       - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017
-    extra_hosts:
-      - "host.docker.internal:host-gateway" # for accessing the host from within the container
   meteor:
     container_name: alloy4fun-meteor
     build:
@@ -34,3 +32,6 @@ services:
     links:
       - mongo
       - api
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+      - METEOR_SETTINGS= {"env":{"API_URL":"http://alloy4fun-api:8080"}}

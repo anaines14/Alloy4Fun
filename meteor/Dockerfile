@@ -12,4 +12,4 @@ RUN chmod -R 777 /usr/src/app/.meteor/local
 RUN meteor npm install
 
 EXPOSE 3000
-CMD ["npm", "start"]
+CMD ["meteor"]
