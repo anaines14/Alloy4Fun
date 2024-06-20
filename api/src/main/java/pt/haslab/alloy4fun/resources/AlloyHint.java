@@ -47,9 +47,11 @@ public class AlloyHint {
     public Response getSpecHint(HintRequest request) {
         log.info("Spec Hint requested");
         Model m = models.findById(request.challenge); //TEMPORARY WORKAROUND
+        if (m == null)
+            return Response.ok(InstanceMsg.error("No model found")).build();
         Map<String, String> hint = hintMerge.specAssistantGraphToHigena(m.getOriginal(), m.getCmd_n(), m.getCode());
         if (hint == null)
-            return Response.status(Response.Status.NO_CONTENT).build();
+            return Response.ok(InstanceMsg.error("No model found")).build();
 
         return Response.ok(hint).build();
     }

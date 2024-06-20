@@ -42,7 +42,7 @@ public class AlloyGetInstances {
     @Produces(MediaType.APPLICATION_JSON)
     public Response doPost(InstancesRequest request) {
 
-        LOGGER.info("Received request for session: " + request.sessionId + "with parent (" + request.parentId + ")");
+        LOGGER.info("Received request for session: " + request.sessionId + " with parent (" + request.parentId + ")");
 
         if (sessionManager.deleteById(request.parentId))
             LOGGER.debug("Deleted parent session (" + request.parentId + ").");
@@ -58,7 +58,8 @@ public class AlloyGetInstances {
 
             Session session = ensureSession(request, rep);
 
-            return Response.ok(batchAdd(request.numberOfInstances, session, warnings)).build();
+            List<InstanceResponse> ret = batchAdd(request.numberOfInstances, session, warnings);
+            return Response.ok(ret).build();
         } catch (Err e) {
             LOGGER.info("Responding with an alloy error.");
             return Response.ok(InstanceMsg.from(e)).build();
