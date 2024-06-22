@@ -14,6 +14,7 @@ import pt.haslab.specassistant.data.aggregation.Transition;
 import pt.haslab.specassistant.data.models.Challenge;
 import pt.haslab.specassistant.data.models.Node;
 import pt.haslab.specassistant.data.transfer.HintMsg;
+import pt.haslab.specassistant.repositories.ModelRepository;
 import pt.haslab.specassistant.services.HintGenerator;
 
 import java.io.IOException;
@@ -25,10 +26,13 @@ import java.util.Set;
 public class HintMerge {
 
     @Inject
+    ModelRepository modelRepo;
+
+    @Inject
     HintGenerator specAssistantGen;
 
     public Optional<String> specAssistantGraphToHigena(String originId, String command_label, String model) {
-        Optional<Transition> target = specAssistantGen.bareTransition(originId, command_label, model);
+        Optional<Transition> target = specAssistantGen.bareTransition(modelRepo.getOriginalById(originId), command_label, model);
 
         if (target.isEmpty()) return Optional.empty(); //
 

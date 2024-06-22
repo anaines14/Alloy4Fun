@@ -12,9 +12,7 @@ import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.data.request.HintRequest;
 import pt.haslab.alloy4fun.data.transfer.InstanceMsg;
 import pt.haslab.alloy4fun.repositories.SessionRepository;
-import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.specassistant.data.policy.PolicyOption;
-import pt.haslab.specassistant.repositories.ModelRepository;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.SpecAssistantTestService;
 
@@ -55,13 +53,14 @@ public class AlloyHint {
     @POST
     @Path("/compute-all-policies-for-rule")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response computePolicyOnModel(@QueryParam("rule") String rule) {
+    public Response computePolicyForAll(@QueryParam("rule") String rule, @DefaultValue("true") @QueryParam("await") Boolean await) {
         try {
-            specAssistantTestService.computePoliciesForAll(PolicyOption.samples.get(rule)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.getCause().printStackTrace();
+            CompletableFuture<Void> future = specAssistantTestService.computePoliciesForAll(PolicyOption.samples.get(rule));
+            if (await)
+                future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e);
+            return Response.serverError().build();
         }
         return Response.ok("Policy computed").build();
     }
@@ -73,8 +72,15 @@ public class AlloyHint {
     @GET
     @Path("/specassistant-setup")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response genGraphs(List<String> model_ids, @DefaultValue("Unkown") @QueryParam("prefix") String prefix) {
-        specAssistantTestService.genGraphs(prefix, model_ids);
+    public Response genGraphs(List<String> model_ids, @DefaultValue("Unkown") @QueryParam("prefix") String prefix, @DefaultValue("true") @QueryParam("await") Boolean await) {
+        try {
+            CompletableFuture<Void> future = specAssistantTestService.genGraphs(prefix, model_ids);
+            if (await)
+                future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e);
+            return Response.serverError().build();
+        }
         return Response.ok("Setup completed for " + prefix + " with model_ids " + model_ids).build();
     }
 

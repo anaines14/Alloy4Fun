@@ -18,7 +18,7 @@ services:
     links:
       - mongo
     environment:
-      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017
+      - QUARKUS_MONGODB_CONNECTION_STRING=mongodb://mongo:27017/meteor
   meteor:
     container_name: alloy4fun-meteor
     build:
@@ -33,5 +33,5 @@ services:
       - mongo
       - api
     environment:
-      - MONGO_URL=mongodb://mongo:27017
+      - MONGO_URL=mongodb://mongo:27017/meteor
       - METEOR_SETTINGS= {"env":{"API_URL":"http://alloy4fun-api:8080"}}
