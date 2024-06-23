@@ -8,10 +8,11 @@ RUN curl "https://install.meteor.com/?release=2.16" | sh
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 
+RUN chmod -R 777 /usr/src/app/.meteor/local
 RUN meteor npm ci || meteor npm install
 RUN meteor build /usr/src/build
 
-WORKDIR /usr/src/build
+WORKDIR /usr/src/build/bundle
 
 EXPOSE 3000
 CMD ["node","main.js"]
