@@ -1,0 +1,9 @@
+{
+    "env": {
+        "API_URL": "http://alloy4fun-api:8080",
+        "MAX_INSTANCES": 10
+    },
+    "public": {
+
+    }
+}

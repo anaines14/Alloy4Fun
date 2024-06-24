@@ -23,7 +23,7 @@ services:
     container_name: alloy4fun-meteor
     build:
       context: ./meteor
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
     depends_on:

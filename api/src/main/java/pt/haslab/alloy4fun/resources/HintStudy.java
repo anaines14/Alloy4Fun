@@ -11,26 +11,36 @@ import jakarta.ws.rs.core.Response;
 import lombok.Builder;
 import lombok.Data;
 import org.bson.types.ObjectId;
+import org.jboss.logging.Logger;
 import pt.haslab.alloy4fun.services.HintMerge;
 import pt.haslab.specassistant.data.models.Challenge;
 import pt.haslab.specassistant.data.models.Model;
 import pt.haslab.specassistant.data.policy.PolicyOption;
 import pt.haslab.specassistant.services.GraphManager;
 import pt.haslab.specassistant.services.PolicyManager;
+import pt.haslab.specassistant.services.SpecAssistantTestService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Path("/study")
 public class HintStudy {
 
     @Inject
+    Logger log;
+
+    @Inject
     GraphManager graphManager;
     @Inject
     PolicyManager policyManager;
+
+    @Inject
+    SpecAssistantTestService testService;
 
     @Inject
     HintMerge merge;
@@ -71,6 +81,42 @@ public class HintStudy {
         });
 
         return Response.ok(responses).build();
+    }
+
+    @POST
+    @Path("/test-spec-assist")
+    public Response testSpecAssist(Map<String, List<String>> names_to_model_ids) {
+        log.info("Performing train/test split and rebuilding hint Database");
+        testService.specTestDefaultPolicies(names_to_model_ids);
+        log.info("Evaluating test data-set");
+        testService.testPartitionFromFile("testing.txt");
+        return Response.ok().build();
+    }
+
+
+    @POST
+    @Path("/test-TAR")
+    public Response testTAR() {
+        log.info("Performing train/test split and rebuilding hint Database");
+        Set<String> model_ids = testService.readSetFromFile("testing.txt");
+        Predicate<Model> test = x -> model_ids.contains(x.getId());
+        if (model_ids.isEmpty())
+            test = x -> true;
+        try {
+            testService.testAllChallengesWithTAR(test).get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e);
+            return Response.serverError().build();
+        }
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/fix-naming")
+    public Response fixNaming(Map<String, List<String>> names_to_model_ids) {
+        log.info("Performing train/test split and rebuilding hint Database");
+        testService.fixTestGraphIds();
+        return Response.ok().build();
     }
 
 

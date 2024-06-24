@@ -28,7 +28,6 @@ export function displayHint() {
         log_classes.push('log-unavailable')
         Session.set('log-class', log_classes)
     } else {
-        markEditorInfo(result.line - 1, result.column - 1, result.line2 - 1, result.column2 - 1)
         const log = `(${result.line}:${result.column}) - ${result.msg ?? 'No msg available.'}`
 
         const log_messages = Session.get('log-message')
@@ -38,6 +37,8 @@ export function displayHint() {
         const log_classes = Session.get('log-class')
         log_classes.push('log-info')
         Session.set('log-class', log_classes)
+
+        markEditorInfo(result.line - 1, result.column - 1, result.line2 - 1, result.column2 - 1)
     }
 }
 
