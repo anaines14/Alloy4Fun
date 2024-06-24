@@ -83,14 +83,22 @@ public class HintStudy {
         return Response.ok(responses).build();
     }
 
+
     @POST
-    @Path("/test-spec-assist")
-    public Response testSpecAssist(Map<String, List<String>> names_to_model_ids) {
+    @Path("/split-train-spec-assist")
+    public Response trainSpecAssist(Map<String, List<String>> names_to_model_ids) {
         log.info("Performing train/test split and rebuilding hint Database");
         testService.specTestDefaultPolicies(names_to_model_ids);
+        return Response.ok("").build();
+    }
+
+    @POST
+    @Path("/test-spec-assist")
+    public Response testSpecAssist() {
         log.info("Evaluating test data-set");
         testService.testPartitionFromFile("testing.txt");
-        return Response.ok().build();
+
+        return Response.ok("").build();
     }
 
 
@@ -113,7 +121,7 @@ public class HintStudy {
 
     @POST
     @Path("/fix-naming")
-    public Response fixNaming(Map<String, List<String>> names_to_model_ids) {
+    public Response fixNaming() {
         log.info("Performing train/test split and rebuilding hint Database");
         testService.fixTestGraphIds();
         return Response.ok().build();
