@@ -13,6 +13,7 @@ def extract_test_data_pipeline():
             {'$switch':{'branches':[
                 {'case':{'$eq':['$_id.type','SPEC_MUTATION']},'then':2},
                 {'case':{'$eq':['$_id.type','TED.SPEC']},'then':1},
+                {'case':{'$eq':['$_id.type','TED-SPEC']},'then':1},
                 {'case':{'$eq':['$_id.type','TAR']},'then':4}],
                 'default':0}
             }]
@@ -58,7 +59,7 @@ def extract_test_data_pipeline():
         'count':{'$sum':'$count'},
         'parsing_time':{'$avg':'$graph.parsing_time'},
         'parsing_count':{'$sum':'$graph.parsing_count'},
-        'policy_time':{'$sum':'$graph.policy_time'},
+        'policy_time':{'$avg':'$graph.policy_time'}, # They all ran concurrently
         'policy_count':{'$sum':'$graph.policy_count'},
         'TAR_TIME':{'$avg':'$tests.TAR.avg'},
         'TAR_DEV':{'$avg':'$tests.TAR.stddev'},
