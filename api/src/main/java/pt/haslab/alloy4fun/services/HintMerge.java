@@ -31,10 +31,12 @@ public class HintMerge {
     @Inject
     HintGenerator specAssistantGen;
 
-    public Optional<String> specAssistantGraphToHigena(String originId, String command_label, String model) {
-        Optional<Transition> target = specAssistantGen.bareTransition(modelRepo.getOriginalById(originId), command_label, model);
+    public Optional<HintMsg> specAssistantGraphToHigena(String originId, String command_label, String model) {
+        String originid = modelRepo.getOriginalById(originId);
+        Optional<Transition> target = specAssistantGen.bareTransition(originid, command_label, model);
 
         if (target.isEmpty()) return Optional.empty(); //
+        Optional<HintMsg> msg = specAssistantGen.getHint(originid, command_label, ParseUtil.parseModel(model));
 
         String old_expr = target.orElseThrow().getFrom().getFormula().values().stream().findFirst().orElseThrow();
         String new_expr = target.orElseThrow().getTo().getFormula().values().stream().findFirst().orElseThrow();
@@ -43,7 +45,7 @@ public class HintMerge {
         String oldAST = A4FParser.parse(old_expr, model).toTreeString(),
                 newAST = A4FParser.parse(new_expr, model).toTreeString();
 
-        return Optional.of(new Hint(oldAST, newAST).toString());
+        return Optional.of(HintMsg.from(msg.map(x -> x.pos).orElse(null), new Hint(oldAST, newAST).toString()));
     }
 
     public Map<String, String> specAssistantGraphToHigenaFormula(CompModule base_world, Challenge challenge, String formula) {

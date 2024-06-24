@@ -43,8 +43,7 @@ public class AlloyHint {
     public Response getSpecHint(HintRequest request) {
         log.info("Spec Hint requested");
         try {
-            String hint = sessions.findById(request.challenge).hintRequest.get().orElseThrow();
-            return Response.ok(InstanceMsg.hint(hint)).build();
+            return Response.ok(InstanceMsg.from(sessions.findById(request.challenge).hintRequest.get().orElseThrow())).build();
         } catch (InterruptedException | ExecutionException | NoSuchElementException | NullPointerException e) {
             return Response.ok(InstanceMsg.error("No hint")).build();
         }
