@@ -19,16 +19,12 @@ export function displayHint() {
     Session.set('hint-data', null)
     Session.set('hint-available', false)
 
-    if (!(result.line && result.column && result.line2 && result.column2)) {
-        const log_messages = Session.get('log-message')
-        log_messages.push(result.msg ?? 'Unable to generate hint')
-        Session.set('log-message', log_messages)
-
-        const log_classes = Session.get('log-class')
-        log_classes.push('log-unavailable')
-        Session.set('log-class', log_classes)
-    } else {
-        const log = `(${result.line}:${result.column}) - ${result.msg ?? 'No msg available.'}`
+    if (result.msg) {
+        let log = ''
+        if (result.line && result.column) {
+            log += `(${result.line}:${result.column}) - `
+        }
+        log += `${result.msg}`
 
         const log_messages = Session.get('log-message')
         log_messages.push(log)
@@ -37,8 +33,19 @@ export function displayHint() {
         const log_classes = Session.get('log-class')
         log_classes.push('log-info')
         Session.set('log-class', log_classes)
-
+        if (result.line && result.column && result.line2 && result.column2) {
+            markEditorInfo(result.line - 1, result.column - 1, result.line2 - 1, result.column2 - 1)
+        }
+    } else if (result.line && result.column && result.line2 && result.column2) {
         markEditorInfo(result.line - 1, result.column - 1, result.line2 - 1, result.column2 - 1)
+    } else {
+        const log_messages = Session.get('log-message')
+        log_messages.push(result.msg ?? 'Unable to generate hint')
+        Session.set('log-message', log_messages)
+
+        const log_classes = Session.get('log-class')
+        log_classes.push('log-unavailable')
+        Session.set('log-class', log_classes)
     }
 }
 
