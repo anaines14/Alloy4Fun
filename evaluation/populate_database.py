@@ -32,6 +32,7 @@ def populate_database():
     record_id = ZENODO_RECORD
 
     collection.delete_many({})
+    client["meteor"]["Link"].delete_many({})
 
     base_url = f"https://zenodo.org/api/records/{record_id}"
     response = requests.get(base_url)
